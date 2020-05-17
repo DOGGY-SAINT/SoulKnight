@@ -103,26 +103,22 @@ bool HelloWorld::init()
 	}
 
 	// add "HelloWorld" splash screen"
-	CCSpriteBatchNode* batchNode = CCSpriteBatchNode::create("startscene.jpg");
-	this->addChild(batchNode);
-	auto sprite = Sprite::create("startscene.jpg");
-	//	auto sprite = Sprite::create("HelloWorld.png", CCRectMake(0, 0, 300, 300));
-	if (sprite == nullptr)
+	auto sprite0 = Sprite::create("startscene.jpg");
+	if (sprite0 == nullptr)
 	{
 		problemLoading("'startscene.jpg'");
 	}
 	else
 	{
 		// position the sprite on the center of the screen
-		sprite->setPosition(Vec2(visibleSize.width / 2 + origin.x, visibleSize.height / 2 + origin.y));
+		sprite0->setPosition(Vec2(visibleSize.width / 2 + origin.x, visibleSize.height / 2 + origin.y));
 
 		// add the sprite as a child to this layer
-		batchNode->addChild(sprite, 0);
+		this->addChild(sprite0, 1);
 	}
 	CocosDenshion::SimpleAudioEngine::sharedEngine()->playBackgroundMusic("pigman.mp3");
 	return true;
 }
-
 
 void HelloWorld::menuCloseCallback(Ref* pSender)
 {
