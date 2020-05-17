@@ -54,6 +54,8 @@
     <ClCompile Include="..\Classes\Component\Bullet.cpp">
       <Filter>src\Component</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\HelloWorldScene.cpp" />
+    <ClCompile Include="..\Classes\secondScene.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -89,6 +91,8 @@
     <ClInclude Include="..\Classes\Component\Bullet.h">
       <Filter>src\Component</Filter>
     </ClInclude>
+    <ClInclude Include="..\Classes\HelloWorldScene.h" />
+    <ClInclude Include="..\Classes\secondScene.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="game.rc">
