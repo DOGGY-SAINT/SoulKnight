@@ -101,7 +101,8 @@ bool secondScene::init()
 	// add a label shows "Hello World"
 	// create and initialize a label
 	auto map = TMXTiledMap::create("newmap.tmx");
-	map->setAnchorPoint(ccp(-0.07f, 0.02f));
+	map->setAnchorPoint(ccp(0.5f, 0.5f));
+	map->setPosition(Point(450, 450));
 	addChild(map, 0);
 
 
