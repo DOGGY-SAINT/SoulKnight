@@ -100,23 +100,25 @@ bool secondScene::init()
 	}
 	// add a label shows "Hello World"
 	// create and initialize a label
-
+	auto map = TMXTiledMap::create("newmap.tmx");
+	map->setAnchorPoint(ccp(-0.07f, 0.02f));
+	addChild(map, 0);
 
 
 	// add "HelloWorld" splash screen"
-	auto sprite = Sprite::create("smallmap.png");
-	if (sprite == nullptr)
-	{
-		problemLoading("'smallmap.png'");
-	}
-	else
-	{
-		// position the sprite on the center of the screen
-		sprite->setPosition(Vec2(visibleSize.width / 2 + origin.x, visibleSize.height / 2 + origin.y));
-
-		// add the sprite as a child to this layer
-		this->addChild(sprite, 0);
-	}
+	//auto sprite = Sprite::create("smallmap.png");
+//	if (sprite == nullptr)
+	//{
+	//	problemLoading("'smallmap.png'");
+	//}
+	//else
+	//{
+	//	// position the sprite on the center of the screen
+///		sprite->setPosition(Vec2(visibleSize.width / 2 + origin.x, visibleSize.height / 2 + origin.y));
+	//
+		//// add the sprite as a child to this layer
+		//this->addChild(sprite, 0);
+	//}
 
 
 	return true;
