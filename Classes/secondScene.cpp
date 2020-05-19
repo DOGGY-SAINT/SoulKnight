@@ -65,7 +65,7 @@ bool secondScene::init()
 	else
 	{
 		// position the sprite on the center of the screen
-		sprite0->setPosition(Vec2(250, 700));
+		sprite0->setPosition(Vec2(150, 700));
 
 		// add the sprite as a child to this layer
 		this->addChild(sprite0, 1);
@@ -79,7 +79,7 @@ bool secondScene::init()
 	else
 	{
 		// position the sprite on the center of the screen
-		sprite1->setPosition(Vec2(310, 700));
+		sprite1->setPosition(Vec2(190, 700));
 
 		// add the sprite as a child to this layer
 		this->addChild(sprite1, 1);
@@ -93,7 +93,7 @@ bool secondScene::init()
 	else
 	{
 		// position the sprite on the center of the screen
-		sprite2->setPosition(Vec2(370, 700));
+		sprite2->setPosition(Vec2(230, 700));
 
 		// add the sprite as a child to this layer
 		this->addChild(sprite2, 1);
