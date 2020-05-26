@@ -39,9 +39,6 @@
     <ClCompile Include="..\Classes\Scene\MainScene.cpp">
       <Filter>src\Scene</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\Component\Weapon.cpp">
-      <Filter>src\Component</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\Actor\Actor.cpp">
       <Filter>src\Actor</Filter>
     </ClCompile>
@@ -53,6 +50,21 @@
     </ClCompile>
     <ClCompile Include="..\Classes\Component\Bullet.cpp">
       <Filter>src\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Component\Weapon.cpp">
+      <Filter>src\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Component\Pistol.cpp">
+      <Filter>src\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Component\PistolBullet.cpp">
+      <Filter>src\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\HelloWorldScene.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\secondScene.cpp">
+      <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -88,6 +100,18 @@
     </ClInclude>
     <ClInclude Include="..\Classes\Component\Bullet.h">
       <Filter>src\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Component\Pistol.h">
+      <Filter>src\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Component\PistolBullet.h">
+      <Filter>src\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\HelloWorldScene.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\secondScene.h">
+      <Filter>src</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
