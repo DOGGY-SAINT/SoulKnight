@@ -1,16 +1,10 @@
 #include "secondScene.h"
-<<<<<<< HEAD
-#include "PauseLayer.h"
-#include "HelloWorldScene.h"
-#include "SimpleAudioEngine.h"
-=======
 #include "Component/Pistol.h"
 #include "Component/PistolBullet.h"
 #include "SimpleAudioEngine.h"
 #include "math.h"
 #include "stdlib.h"
 #include"cocos2d.h"
->>>>>>> Kite
 USING_NS_CC;
 
 
@@ -29,15 +23,6 @@ static void problemLoading(const char* filename)
 // on "init" you need to initialize your instance
 bool secondScene::init()
 {
-<<<<<<< HEAD
-	if (!Scene::init())
-	{
-		return false;
-	}
-
-	auto visibleSize = Director::getInstance()->getVisibleSize();
-	Vec2 origin = Director::getInstance()->getVisibleOrigin();
-=======
 	if (!Scene::initWithPhysics())
 	{
 		return false;
@@ -130,7 +115,6 @@ bool secondScene::init()
 
 //	auto visibleSize = Director::getInstance()->getVisibleSize();
 //	Vec2 origin = Director::getInstance()->getVisibleOrigin();
->>>>>>> Kite
 
 	/////////////////////////////
 	// 2. add a menu item with "X" image, which is clicked to quit the program
@@ -206,19 +190,6 @@ bool secondScene::init()
 	// add a label shows "Hello World"
 	// create and initialize a label
 	auto map = TMXTiledMap::create("newmap.tmx");
-<<<<<<< HEAD
-	map->setAnchorPoint(ccp(0.5f, 0.5f));
-	map->setPosition(Point(450, 450));
-	addChild(map, 0);
-
-	return true;
-}
-
-void secondScene::menuCloseCallback(Ref* pSender)
-{
-	Director::getInstance()->pushScene(PauseLayer::createScene());
-//	Director::getInstance()->replaceScene(CCTransitionFade::create(1.7f, PauseLayer::createScene()));
-=======
 	map->setAnchorPoint(ccp(-0.07f, 0.02f));
 	addChild(map, 0);
 
@@ -302,6 +273,5 @@ void secondScene::menuCloseCallback(Ref* pSender)
 
 	//EventCustom customEndEvent("game_scene_close_event");
 	//_eventDispatcher->dispatchEvent(&customEndEvent);
->>>>>>> Kite
 
 }

@@ -25,10 +25,6 @@
 #include "HelloWorldScene.h"
 #include "SimpleAudioEngine.h"
 #include "secondScene.h"
-<<<<<<< HEAD
-#include "math.h"
-=======
->>>>>>> Kite
 
 USING_NS_CC;
 
