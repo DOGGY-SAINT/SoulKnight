@@ -25,6 +25,7 @@
 #include "HelloWorldScene.h"
 #include "SimpleAudioEngine.h"
 #include "secondScene.h"
+#include "math.h"
 
 USING_NS_CC;
 

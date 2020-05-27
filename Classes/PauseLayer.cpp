@@ -63,10 +63,10 @@ bool PauseLayer::init()
 	// add a label shows "Hello World"
 	// create and initialize a label
 
-	
+
 
 	// add "HelloWorld" splash screen"
-	
+
 	return true;
 }
 
@@ -74,5 +74,6 @@ bool PauseLayer::init()
 void PauseLayer::menuCloseCallback(Ref* pSender)
 {
 	Director::getInstance()->popScene();
-
 }
+
+

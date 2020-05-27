@@ -1,5 +1,6 @@
 #include "secondScene.h"
-
+#include "PauseLayer.h"
+#include "HelloWorldScene.h"
 #include "SimpleAudioEngine.h"
 USING_NS_CC;
 
@@ -105,34 +106,12 @@ bool secondScene::init()
 	map->setPosition(Point(450, 450));
 	addChild(map, 0);
 
-
-	// add "HelloWorld" splash screen"
-	//auto sprite = Sprite::create("smallmap.png");
-//	if (sprite == nullptr)
-	//{
-	//	problemLoading("'smallmap.png'");
-	//}
-	//else
-	//{
-	//	// position the sprite on the center of the screen
-///		sprite->setPosition(Vec2(visibleSize.width / 2 + origin.x, visibleSize.height / 2 + origin.y));
-	//
-		//// add the sprite as a child to this layer
-		//this->addChild(sprite, 0);
-	//}
-
-
 	return true;
 }
 
 void secondScene::menuCloseCallback(Ref* pSender)
 {
-	//Close the cocos2d-x game scene and quit the application
-	Director::getInstance()->end();
-
-	/*To navigate back to native iOS screen(if present) without quitting the application  ,do not use Director::getInstance()->end() as given above,instead trigger a custom event created in RootViewController.mm as below*/
-
-	//EventCustom customEndEvent("game_scene_close_event");
-	//_eventDispatcher->dispatchEvent(&customEndEvent);
+	Director::getInstance()->pushScene(PauseLayer::createScene());
+//	Director::getInstance()->replaceScene(CCTransitionFade::create(1.7f, PauseLayer::createScene()));
 
 }
