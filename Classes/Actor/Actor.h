@@ -18,8 +18,10 @@ public:
 	//默认函数,对自己做的事情
 	inline virtual bool onContactBegin(Actor* a2);
 
+	inline bool isAnotherFlag(Actor* a2);
+
 	//默认材料
-	static PhysicsMaterial defaultMaterial;
+	static const PhysicsMaterial defaultMaterial;
 
 	//set&get
 	inline void setCanBeHurt(bool num);
@@ -52,41 +54,7 @@ public:
 	inline virtual void afterDead();
 };
 
-inline void Actor::afterDead()
-{
-	auto body = getPhysicsBody();
-	if (body)
-		body->removeFromWorld();
-	this->removeFromParentAndCleanup(true);
-}
 
-inline void Actor::getHurt(INT32 dmg)
-{
-	_HP.setStateBy(-dmg);
-	if (isDead())
-		afterDead();
-}
-
-inline bool Actor::isDead()
-{
-	return _HP.isEmpty();
-}
-
-inline void Actor::setCanBeHurt(bool num)
-{
-	_HP.setImmutable(!num);
-}
-
-inline bool Actor::getCanBeHurt()
-{
-	return !(_HP.getImmutable());
-}
-
-inline bool Actor::onContactBegin(Actor* a2)
-{
-	getHurt(a2->_damage);
-	return true;
-}
 
 
 

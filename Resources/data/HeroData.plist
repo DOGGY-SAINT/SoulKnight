@@ -24,13 +24,13 @@
       <key>CategoryBitmask</key>
       <integer>2</integer>
       <key>CollisionBitmask</key>
-      <integer>55</integer>
+      <integer>119</integer>
       <key>ContactTestBitmask</key>
-      <integer>1</integer>
+      <integer>65</integer>
       <key>Dynamic</key>
-      <boolean>true</boolean>
+      <true></true>
       <key>RotationEnable</key>
-      <boolean>false</boolean>
+      <false>0</false>
     </dict>
     <key>Knight</key>
     <dict>

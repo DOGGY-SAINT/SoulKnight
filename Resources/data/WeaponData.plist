@@ -10,7 +10,7 @@
       <string>Weapon</string>
       <key>PowerCost</key>
       <integer>1</integer>
-      <key>BuletData</key>
+      <key>BulletData</key>
       <dict>
         <key>Damage</key>
         <integer>2</integer>

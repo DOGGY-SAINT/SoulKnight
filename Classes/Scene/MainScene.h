@@ -4,23 +4,56 @@
 class Hero;
 class MapLayer;
 class PauseLayer;
-
+class TMXMap;
 
 USING_NS_CC;
 class MainScene :public Scene
 {
-private:
-	/*static MainScene *_sharedScene;*/
 	CC_SYNTHESIZE(EventListener*, _mouseListener, MouseListener);
-	CC_SYNTHESIZE(Hero*, _myHero, MyHero);
-	CC_SYNTHESIZE(MapLayer*, _myMapLayer, MyMapLayer);
-	CC_SYNTHESIZE(PauseLayer*, _myPauseLayer, MyPauseLayer);
+	CC_SYNTHESIZE(MapLayer*, _mapLayer, MapLayer);
+	CC_SYNTHESIZE(PauseLayer*, _pauseLayer, PauseLayer);
 
-	
+	std::function<void()> onRPredded;
+private:
+	void initMap(std::string mapName);
+
+	void initHero();
+
+	void initPhysicsWorld();
+
+	void initListener();
+
+	void initContactListener();
+
+	void initKeyBoardListener();
+
+	void initMouseListener();
 public:
+	static Hero* _hero;
+
 	static MainScene* create(std::string mapName);
 
+	static MainScene* createWithHero(std::string mapName,Hero*);
+
+	bool initWithHero(std::string mapName, Hero*);
+
+	static TMXTiledMap* getTiledMap();
+
 	bool init(std::string mapName);
+
+	void onKeyPressed(EventKeyboard::KeyCode keyCode, Event* event);
+
+	void onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event);
+
+	bool onContactBegin(PhysicsContact& contact);
+
+	void onMouseDown(EventMouse *event);
+
+	void onMouseMove(EventMouse *event);
+	
+	void changeMap(std::string mapName);
+
+
 
 	/*void initListener();*/
 
@@ -30,7 +63,7 @@ public:
 
 };
 
-//MainScene* MainScene::_sharedScene = nullptr;
+
 
 
 #endif

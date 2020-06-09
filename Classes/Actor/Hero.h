@@ -6,7 +6,7 @@
 USING_NS_CC;
 class Weapon;
 
-class Hero 
+class Hero
 	:public Actor
 {
 protected:
@@ -15,11 +15,19 @@ protected:
 	//蓝量
 	State _power;
 	CC_SYNTHESIZE(Weapon*, _weapon1, Weapon1);
-	CC_SYNTHESIZE(Vec2, _velocityTo, VelocityTo);
+	CC_SYNTHESIZE(bool, _wPressed, WPressed);
+	CC_SYNTHESIZE(bool, _aPressed, APressed);
+	CC_SYNTHESIZE(bool, _sPressed, SPressed);
+	CC_SYNTHESIZE(bool, _dPressed, DPressed);
 	CC_SYNTHESIZE(INT32, _v, V);
 public:
+	static const PhysicsMaterial defaultMaterial;
 
 	static Hero* createWithName(std::string);
+
+	virtual bool initWithHero(Hero*);
+
+	static Hero* createWithHero(Hero*);
 
 	virtual bool initWithName(std::string);
 
@@ -30,22 +38,34 @@ public:
 	//初始化HP，AC，Power，开启自动恢复
 	void initState(ValueMap);
 
-	void initWeapon(ValueMap);
+	void initController();
 
-	void changeWeapon(Weapon*);
 
-	virtual void getHurt(INT32 dmg)override;
+	inline void controlVelocity();
 
-	inline void moveChange(Vec2 vec);
+	void updateHP(float dt);
+
+	void updateAC(float dt);
+
+	void updatePower(float dt);
+
+	/*void initWeapon(ValueMap);
+
+	void changeWeapon(Weapon*);*/
+
+	void getHurt(INT32 dmg)override;
+
+	
 
 };
 
 //初始化，开启恢复
 
 
-inline void Hero::moveChange(Vec2 vec)
+inline void Hero::controlVelocity()
 {
-	_velocityTo += vec * _v;
+	auto v = _v * Vec2(_dPressed - _aPressed, _wPressed - _sPressed);
+	getPhysicsBody()->setVelocity(v);
 }
 
 #endif 

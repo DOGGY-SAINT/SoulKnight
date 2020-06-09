@@ -57,6 +57,15 @@
     <ClCompile Include="..\Classes\Scene\MapLayer.cpp">
       <Filter>src\Scene</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\Actor\MapPortal.cpp">
+      <Filter>src\Actor</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Actor\RecoverProp.cpp">
+      <Filter>src\Actor</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Actor\Box.cpp">
+      <Filter>src\Actor</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -97,6 +106,15 @@
     </ClInclude>
     <ClInclude Include="..\Classes\Scene\MapLayer.h">
       <Filter>src\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Actor\MapPortal.h">
+      <Filter>src\Actor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Actor\RecoverProp.h">
+      <Filter>src\Actor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Actor\Box.h">
+      <Filter>src\Actor</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

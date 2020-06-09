@@ -21,7 +21,7 @@ bool Weapon::initWithName(std::string weaponName)
 	if (!initWithFile(PATH_PICTURE_WEAPON + weaponName + ".png"))
 		return false;
 	auto file = FileUtils::getInstance();
-	auto weaponMap = file->getValueMapFromFile(PATH_DATA + "Weapon.plist");
+	auto weaponMap = file->getValueMapFromFile(PATH_DATA + "WeaponData.plist");
 	auto thisMap = weaponMap[weaponName].asValueMap();
 	initWithValueMap(thisMap);
 
