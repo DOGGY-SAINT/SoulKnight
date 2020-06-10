@@ -25,12 +25,15 @@ bool PauseLayer::init()
 	{
 		return false;
 	}
-	////////////////////
+
 	auto visibleSize = Director::getInstance()->getVisibleSize();
 	Vec2 origin = Director::getInstance()->getVisibleOrigin();
-	///////////////
-	
-	/////////////////////////
+
+	/////////////////////////////
+	// 2. add a menu item with "X" image, which is clicked to quit the program
+	//    you may modify it.
+	// add a "close" icon to exit the progress. it's an autorelease object
+
 	auto closeItem = MenuItemImage::create(
 		"startbutton2.png",
 		"button2.1.jpg",
@@ -44,46 +47,24 @@ bool PauseLayer::init()
 	}
 	else
 	{
-		float x = visibleSize.width / 2;
-		float y = visibleSize.height / 2;
+		float x = origin.x + visibleSize.width - closeItem->getContentSize().width / 2 - 30;
+		float y = origin.y + closeItem->getContentSize().height / 2 + 270;
 		closeItem->setPosition(Vec2(x, y));
 	}
+
+	// create menu, it's an autorelease object
 	auto menu = Menu::create(closeItem, NULL);
 	menu->setPosition(Vec2::ZERO);
 	this->addChild(menu, 1);
-	auto tmp1 = Label::createWithTTF("Soul Knight", "fonts/Marker Felt.ttf",56);
-	auto tmp2 = MenuItemFont::create("Off");
-	//tmp1->setFontName("fonts / Marker Felt.ttf");
-	auto les = MenuItemToggle::createWithCallback( [](Object* sender) {
-		auto audio = SimpleAudioEngine::getInstance();
 
-		if (audio->isBackgroundMusicPlaying()==1)
-		{
-			audio->pauseBackgroundMusic();
-		}
-		else
-		{
-			audio->resumeBackgroundMusic();
-		}
-	},
-		tmp1,tmp2, NULL);
-
-	les->setPosition(200, 200);
-	
-		
 	auto volumeItem = MenuItemImage::create("CloseNormal.png", "CloseSelected.png",
-		[](Object* sender) {
+		[&](Ref* sender) {
 		auto audio = SimpleAudioEngine::getInstance();
-	
-	//	auto vol = audio->getBackgroundMusicVolume();
-		audio->setBackgroundMusicVolume( 0.0);
-		
+		audio->setBackgroundMusicVolume(0.5);
 		// your code here
 	});
-	volumeItem->setPosition(100,100);
-	auto menu2 = Menu::create(volumeItem,les, NULL);
-	this->addChild(menu2, 1);
-
+	volumeItem->setPosition(50,50);
+	this->addChild(volumeItem, 1);
 	return true;
 }
 

@@ -5,8 +5,9 @@
 #include "math.h"
 #include "stdlib.h"
 #include"cocos2d.h"
-USING_NS_CC;
+#include"PauseLayer.h"
 
+USING_NS_CC;
 
 Scene* secondScene::createScene()
 {
@@ -66,7 +67,28 @@ bool secondScene::init()
 	bulletLable->setName("Lable");
 	bulletLable->setPosition(visibleSize.width - 100, 20);
 	this->addChild(bulletLable, 1);
-
+	//
+	auto bloodbackground = Sprite::create("bloodbackground.jpg");
+	if (bloodbackground == nullptr)
+	{
+		problemLoading("'bloodbackground.jpg'");
+		return false;
+	}
+	bloodbackground->setName("bloodbackground");
+	bloodbackground->setPosition(Vec2(150, 750));
+	bloodbackground->setAnchorPoint(ccp(0.00001f, 0.5f));
+	this->addChild(bloodbackground, 1);
+	//蓝条
+	auto bloodsqu = Sprite::create("engery.png");
+	if (bloodsqu == nullptr)
+	{
+		problemLoading("'engery.jpg'");
+		return false;
+	}
+	bloodsqu->setName("bloodsqu");
+	bloodsqu->setPosition(Vec2(150, 750));
+	bloodsqu->setAnchorPoint(ccp(0.00001f, 0.5f));
+	this->addChild(bloodsqu, 1);
 	//鼠标移动
 	auto l2 = EventListenerMouse::create();
 	l2->onMouseMove = CC_CALLBACK_1(secondScene::onMouseMove, this);
@@ -100,7 +122,11 @@ bool secondScene::init()
 			str2 += to_string(pistolBullet->bulletAmount);
 			bulletLable->setString(str2);
 
+			//auto bloodsqu = dynamic_cast<Sprite*>(this->getChildByName("bloodsqu"));
+			auto scaleBy = ScaleBy::create(0.1f, (float)pistolBullet->bulletAmount/((float)pistolBullet->bulletAmount+1), 1.0f);
+			bloodsqu->runAction(scaleBy);
 			//进行schedule循环
+			
 			schedule(schedule_selector(secondScene::onMousePressed), 0.2f);
 		}
 	};
@@ -122,20 +148,23 @@ bool secondScene::init()
 
 	// add a "close" icon to exit the progress. it's an autorelease object
 	auto closeItem = MenuItemImage::create(
-		"CloseNormal.png",
-		"CloseSelected.png",
+		"pausebutton.png",
+		"pausebutton2.png",
 		CC_CALLBACK_1(secondScene::menuCloseCallback, this));
-
+	
 	if (closeItem == nullptr ||
 		closeItem->getContentSize().width <= 0 ||
 		closeItem->getContentSize().height <= 0)
 	{
-		problemLoading("'CloseNormal.png' and 'CloseSelected.png'");
+		problemLoading("'pausebutton.png' and 'pausebutton2.png'");
 	}
 	else
 	{
+		closeItem->setAnchorPoint(ccp(1.0f, 1.0f));
+		auto scaleTo1 = ScaleTo::create(0.5f, 0.5f);
+		closeItem->runAction(scaleTo1);
 		float x = origin.x + visibleSize.width - closeItem->getContentSize().width / 2;
-		float y = origin.y + closeItem->getContentSize().height / 2;
+		float y = visibleSize.height - closeItem->getContentSize().height / 2;
 		closeItem->setPosition(Vec2(x, y));
 	}
 
@@ -193,28 +222,12 @@ bool secondScene::init()
 	map->setAnchorPoint(ccp(-0.07f, 0.02f));
 	addChild(map, 0);
 
-
-	// add "HelloWorld" splash screen"
-	//auto sprite = Sprite::create("smallmap.png");
-//	if (sprite == nullptr)
-	//{
-	//	problemLoading("'smallmap.png'");
-	//}
-	//else
-	//{
-	//	// position the sprite on the center of the screen
-///		sprite->setPosition(Vec2(visibleSize.width / 2 + origin.x, visibleSize.height / 2 + origin.y));
-	//
-		//// add the sprite as a child to this layer
-		//this->addChild(sprite, 0);
-	//}
-
-
 	return true;
 }
 
-
 void secondScene::update(float dt) {
+	
+	//进行schedule循环
 	
 }
 
@@ -246,6 +259,7 @@ void secondScene::onMousePressed(float dt) {
 		str += to_string(bulletInstence->bulletAmount);
 		auto bulletLable = dynamic_cast<CCLabelTTF*>(this->getChildByName("Lable"));
 		bulletLable->setString(str);
+		
 	}
 }
 void secondScene::onMouseMove(EventMouse *e)
@@ -267,11 +281,8 @@ void secondScene::onMouseMove(EventMouse *e)
 void secondScene::menuCloseCallback(Ref* pSender)
 {
 	//Close the cocos2d-x game scene and quit the application
-	Director::getInstance()->end();
+	Director::getInstance()->pushScene(PauseLayer::createScene());
 
-	/*To navigate back to native iOS screen(if present) without quitting the application  ,do not use Director::getInstance()->end() as given above,instead trigger a custom event created in RootViewController.mm as below*/
-
-	//EventCustom customEndEvent("game_scene_close_event");
-	//_eventDispatcher->dispatchEvent(&customEndEvent);
 
 }
+
