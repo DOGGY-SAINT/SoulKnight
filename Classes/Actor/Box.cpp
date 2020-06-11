@@ -14,7 +14,7 @@ Box * Box::createWithObject(ValueMap valueMap)
 
 bool Box::initWithObject(ValueMap valueMap)
 {
-
+	return false;
 
 }
 

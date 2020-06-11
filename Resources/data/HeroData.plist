@@ -31,6 +31,8 @@
       <true></true>
       <key>RotationEnable</key>
       <false>0</false>
+      <key>VelocityLimit</key>
+      <real>100</real>
     </dict>
     <key>Knight</key>
     <dict>

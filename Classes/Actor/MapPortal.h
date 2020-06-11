@@ -2,7 +2,8 @@
 #include"cocos2d.h"
 #include"Actor/Actor.h"
 USING_NS_CC;
-class MapPortal:public Actor
+class MapPortal
+	:public Actor
 {
 	CC_SYNTHESIZE(std::string, _nextMap, NextMap);
 private:

@@ -3,7 +3,8 @@
 #include"cocos2d.h"
 #include"Actor/Actor.h"
 
-class Box :public Actor
+class Box 
+	:public Actor
 {
 	CC_SYNTHESIZE(Actor*, _prop, Prop);
 public:

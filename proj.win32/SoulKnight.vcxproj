@@ -154,6 +154,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)\Resources\" /D /E /I /F /Y
     <ClCompile Include="..\Classes\Actor\Hero.cpp" />
     <ClCompile Include="..\Classes\Actor\MapPortal.cpp" />
     <ClCompile Include="..\Classes\Actor\Monster.cpp" />
+    <ClCompile Include="..\Classes\Actor\MovingActor.cpp" />
     <ClCompile Include="..\Classes\Actor\RecoverProp.cpp" />
     <ClCompile Include="..\Classes\AppDelegate.cpp" />
     <ClCompile Include="..\Classes\Scene\MainScene.cpp" />
@@ -170,6 +171,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)\Resources\" /D /E /I /F /Y
     <ClInclude Include="..\Classes\Actor\Hero.h" />
     <ClInclude Include="..\Classes\Actor\MapPortal.h" />
     <ClInclude Include="..\Classes\Actor\Monster.h" />
+    <ClInclude Include="..\Classes\Actor\MovingActor.h" />
     <ClInclude Include="..\Classes\Actor\RecoverProp.h" />
     <ClInclude Include="..\Classes\AppDelegate.h" />
     <ClInclude Include="..\Classes\Component\Constant.h" />

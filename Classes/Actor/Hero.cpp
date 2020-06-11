@@ -29,29 +29,13 @@ bool Hero::initWithName(std::string Name)
 	initData(VALUE_AT(valueMap, "CommonData", ValueMap));
 	initState(VALUE_AT(valueMap, Name, ValueMap));
 	initCollision(VALUE_AT(valueMap, "CollisionData", ValueMap));
-	_weapon1 = Weapon::createWithName(DEFAULT_WEAPON_NAME);
-	_weapon1->setPosition(Vec2::ZERO);
-	addChild(_weapon1);
+	_mainWeapon = Weapon::createWithName(DEFAULT_WEAPON_NAME);
+	_mainWeapon->setPosition(Vec2::ZERO);
+	addChild(_mainWeapon);
 	return true;
 }
 
-bool Hero::initWithHero(Hero* hero)
-{
-	return false;
-}
 
-Hero* Hero::createWithHero(Hero* hero)
-{
-	/*Hero* hero = new(std::nothrow)Hero;
-	if (hero && hero->initWithHero(hero))
-	{
-		hero->autorelease();
-		return hero;
-	}
-	CC_SAFE_DELETE(hero);
-	return nullptr;*/
-	return nullptr;
-}
 
 void Hero::initData(ValueMap valueMap)
 {
@@ -72,9 +56,8 @@ void Hero::initCollision(ValueMap valueMap)
 	body->SET_DATA(valueMap, CategoryBitmask, Int);
 	body->SET_DATA(valueMap, CollisionBitmask, Int);
 	body->SET_DATA(valueMap, ContactTestBitmask, Int);
-	/*auto s = VALUE_AT(valueMap, "Dynamic", Bool);*/
 	body->SET_DATA(valueMap, Dynamic, Bool);
-	/*auto s2 = VALUE_AT(valueMap, "RotationEnable", Bool);*/
+	body->SET_DATA(valueMap,VelocityLimit,Float);
 	body->SET_DATA(valueMap, RotationEnable, Bool);
 	addComponent(body);
 }
@@ -124,4 +107,10 @@ void Hero::updateAC(float dt)
 void Hero::updatePower(float dt)
 {
 	_power.updateRecover(dt);
+}
+
+void Hero::controlVelocity()
+{
+	auto v = _v * Vec2(_dPressed - _aPressed, _wPressed - _sPressed);
+	getPhysicsBody()->setVelocity(v);
 }
