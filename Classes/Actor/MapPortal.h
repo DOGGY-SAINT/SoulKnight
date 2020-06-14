@@ -13,6 +13,8 @@ public:
 
 	bool onContactBegin(Actor*)override;
 
+	bool onContactSeparate(Actor*)override;
+
 	void changeMap();
 
 	

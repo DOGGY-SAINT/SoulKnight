@@ -3,9 +3,7 @@
 #include"Component/Constant.h"
 #include"Actor/Hero.h"
 
-//MainScene* MainScene::_sharedScene = nullptr;
-
-Hero* MainScene::_hero = nullptr;
+MainScene* MainScene::_sharedScene = nullptr;
 
 MainScene* MainScene::create(std::string mapName)
 {
@@ -23,41 +21,12 @@ bool MainScene::init(std::string mapName)
 {
 	if (!initWithPhysics())
 		return false;
+	_sharedScene = this;
 	initPhysicsWorld();
 	initMap(mapName);
 	initHero();
 	initListener();
-	/*_sharedScene = this;*/
-	return true;
-}
-
-MainScene* MainScene::createWithHero(std::string mapName, Hero* hero)
-{
-	MainScene* mainScene = new(std::nothrow)MainScene;
-	if (mainScene && mainScene->initWithHero(mapName, hero))
-	{
-		mainScene->autorelease();
-		return mainScene;
-	}
-	CC_SAFE_DELETE(mainScene);
-	return nullptr;
-}
-
-
-
-
-bool MainScene::initWithHero(std::string mapName, Hero* hero)
-{
-	if (!initWithPhysics())
-		return false;
-	initPhysicsWorld();
-	initMap(mapName);
-
-	_hero = hero;
-	_mapLayer->addHero(hero);
-
-	initListener();
-	/*_sharedScene = this;*/
+	
 	return true;
 }
 
@@ -69,7 +38,7 @@ void MainScene::initMap(std::string mapName)
 {
 	_mapLayer = MapLayer::create(mapName);
 	_mapLayer->setPosition(Vec2::ZERO);
-	addChild(_mapLayer);
+	addChild(_mapLayer,MAP_LAYER);
 }
 
 void MainScene::initHero()
@@ -98,8 +67,8 @@ void MainScene::initContactListener()
 {
 	auto contactListener = EventListenerPhysicsContact::create();
 	contactListener->onContactBegin = CC_CALLBACK_1(MainScene::onContactBegin, this);
+	contactListener->onContactSeparate= CC_CALLBACK_1(MainScene::onContactSeparate, this);
 	_eventDispatcher->addEventListenerWithSceneGraphPriority(contactListener, this);
-
 }
 
 void MainScene::initKeyBoardListener()
@@ -120,15 +89,7 @@ void MainScene::initMouseListener()
 
 void MainScene::onMouseDown(EventMouse *event)
 {
-	/*auto pos=event->getLocation();
-		_hero->setPosition(pos);*/
-		/*_mapLayer->retain();
-		_mapLayer->removeFromParent();
-		addChild(_mapLayer);*/
-	_hero->retain();
-	_mapLayer->removeFromParent();
-	initMap("GameMap1");
-	_mapLayer->addHero(_hero);
+	
 }
 
 void MainScene::onMouseMove(EventMouse *event)
@@ -192,6 +153,15 @@ bool MainScene::onContactBegin(PhysicsContact & contact)
 	return false;
 }
 
+bool MainScene::onContactSeparate(PhysicsContact & contact)
+{
+	auto Actor1 = dynamic_cast<Actor*>(contact.getShapeA()->getBody()->getNode());
+	auto Actor2 = dynamic_cast<Actor*>(contact.getShapeB()->getBody()->getNode());
+	if (Actor1&&Actor2)
+		return (Actor1->onContactSeparate(Actor2) && Actor2->onContactSeparate(Actor1));
+	return false;
+}
+
 
 
 TMXTiledMap* MainScene::getTiledMap()
@@ -201,10 +171,11 @@ TMXTiledMap* MainScene::getTiledMap()
 
 MainScene* MainScene::SharedScene()
 {
-	auto scene = dynamic_cast<MainScene*>(CCDirector::sharedDirector()->getRunningScene());
+	return _sharedScene;
+	/*auto scene = dynamic_cast<MainScene*>(CCDirector::sharedDirector()->getRunningScene());
 	if (scene)
 		return scene;
-	return nullptr;
+	return nullptr;*/
 }
 
 

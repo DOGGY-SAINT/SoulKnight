@@ -10,9 +10,15 @@ class RecoverProp
 	CC_SYNTHESIZE(INT32, _type, Type);
 	CC_SYNTHESIZE(INT32, _recoverNum, RecoverNum);
 
+	static RecoverProp* createWithName(std::string);
+
+	bool initWithName(std::string);
+
+	void initOther(ValueMap);
+
 	bool onContactBegin(Actor*)override;
 
-	void initData(ValueMap)override;
+	void recover();
 
 };
 

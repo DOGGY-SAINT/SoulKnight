@@ -35,6 +35,12 @@ bool MapPortal::onContactBegin(Actor* actor)
 	return false;
 }
 
+bool MapPortal::onContactSeparate(Actor *)
+{
+	MainScene::SharedScene()->onRPredded = nullptr;
+	return false;
+}
+
 void MapPortal::changeMap()
 {
 	MainScene::SharedScene()->changeMap(_nextMap);
