@@ -18,6 +18,7 @@ protected:
 	CC_SYNTHESIZE(bool, _aPressed, APressed);
 	CC_SYNTHESIZE(bool, _sPressed, SPressed);
 	CC_SYNTHESIZE(bool, _dPressed, DPressed);
+	CC_SYNTHESIZE(Weapon*, _weaponToOn, WeaponToOn);
 	std::vector<Weapon*> _weaponVector;
 public:
 	static const PhysicsMaterial defaultMaterial;
@@ -46,9 +47,7 @@ public:
 
 	void updatePower(float dt);
 
-	/*void initWeapon(ValueMap);
-
-	void changeWeapon(Weapon*);*/
+	void changeWeapon();
 
 	void getHurt(INT32 dmg)override;
 

@@ -41,7 +41,7 @@ void RecoverProp::initOther(ValueMap valueMap)
 bool RecoverProp::onContactBegin(Actor *a2)
 {
 	if (a2->getName() == "Hero")
-		MainScene::SharedScene()->onRPredded = CC_CALLBACK_0(RecoverProp::recover,this);
+		MainScene::SharedScene()->onRPressed = CC_CALLBACK_0(RecoverProp::recover,this);
 	return false;
 }
 

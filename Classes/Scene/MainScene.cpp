@@ -2,6 +2,7 @@
 #include"MapLayer.h"
 #include"Component/Constant.h"
 #include"Actor/Hero.h"
+#include"Weapon/Weapon.h"
 
 MainScene* MainScene::_sharedScene = nullptr;
 
@@ -26,11 +27,9 @@ bool MainScene::init(std::string mapName)
 	initMap(mapName);
 	initHero();
 	initListener();
-	
+	initScheduler();
 	return true;
 }
-
-
 
 
 
@@ -83,8 +82,24 @@ void MainScene::initMouseListener()
 {
 	auto mouseListener = EventListenerMouse::create();
 	mouseListener->onMouseDown = CC_CALLBACK_1(MainScene::onMouseDown, this);
+	mouseListener->onMouseMove = CC_CALLBACK_1(MainScene::onMouseMove, this);
 	_eventDispatcher->addEventListenerWithSceneGraphPriority(mouseListener, this);
 
+}
+
+void MainScene::initScheduler()
+{
+	schedule(schedule_selector(MainScene::updateMapPosition));
+
+}
+
+//保持英雄在正中央
+void MainScene::updateMapPosition(float dt)
+{
+	auto visibleSize = Director::getInstance()->getVisibleSize();
+	auto centre = Vec2(visibleSize.width / 2, visibleSize.height / 2);
+	auto heroPos = getHero()->getPosition();
+	_mapLayer->setPosition(centre-heroPos);
 }
 
 void MainScene::onMouseDown(EventMouse *event)
@@ -94,7 +109,11 @@ void MainScene::onMouseDown(EventMouse *event)
 
 void MainScene::onMouseMove(EventMouse *event)
 {
-
+	auto visibleSize = Director::getInstance()->getVisibleSize();
+	auto centre = this->convertToWorldSpace(Vec2(visibleSize.width / 2, visibleSize.height / 2));
+	auto pos = CCDirector::sharedDirector()->convertToUI(event->getLocation());
+	auto dir = pos - centre;
+	_hero->getMainWeapon()->setDirection(dir);
 }
 
 
@@ -116,8 +135,12 @@ void MainScene::onKeyPressed(EventKeyboard::KeyCode keyCode, Event* event)
 		hero->setDPressed(true);
 		break;
 	case EventKeyboard::KeyCode::KEY_R:
-		if (onRPredded)
-			onRPredded();
+		if (onRPressed)
+			onRPressed();
+		break;
+	case EventKeyboard::KeyCode::KEY_T:
+		if (onTPressed)
+			onTPressed();
 		break;
 	}
 	hero->controlVelocity();
@@ -148,18 +171,26 @@ bool MainScene::onContactBegin(PhysicsContact & contact)
 {
 	auto Actor1 = dynamic_cast<Actor*>(contact.getShapeA()->getBody()->getNode());
 	auto Actor2 = dynamic_cast<Actor*>(contact.getShapeB()->getBody()->getNode());
+	bool ret1=false, ret2=false;
 	if (Actor1&&Actor2)
-		return (Actor1->onContactBegin(Actor2) && Actor2->onContactBegin(Actor1));
-	return false;
+	{
+		ret1 = Actor1->onContactBegin(Actor2);
+		ret2 = Actor2->onContactBegin(Actor1);
+	}
+	return ret1&&ret2;
 }
 
 bool MainScene::onContactSeparate(PhysicsContact & contact)
 {
 	auto Actor1 = dynamic_cast<Actor*>(contact.getShapeA()->getBody()->getNode());
 	auto Actor2 = dynamic_cast<Actor*>(contact.getShapeB()->getBody()->getNode());
+	bool ret1 = false, ret2 = false;
 	if (Actor1&&Actor2)
-		return (Actor1->onContactSeparate(Actor2) && Actor2->onContactSeparate(Actor1));
-	return false;
+	{
+		ret1 = Actor1->onContactSeparate(Actor2);
+		ret2 = Actor2->onContactSeparate(Actor1);
+	}
+	return ret1 && ret2;
 }
 
 
@@ -181,6 +212,7 @@ MainScene* MainScene::SharedScene()
 
 void MainScene::changeMap(std::string mapName)
 {
+	_mapLayer->releaseAllWeapon();
 	_hero->retain();
 	_mapLayer->removeFromParent();
 	initMap(mapName);

@@ -1,8 +1,9 @@
 #pragma once
 #include"cocos2d.h"
+#include<vector>
 class Hero;
 class PauseLayer;
-
+class Weapon;
 
 USING_NS_CC;
 class MapLayer :public Layer
@@ -23,6 +24,8 @@ private:
 
 	void initBoxLayer();
 public:
+	std::vector<Weapon*> toRelease;
+
 	static MapLayer* create(std::string mapName);
 
 	virtual bool init(std::string mapName);
@@ -31,6 +34,12 @@ public:
 
 	static Vec2 getObjectNodeSpace(ValueMap);
 
+	void releaseAllWeapon();
+
 	void addHero(Hero*);
+
+	void addWeaponToVec(Weapon*);
+
+	void removeWeaponFromVec(Weapon*);
 
 };

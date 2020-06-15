@@ -29,9 +29,7 @@ bool Hero::initWithName(std::string Name)
 	initData(VALUE_AT(valueMap, "CommonData", ValueMap));
 	initState(VALUE_AT(valueMap, Name, ValueMap));
 	initCollision(VALUE_AT(valueMap, "CollisionData", ValueMap));
-	_mainWeapon = Weapon::createWithName(DEFAULT_WEAPON_NAME);
-	_mainWeapon->setPosition(Vec2::ZERO);
-	addChild(_mainWeapon);
+	initWeapon(DEFAULT_WEAPON_NAME);
 	return true;
 }
 
@@ -45,6 +43,7 @@ void Hero::initData(ValueMap valueMap)
 	SET_DATA(valueMap, Flag, Int);
 	SET_DATA(valueMap, Name, String);
 	SET_DATA(valueMap, V, Int);
+	_weaponToOn = nullptr;
 }
 
 void Hero::initCollision(ValueMap valueMap)
@@ -107,6 +106,15 @@ void Hero::updateAC(float dt)
 void Hero::updatePower(float dt)
 {
 	_power.updateRecover(dt);
+}
+
+void Hero::changeWeapon()
+{
+	if (_weaponToOn)
+	{
+		_mainWeapon->weaponOff();
+		_weaponToOn->weaponOn(this);
+	}
 }
 
 void Hero::controlVelocity()

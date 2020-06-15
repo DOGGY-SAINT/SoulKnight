@@ -30,7 +30,7 @@
       <key>Dynamic</key>
       <false></false>
       <key>RotationEnable</key>
-      <false>0</false>
+      <false></false>
     </dict>
   </dict>
 </plist>

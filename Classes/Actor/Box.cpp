@@ -84,26 +84,27 @@ void Box::randWeapon(ValueMap valueMap)
 bool Box::onContactBegin(Actor *a2)
 {
 	if ((!isOpen()) && a2->getName() == "Hero")
-		MainScene::SharedScene()->onRPredded = CC_CALLBACK_0(Box::openBox, this);
+		MainScene::SharedScene()->onRPressed = CC_CALLBACK_0(Box::openBox, this);
 	return false;
 }
 
 bool Box::onContactSeparate(Actor *a2)
 {
 	if ((!isOpen()) && a2->getName() == "Hero")
-		MainScene::SharedScene()->onRPredded = nullptr;
+		MainScene::SharedScene()->onRPressed = nullptr;
 	return false;
 }
 
 void Box::openBox()
 {
+	_open = true;
 	if (_prop)
 	{
 		_prop->setVisible(true);
 		if (_prop->getPhysicsBody())
 			_prop->getPhysicsBody()->setEnabled(true);
-		_open = true;
 	}
-	MainScene::SharedScene()->onRPredded = nullptr;
+	MainScene::SharedScene()->onRPressed = nullptr;
+	afterDead();
 }
 

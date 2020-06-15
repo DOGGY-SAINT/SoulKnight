@@ -5,6 +5,7 @@ class Hero;
 class MapLayer;
 class PauseLayer;
 class TMXMap;
+class Actor;
 
 USING_NS_CC;
 class MainScene :public Scene
@@ -29,10 +30,17 @@ private:
 	void initKeyBoardListener();
 
 	void initMouseListener();
+
+	void initScheduler();
+
+	void updateMapPosition(float dt);
 public:
 	static MainScene* _sharedScene;
 
-	std::function<void()> onRPredded;
+	//捡道具，传送门
+	std::function<void()> onRPressed;
+	//换枪
+	std::function<void()> onTPressed;
 
 	static MainScene* create(std::string mapName);
 
@@ -56,11 +64,8 @@ public:
 
 	Hero* getHero() { return _hero; }
 
-	/*void initListener();*/
-
 	static MainScene* SharedScene();
 
-	/*void changeMap(std::string mapName);*/
 
 };
 

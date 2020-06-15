@@ -5,6 +5,8 @@
 #include"MainScene.h"
 #include"Actor/MapPortal.h"
 #include"Actor/Box.h"
+#include"Weapon/Weapon.h"
+#include<algorithm>
 
 //#define INITLAYER(layerName)\
 //init##layerName##Layer()
@@ -85,7 +87,7 @@ void MapLayer::initMapPortalLayer()
 	for (auto obj : Group)
 	{
 		auto valueMap = obj.asValueMap();
-		auto portal=MapPortal::createWithObject(valueMap);
+		auto portal = MapPortal::createWithObject(valueMap);
 		addChild(portal);
 	}
 }
@@ -112,25 +114,36 @@ void MapLayer::initBornLayer()
 	_bornPlace = Vec2(x, y);
 }
 
-//inline Vec2 MapLayer::TileSpaceToNodeSpace(float x, float y, TMXTiledMap* map)
-//{
-//	auto scene = MainScene::SharedScene();
-//	Size tileSize = map->getTileSize();
-//	Size mapSize = map->getMapSize();
-//	float height = tileSize.height * mapSize.height;
-//	return Vec2(x, height - y);
-//}
-
 Vec2 MapLayer::getObjectNodeSpace(ValueMap valueMap)
 {
 	float height = VALUE_AT(valueMap, "height", Float);
 	auto x = VALUE_AT(valueMap, "x", Float), y = VALUE_AT(valueMap, "y", Float);
-	return Vec2(x,y + height);
+	return Vec2(x, y + height);
+}
+
+void MapLayer::releaseAllWeapon()
+{
+	for (auto weapon : toRelease)
+		weapon->release();
 }
 
 void MapLayer::addHero(Hero* hero)
 {
 	addChild(hero);
 	setHero(hero);
-	hero->setPosition(_bornPlace);	
+	hero->setPosition(_bornPlace);
+}
+
+void MapLayer::addWeaponToVec(Weapon *weapon)
+{
+	auto it = std::find(toRelease.begin(), toRelease.end(), weapon);
+	if (it == toRelease.end())
+		toRelease.insert(it,weapon);
+}
+
+void MapLayer::removeWeaponFromVec(Weapon *weapon)
+{
+	auto it = std::find(toRelease.begin(), toRelease.end(), weapon);
+	if (it != toRelease.end())
+		toRelease.erase(it);
 }

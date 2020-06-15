@@ -15,3 +15,9 @@ void MovingActor::setAttackOff()
 	if (_mainWeapon)
 		_mainWeapon->unschedule(schedule_selector(Weapon::attack, _mainWeapon));
 }
+
+void MovingActor::initWeapon(std::string weaponName)
+{
+	auto weapon=Weapon::createWithName(weaponName);
+	weapon->weaponOn(this);
+}

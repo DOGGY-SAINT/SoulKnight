@@ -14,8 +14,9 @@ mapName[dataName].as##typeName##()
 
 //Flag
 #define FLAG_NOTHING  0
-#define FLAG_MONSTER 1
-#define FLAG_HERO    2
+#define FLAG_MONSTER  1
+#define FLAG_HERO     2
+#define FLAG_NOHURT   3
 
 //需要双引号
 #define PATH_DATA             std::string("data/")
@@ -28,7 +29,7 @@ mapName[dataName].as##typeName##()
 
 #define SAFE_MAP_NAME         std::string("GameMap1")
 #define DEFAULT_HERO_NAME     std::string("Knight")
-#define DEFAULT_WEAPON_NAME   std::string("M2")
+#define DEFAULT_WEAPON_NAME   std::string("RedGun")
 
 
 //catagory&contact!=0 事件发送
@@ -41,6 +42,7 @@ mapName[dataName].as##typeName##()
 #define CLOSE_DOOR_CATAGORY   0b0000010000
 #define MONSTER_CATAGORY      0b0000100000
 #define PROP_CATAGORY         0b0001000000		//所有道具，传送门，箱子，药瓶
+#define WEAPON_CATAGORY       0b0010000000
 
 #define BULLET_COLLISION      0b0000111110
 #define HERO_COLLISION        0b0001110111
@@ -49,14 +51,16 @@ mapName[dataName].as##typeName##()
 #define CLOSE_DOOR_COLLISION  0b0000100101
 #define MONSTER_COLLISION     0b0000110111
 #define PROP_COLLISION        0b0000000000
+#define WEAPON_COLLISION      0b0000000000
 
-#define BULLET_CONTACT        0b0000111110
-#define HERO_CONTACT          0b0001000001
+#define BULLET_CONTACT        0b0010111110
+#define HERO_CONTACT          0b0011000001
 #define WALL_CONTACT          0b0000000001
 #define OPEN_DOOR_CONTACT     0b0000000001
 #define CLOSE_DOOR_CONTACT    0b0000000001
-#define MONSTER_CONTACT       0b0000000001
+#define MONSTER_CONTACT       0b0010000001
 #define PROP_CONTACT          0b0000000010
+#define WEAPON_CONTACT        0b0000100011
 
 
 

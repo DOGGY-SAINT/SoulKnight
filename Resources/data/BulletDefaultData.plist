@@ -5,22 +5,18 @@
     <key>CommonData</key>
     <dict>
       <key>Name</key>
-      <string>Weapon</string>
-      <key>Damage</key>
-      <integer>0</integer>
+      <string>Bullet</string>
       <key>CanBeHurt</key>
-      <boolean>false</boolean>
-      <key>Flag</key>
-      <integer>3</integer>
+      <boolean>true</boolean>
       <key>LocalZOrder</key>
-      <integer>6</integer>
+      <integer>3</integer>
     </dict>
     <key>CollisionData</key>
     <dict>
       <key>Collision</key>
       <true></true>
       <key>Name</key>
-      <string>Weapon</string>
+      <string>Bullet</string>
       <key>CategoryBitmask</key>
       <integer>64</integer>
       <key>CollisionBitmask</key>

@@ -20,5 +20,7 @@ public:
 
 	void setAttackOff();
 
+	virtual void initWeapon(std::string weaponName);
+
 };
 

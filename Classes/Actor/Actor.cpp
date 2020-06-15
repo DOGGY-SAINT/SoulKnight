@@ -86,10 +86,7 @@ void Actor::initCollision(ValueMap valueMap)
 
 inline void Actor::afterDead()
 {
-	auto body = getPhysicsBody();
-	if (body)
-		body->removeFromWorld();
-	this->removeFromParentAndCleanup(true);
+	this->removeFromParent();
 }
 
 inline void Actor::getHurt(INT32 dmg)
@@ -117,7 +114,7 @@ inline bool Actor::getCanBeHurt()
 //Flag不一样才受伤
 inline bool Actor::onContactBegin(Actor* a2)
 {
-	if (isAnotherFlag(a2))
+	if (isAnotherFlag(a2)&&a2->_flag!=FLAG_NOHURT)
 	{
 		getHurt(a2->_damage);
 		return true;

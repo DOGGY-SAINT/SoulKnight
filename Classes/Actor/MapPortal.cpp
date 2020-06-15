@@ -31,18 +31,18 @@ MapPortal* MapPortal::createWithObject(ValueMap valueMap)
 bool MapPortal::onContactBegin(Actor* actor)
 {
 	if (actor->getName() == "Hero")
-		MainScene::SharedScene()->onRPredded = CC_CALLBACK_0(MapPortal::changeMap, this);
+		MainScene::SharedScene()->onRPressed = CC_CALLBACK_0(MapPortal::changeMap, this);
 	return false;
 }
 
 bool MapPortal::onContactSeparate(Actor *)
 {
-	MainScene::SharedScene()->onRPredded = nullptr;
+	MainScene::SharedScene()->onRPressed = nullptr;
 	return false;
 }
 
 void MapPortal::changeMap()
 {
 	MainScene::SharedScene()->changeMap(_nextMap);
-	MainScene::SharedScene()->onRPredded = nullptr;
+	MainScene::SharedScene()->onRPressed = nullptr;
 }
