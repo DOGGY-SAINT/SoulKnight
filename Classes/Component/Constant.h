@@ -23,8 +23,10 @@ mapName[dataName].as##typeName##()
 #define PATH_PICTURE_BULLET   std::string("picture/bullet/")
 #define PATH_PICTURE_HERO     std::string("picture/hero/")
 #define PATH_MAP              std::string("map/")
+#define PATH_PICTURE_PROP     std::string("picture/Prop/")
 
-#define SAFE_MAP_NAME         std::string("SafeMap")
+
+#define SAFE_MAP_NAME         std::string("GameMap1")
 #define DEFAULT_HERO_NAME     std::string("Knight")
 #define DEFAULT_WEAPON_NAME   std::string("M2")
 
@@ -62,7 +64,7 @@ mapName[dataName].as##typeName##()
 
 
 #define HERO_LAYER  5
-#define MAP_LAYER 2
+#define MAP_LAYER 0
 
 
 #endif // !Constant_H

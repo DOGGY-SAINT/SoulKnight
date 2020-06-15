@@ -52,7 +52,9 @@ public:
 
 	void getHurt(INT32 dmg)override;
 
-	
+	State* getAC() { return &_AC; }
+
+	State* getPower() { return &_power; }
 
 };
 

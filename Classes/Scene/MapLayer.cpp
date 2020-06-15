@@ -4,6 +4,7 @@
 #include"Component\Constant.h"
 #include"MainScene.h"
 #include"Actor/MapPortal.h"
+#include"Actor/Box.h"
 
 //#define INITLAYER(layerName)\
 //init##layerName##Layer()
@@ -24,6 +25,7 @@ bool MapLayer::init(std::string mapName)
 {
 	if (!Layer::create())
 		return false;
+	MainScene::SharedScene()->setMapLayer(this);
 	initMap(mapName);
 	initTileLayer();
 	initObjectLayer();
@@ -73,6 +75,7 @@ void MapLayer::initObjectLayer()
 {
 	initBornLayer();
 	initMapPortalLayer();
+	initBoxLayer();
 }
 
 void MapLayer::initMapPortalLayer()
@@ -84,6 +87,18 @@ void MapLayer::initMapPortalLayer()
 		auto valueMap = obj.asValueMap();
 		auto portal=MapPortal::createWithObject(valueMap);
 		addChild(portal);
+	}
+}
+
+void MapLayer::initBoxLayer()
+{
+	auto layer = _tiledMap->getObjectGroup("BoxLayer");
+	auto Group = layer->getObjects();
+	for (auto obj : Group)
+	{
+		auto valueMap = obj.asValueMap();
+		auto box = Box::createWithObject(valueMap);
+		addChild(box);
 	}
 }
 

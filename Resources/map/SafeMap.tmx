@@ -213,7 +213,7 @@
     <property name="Dynamic" type="bool" value="false"/>
     <property name="Flag" type="int" value="0"/>
     <property name="HP" type="int" value="1"/>
-    <property name="LocalZOrder" type="int" value="6"/>
+    <property name="LocalZOrder" type="int" value="3"/>
     <property name="Name" value="MapPortal"/>
     <property name="NextMap" value="GameMap1"/>
     <property name="RotationEnable" type="bool" value="false"/>

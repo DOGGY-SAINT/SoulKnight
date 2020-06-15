@@ -18,6 +18,8 @@ public:
 	//默认函数,对自己做的事情
 	inline virtual bool onContactBegin(Actor* a2);
 
+	inline virtual bool onContactSeparate(Actor* a2) { return false; }
+
 	inline bool isAnotherFlag(Actor* a2);
 
 	//默认材料
@@ -52,6 +54,8 @@ public:
 
 	//死亡回调
 	inline virtual void afterDead();
+
+	State* getHP() { return &_HP; }
 };
 
 

@@ -12,9 +12,10 @@ class MainScene :public Scene
 	CC_SYNTHESIZE(EventListener*, _mouseListener, MouseListener);
 	CC_SYNTHESIZE(MapLayer*, _mapLayer, MapLayer);
 	CC_SYNTHESIZE(PauseLayer*, _pauseLayer, PauseLayer);
-
-	std::function<void()> onRPredded;
+	
 private:
+	Hero* _hero = nullptr;
+
 	void initMap(std::string mapName);
 
 	void initHero();
@@ -29,13 +30,11 @@ private:
 
 	void initMouseListener();
 public:
-	static Hero* _hero;
+	static MainScene* _sharedScene;
+
+	std::function<void()> onRPredded;
 
 	static MainScene* create(std::string mapName);
-
-	static MainScene* createWithHero(std::string mapName,Hero*);
-
-	bool initWithHero(std::string mapName, Hero*);
 
 	static TMXTiledMap* getTiledMap();
 
@@ -47,13 +46,15 @@ public:
 
 	bool onContactBegin(PhysicsContact& contact);
 
+	bool onContactSeparate(PhysicsContact& contact);
+
 	void onMouseDown(EventMouse *event);
 
 	void onMouseMove(EventMouse *event);
 	
 	void changeMap(std::string mapName);
 
-
+	Hero* getHero() { return _hero; }
 
 	/*void initListener();*/
 

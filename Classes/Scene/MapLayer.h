@@ -20,8 +20,9 @@ private:
 	void initBornLayer();
 
 	void initMapPortalLayer();
-public:
 
+	void initBoxLayer();
+public:
 	static MapLayer* create(std::string mapName);
 
 	virtual bool init(std::string mapName);
