@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<plist version="1.0">
+  <dict>
+    <key>M2</key>
+    <dict>
+      <key>GapTime</key>
+      <real>0.5</real>
+      <key>Name</key>
+      <string>Weapon</string>
+      <key>PowerCost</key>
+      <integer>1</integer>
+      <key>BulletData</key>
+      <dict>
+        <key>Damage</key>
+        <integer>2</integer>
+      </dict>
+    </dict>
+  </dict>
+</plist>
