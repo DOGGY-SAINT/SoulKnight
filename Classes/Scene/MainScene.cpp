@@ -2,6 +2,9 @@
 #include"MapLayer.h"
 #include"Component/Constant.h"
 #include"Actor/Hero.h"
+#include"PauseLayer.h"
+
+USING_NS_CC;
 
 MainScene* MainScene::_sharedScene = nullptr;
 
@@ -31,14 +34,42 @@ bool MainScene::init(std::string mapName)
 }
 
 
-
-
-
 void MainScene::initMap(std::string mapName)
 {
 	_mapLayer = MapLayer::create(mapName);
 	_mapLayer->setPosition(Vec2::ZERO);
 	addChild(_mapLayer,MAP_LAYER);
+	////////////////////////////////////////////////////////////////////////////
+	auto visibleSize = Director::getInstance()->getVisibleSize();
+	auto origin = Director::getInstance()->getVisibleOrigin();
+
+	//ÆÁÄ»ÖÐÐÄ
+	auto centre = Vec2(visibleSize.width / 2, visibleSize.height / 2);
+	auto closeItem = MenuItemImage::create(
+		"pausebutton.png",
+		"pausebutton2.png",
+		CC_CALLBACK_1(MainScene::menuCloseCallback, this));
+
+	if (closeItem == nullptr ||
+		closeItem->getContentSize().width <= 0 ||
+		closeItem->getContentSize().height <= 0)
+	{
+
+	}
+	else
+	{
+		closeItem->setAnchorPoint(ccp(1.0f, 1.0f));
+		auto scaleTo1 = ScaleTo::create(0.5f, 0.5f);
+		closeItem->runAction(scaleTo1);
+		float x = origin.x + visibleSize.width - closeItem->getContentSize().width / 2;
+		float y = visibleSize.height - closeItem->getContentSize().height / 2;
+		closeItem->setPosition(Vec2(x, y));
+	}
+
+	// create menu, it's an autorelease object
+	auto menu = Menu::create(closeItem, NULL);
+	menu->setPosition(Vec2::ZERO);
+	this->addChild(menu, 1);
 }
 
 void MainScene::initHero()
@@ -185,4 +216,13 @@ void MainScene::changeMap(std::string mapName)
 	_mapLayer->removeFromParent();
 	initMap(mapName);
 	_mapLayer->addHero(_hero);
+}
+
+
+
+void MainScene::menuCloseCallback(Ref* pSender)
+{
+	//Close the cocos2d-x game scene and quit the application
+	Director::getInstance()->pushScene(PauseLayer::createScene());
+
 }

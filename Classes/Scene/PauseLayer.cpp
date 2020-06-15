@@ -1,6 +1,7 @@
 #include "PauseLayer.h"
 #include "SimpleAudioEngine.h"
-#include "secondScene.h"
+#include "MainScene.h"
+#include "HelloWorldScene.h"
 
 USING_NS_CC;
 
@@ -29,8 +30,32 @@ bool PauseLayer::init()
 	auto visibleSize = Director::getInstance()->getVisibleSize();
 	Vec2 origin = Director::getInstance()->getVisibleOrigin();
 	///////////////
-	
+	auto les = MenuItemToggle::createWithCallback([](Object* sender) {
+		auto audio = CocosDenshion::SimpleAudioEngine::getInstance();
+		if (audio->isBackgroundMusicPlaying() == 1)
+		{
+			audio->pauseBackgroundMusic();
+		}
+		else
+		{
+			audio->resumeBackgroundMusic();
+		}
+	},
+		MenuItemFont::create("On"), MenuItemFont::create("Off"), NULL);
+	les->setPosition(200, 200);
+	auto menu2 = Menu::create(les, NULL);
+	this->addChild(menu2, 1);
 	/////////////////////////
+	auto les1 = MenuItemImage::create(
+		"homebutton1.png",
+		"homebutton2.png",
+		[](Object* sender) {
+		Director::getInstance()->replaceScene(CCTransitionFade::create(0.3f, HelloWorld::createScene()));
+	});
+	les1->setPosition(120, 110);
+	auto menu3 = Menu::create(les1, NULL);
+	this->addChild(menu3, 1);
+	////////////////
 	auto closeItem = MenuItemImage::create(
 		"startbutton2.png",
 		"button2.1.jpg",
@@ -51,45 +76,11 @@ bool PauseLayer::init()
 	auto menu = Menu::create(closeItem, NULL);
 	menu->setPosition(Vec2::ZERO);
 	this->addChild(menu, 1);
-	auto tmp1 = Label::createWithTTF("Soul Knight", "fonts/Marker Felt.ttf",56);
-	auto tmp2 = MenuItemFont::create("Off");
-	//tmp1->setFontName("fonts / Marker Felt.ttf");
-	auto les = MenuItemToggle::createWithCallback( [](Object* sender) {
-		auto audio = SimpleAudioEngine::getInstance();
-
-		if (audio->isBackgroundMusicPlaying()==1)
-		{
-			audio->pauseBackgroundMusic();
-		}
-		else
-		{
-			audio->resumeBackgroundMusic();
-		}
-	},
-		tmp1,tmp2, NULL);
-
-	les->setPosition(200, 200);
-	
-		
-	auto volumeItem = MenuItemImage::create("CloseNormal.png", "CloseSelected.png",
-		[](Object* sender) {
-		auto audio = SimpleAudioEngine::getInstance();
-	
-	//	auto vol = audio->getBackgroundMusicVolume();
-		audio->setBackgroundMusicVolume( 0.0);
-		
-		// your code here
-	});
-	volumeItem->setPosition(100,100);
-	auto menu2 = Menu::create(volumeItem,les, NULL);
-	this->addChild(menu2, 1);
 
 	return true;
 }
 
-
 void PauseLayer::menuCloseCallback(Ref* pSender)
 {
 	Director::getInstance()->popScene();
-
 }
