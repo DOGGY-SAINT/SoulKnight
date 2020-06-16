@@ -1,3 +1,4 @@
+#pragma once
 #ifndef __secondScene_H__
 #define __secondScene_H__
 
@@ -15,3 +16,4 @@ public:
 };
 
 #endif 
+#pragma once

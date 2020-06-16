@@ -2,9 +2,7 @@
 #include"Hero.h"
 #include "Component\Constant.h"
 #include"Weapon/Weapon.h"
-
-//ÃÜ¶È µ¯ÐÔ Ä¦²ÁÁ¦
-const PhysicsMaterial Hero::defaultMaterial = PhysicsMaterial(0.0f, 0.0f, 0.0f);
+#include"Weapon/SingleShotgun.h"
 
 Hero* Hero::createWithName(std::string Name)
 {
@@ -25,15 +23,14 @@ bool Hero::initWithName(std::string Name)
 	auto file = FileUtils::getInstance();
 	auto valueMap = file->getValueMapFromFile(PATH_DATA + "HeroData.plist");
 
-	initController();
 	initData(VALUE_AT(valueMap, "CommonData", ValueMap));
 	initState(VALUE_AT(valueMap, Name, ValueMap));
 	initCollision(VALUE_AT(valueMap, "CollisionData", ValueMap));
-	initWeapon(DEFAULT_WEAPON_NAME);
-	return true;
+
+	_weapon1 = SingleShotgun::createWithName(DEFAULT_WEAPON_NAME);
+	_weapon1->setPosition(Vec2::ZERO);
+	addChild(_weapon1);
 }
-
-
 
 void Hero::initData(ValueMap valueMap)
 {
@@ -43,23 +40,20 @@ void Hero::initData(ValueMap valueMap)
 	SET_DATA(valueMap, Flag, Int);
 	SET_DATA(valueMap, Name, String);
 	SET_DATA(valueMap, V, Int);
-	_weaponToOn = nullptr;
 }
 
 void Hero::initCollision(ValueMap valueMap)
 {
 	auto body = PhysicsBody::createBox(getContentSize(), defaultMaterial);
-	auto b= VALUE_AT(valueMap, "Name", String);
 	body->SET_DATA(valueMap, Name, String);
-	auto b2 = VALUE_AT(valueMap, "CategoryBitmask", String);
 	body->SET_DATA(valueMap, CategoryBitmask, Int);
 	body->SET_DATA(valueMap, CollisionBitmask, Int);
 	body->SET_DATA(valueMap, ContactTestBitmask, Int);
 	body->SET_DATA(valueMap, Dynamic, Bool);
-	body->SET_DATA(valueMap,VelocityLimit,Float);
 	body->SET_DATA(valueMap, RotationEnable, Bool);
 	addComponent(body);
 }
+
 
 void Hero::getHurt(INT32 dmg)
 {
@@ -72,53 +66,16 @@ void Hero::getHurt(INT32 dmg)
 		afterDead();
 }
 
+
 void Hero::initState(ValueMap valueMap)
 {
-	_HP = State(VALUE_AT(valueMap,"HP",ValueMap));
+	/*_HP = State(VALUE_AT(valueMap, "HP", ValueMap));
+	if (_HP.getRecoverGap() != 0)
+		schedule(CC_CALLBACK_1(State::Recover), _HP.getRecoverGap());
 	_AC = State(VALUE_AT(valueMap, "AC", ValueMap));
+	if (_AC.getRecoverGap() != 0)
+		schedule(schedule_selector(State::Recover), _AC.getRecoverGap());
 	_power = State(VALUE_AT(valueMap, "Power", ValueMap));
-
-	schedule(schedule_selector(Hero::updateHP), _HP.getRecoverGap());
-	schedule(schedule_selector(Hero::updateAC), _AC.getRecoverGap());
-	schedule(schedule_selector(Hero::updatePower), _power.getRecoverGap());
-}
-
-void Hero::initController()
-{
-	_wPressed = false;
-	_aPressed = false;
-	_sPressed = false;
-	_dPressed = false;
-}
-
-
-void Hero::updateHP(float dt)
-{
-	_HP.updateRecover(dt);
-}
-
-
-void Hero::updateAC(float dt)
-{
-	_AC.updateRecover(dt);
-}
-
-void Hero::updatePower(float dt)
-{
-	_power.updateRecover(dt);
-}
-
-void Hero::changeWeapon()
-{
-	if (_weaponToOn)
-	{
-		_mainWeapon->weaponOff();
-		_weaponToOn->weaponOn(this);
-	}
-}
-
-void Hero::controlVelocity()
-{
-	auto v = _v * Vec2(_dPressed - _aPressed, _wPressed - _sPressed);
-	getPhysicsBody()->setVelocity(v);
+	if (_power.getRecoverGap() != 0)
+		schedule(schedule_selector(_power.Recover), _power.getRecoverGap());*/
 }

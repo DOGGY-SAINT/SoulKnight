@@ -2,26 +2,22 @@
 #define _HERO_H_
 
 #include"cocos2d.h"
-#include"MovingActor.h"
+#include"Actor.h"
 USING_NS_CC;
 class Weapon;
 
-class Hero
-	:public MovingActor
+class Hero 
+	:public Actor
 {
 protected:
 	//护甲
 	State _AC;
 	//蓝量
 	State _power;
-	CC_SYNTHESIZE(bool, _wPressed, WPressed);
-	CC_SYNTHESIZE(bool, _aPressed, APressed);
-	CC_SYNTHESIZE(bool, _sPressed, SPressed);
-	CC_SYNTHESIZE(bool, _dPressed, DPressed);
-	CC_SYNTHESIZE(Weapon*, _weaponToOn, WeaponToOn);
-	std::vector<Weapon*> _weaponVector;
+	CC_SYNTHESIZE(Weapon*, _weapon1, Weapon1);
+	CC_SYNTHESIZE(Vec2, _velocityTo, VelocityTo);
+	CC_SYNTHESIZE(INT32, _v, V);
 public:
-	static const PhysicsMaterial defaultMaterial;
 
 	static Hero* createWithName(std::string);
 
@@ -34,32 +30,22 @@ public:
 	//初始化HP，AC，Power，开启自动恢复
 	void initState(ValueMap);
 
-	//wasd初始化
-	void initController();
+	void initWeapon(ValueMap);
 
-	//根据wasd改v
-	void controlVelocity();
+	void changeWeapon(Weapon*);
 
-	//update
-	void updateHP(float dt);
+	virtual void getHurt(INT32 dmg)override;
 
-	void updateAC(float dt);
-
-	void updatePower(float dt);
-
-	void changeWeapon();
-
-	void getHurt(INT32 dmg)override;
-
-	State* getAC() { return &_AC; }
-
-	State* getPower() { return &_power; }
+	inline void moveChange(Vec2 vec);
 
 };
 
 //初始化，开启恢复
 
 
-
+inline void Hero::moveChange(Vec2 vec)
+{
+	_velocityTo += vec * _v;
+}
 
 #endif 
