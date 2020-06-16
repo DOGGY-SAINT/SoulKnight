@@ -7,21 +7,18 @@ USING_NS_CC;
 class Monster 
 	:public MovingActor
 {
+public:
 	static Monster* createWithObject(ValueMap);
 
 	bool initWithObject(ValueMap)override;
 
-	void initData(ValueMap);
-
-	void initCollision(ValueMap);
-
-	void initWeapon(std::string name);
-
-	void initSchedule();
+	void initScheduler();
 
 	void updateVelocity(float dt);
 
 	void updateWeaponDirection(float dt);
+
+	float rand();
 };
 
 

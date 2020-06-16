@@ -43,7 +43,6 @@ void MainScene::initMap(std::string mapName)
 void MainScene::initHero()
 {
 	_hero = Hero::createWithName(DEFAULT_HERO_NAME);
-	_hero->retain();
 	_mapLayer->addHero(_hero);
 }
 
@@ -52,7 +51,6 @@ void MainScene::initPhysicsWorld()
 	auto world = getPhysicsWorld();
 	world->setGravity(Vec2::ZERO);
 	world->setDebugDrawMask(PhysicsWorld::DEBUGDRAW_ALL);
-
 }
 
 void MainScene::initListener()
@@ -104,7 +102,7 @@ void MainScene::updateMapPosition(float dt)
 
 void MainScene::onMouseDown(EventMouse *event)
 {
-	
+	gameBegin();
 }
 
 void MainScene::onMouseMove(EventMouse *event)
@@ -143,7 +141,6 @@ void MainScene::onKeyPressed(EventKeyboard::KeyCode keyCode, Event* event)
 			onTPressed();
 		break;
 	}
-	hero->controlVelocity();
 }
 
 void MainScene::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event)
@@ -164,7 +161,6 @@ void MainScene::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event)
 		hero->setDPressed(false);
 		break;
 	}
-	hero->controlVelocity();
 }
 
 bool MainScene::onContactBegin(PhysicsContact & contact)
@@ -203,18 +199,30 @@ TMXTiledMap* MainScene::getTiledMap()
 MainScene* MainScene::SharedScene()
 {
 	return _sharedScene;
-	/*auto scene = dynamic_cast<MainScene*>(CCDirector::sharedDirector()->getRunningScene());
-	if (scene)
-		return scene;
-	return nullptr;*/
+}
+
+void MainScene::gameBegin()
+{
+	_hero->release();
+	initHero();
+	changeMap(SAFE_MAP_NAME);
 }
 
 
 void MainScene::changeMap(std::string mapName)
 {
-	_mapLayer->releaseAllWeapon();
+	_mapLayer->releaseAllActor();
 	_hero->retain();
 	_mapLayer->removeFromParent();
 	initMap(mapName);
 	_mapLayer->addHero(_hero);
+	_hero->initScheduler();
+}
+
+void MainScene::changeHero()
+{
+	auto hero = _hero->getHeroToOn();
+	_hero->heroOff();
+	hero->heroOn();
+	onTPressed = nullptr;
 }

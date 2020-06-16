@@ -24,9 +24,9 @@
       <key>CategoryBitmask</key>
       <integer>2</integer>
       <key>CollisionBitmask</key>
-      <integer>119</integer>
+      <integer>127</integer>
       <key>ContactTestBitmask</key>
-      <integer>65</integer>
+      <integer>201</integer>
       <key>Dynamic</key>
       <true></true>
       <key>RotationEnable</key>

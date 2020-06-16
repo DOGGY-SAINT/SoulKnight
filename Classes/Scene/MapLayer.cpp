@@ -7,6 +7,7 @@
 #include"Actor/Box.h"
 #include"Weapon/Weapon.h"
 #include<algorithm>
+#include"Actor/Monster.h"
 
 //#define INITLAYER(layerName)\
 //init##layerName##Layer()
@@ -78,6 +79,8 @@ void MapLayer::initObjectLayer()
 	initBornLayer();
 	initMapPortalLayer();
 	initBoxLayer();
+	initMonsterLayer();
+	initHeroLayer();
 }
 
 void MapLayer::initMapPortalLayer()
@@ -104,6 +107,32 @@ void MapLayer::initBoxLayer()
 	}
 }
 
+void MapLayer::initMonsterLayer()
+{
+	auto layer = _tiledMap->getObjectGroup("MonsterLayer");
+	auto Group = layer->getObjects();
+	for (auto obj : Group)
+	{
+		auto valueMap = obj.asValueMap();
+		auto monster = Monster::createWithObject(valueMap);
+		addChild(monster);
+	}
+}
+
+void MapLayer::initHeroLayer()
+{
+	auto layer = _tiledMap->getObjectGroup("HeroLayer");
+	if (!layer)
+		return;
+	auto Group = layer->getObjects();
+	for (auto obj : Group)
+	{
+		auto valueMap = obj.asValueMap();
+		auto hero = Hero::createWithObject(valueMap);
+		addChild(hero);
+	}
+}
+
 //object所获得的x与y已经自动转换成cocos2dx中的坐标
 void MapLayer::initBornLayer()
 {
@@ -121,7 +150,7 @@ Vec2 MapLayer::getObjectNodeSpace(ValueMap valueMap)
 	return Vec2(x, y + height);
 }
 
-void MapLayer::releaseAllWeapon()
+void MapLayer::releaseAllActor()
 {
 	for (auto weapon : toRelease)
 		weapon->release();
@@ -130,20 +159,19 @@ void MapLayer::releaseAllWeapon()
 void MapLayer::addHero(Hero* hero)
 {
 	addChild(hero);
-	setHero(hero);
 	hero->setPosition(_bornPlace);
 }
 
-void MapLayer::addWeaponToVec(Weapon *weapon)
+void MapLayer::addActorToVec(Actor * actor)
 {
-	auto it = std::find(toRelease.begin(), toRelease.end(), weapon);
+	auto it = std::find(toRelease.begin(), toRelease.end(), actor);
 	if (it == toRelease.end())
-		toRelease.insert(it,weapon);
+		toRelease.insert(it, actor);
 }
 
-void MapLayer::removeWeaponFromVec(Weapon *weapon)
+void MapLayer::removeActorFromVec(Actor * actor)
 {
-	auto it = std::find(toRelease.begin(), toRelease.end(), weapon);
+	auto it = std::find(toRelease.begin(), toRelease.end(), actor);
 	if (it != toRelease.end())
 		toRelease.erase(it);
 }

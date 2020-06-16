@@ -4,12 +4,12 @@
 class Hero;
 class PauseLayer;
 class Weapon;
+class Actor;
 
 USING_NS_CC;
 class MapLayer :public Layer
 {
 	CC_SYNTHESIZE(Vec2, _bornPlace, BornPlace);
-	CC_SYNTHESIZE(Hero*, _hero, Hero);
 	CC_SYNTHESIZE(TMXTiledMap*, _tiledMap, TiledMap);
 private:
 	void initMap(std::string mapName);
@@ -23,23 +23,25 @@ private:
 	void initMapPortalLayer();
 
 	void initBoxLayer();
+
+	void initMonsterLayer();
+
+	void initHeroLayer();
 public:
-	std::vector<Weapon*> toRelease;
+	std::vector<Actor*> toRelease;
 
 	static MapLayer* create(std::string mapName);
 
 	virtual bool init(std::string mapName);
 
-	static Vec2 TileSpaceToNodeSpace(float x, float y, TMXTiledMap*);
-
 	static Vec2 getObjectNodeSpace(ValueMap);
 
-	void releaseAllWeapon();
+	void releaseAllActor();
 
 	void addHero(Hero*);
 
-	void addWeaponToVec(Weapon*);
+	void addActorToVec(Actor * actor);
 
-	void removeWeaponFromVec(Weapon*);
+	void removeActorFromVec(Actor * actor);
 
 };

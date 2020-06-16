@@ -50,7 +50,6 @@ bool Actor::initWithObject(ValueMap valueMap)
 	if (!initWithFile(VALUE_AT(valueMap, "TexturePath", String)))
 		return false;
 	setAnchorPoint(Vec2::ZERO);
-	/*auto x= VALUE_AT(valueMap, "x", Float), y = MapLayer::getObjectNodeSpace(valueMap,MainScene::getTiledMap());*/
 	auto position = MapLayer::getObjectNodeSpace(valueMap);
 	setPosition(position);
 	initData(valueMap);

@@ -13,9 +13,8 @@ class MainScene :public Scene
 	CC_SYNTHESIZE(EventListener*, _mouseListener, MouseListener);
 	CC_SYNTHESIZE(MapLayer*, _mapLayer, MapLayer);
 	CC_SYNTHESIZE(PauseLayer*, _pauseLayer, PauseLayer);
-	
+	CC_SYNTHESIZE(Hero*, _hero, Hero);
 private:
-	Hero* _hero = nullptr;
 
 	void initMap(std::string mapName);
 
@@ -62,11 +61,11 @@ public:
 	
 	void changeMap(std::string mapName);
 
-	Hero* getHero() { return _hero; }
+	void changeHero();
 
 	static MainScene* SharedScene();
 
-
+	void gameBegin();
 };
 
 

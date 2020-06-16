@@ -16,11 +16,14 @@ class MovingActor
 	CC_SYNTHESIZE(INT32, _v, V);
 
 public:
+	void initCollision(ValueMap)override;
+
 	void setAttackOn();
 
 	void setAttackOff();
 
 	virtual void initWeapon(std::string weaponName);
 
+	
 };
 

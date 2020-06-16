@@ -8,6 +8,8 @@
       <string>Weapon</string>
       <key>Damage</key>
       <integer>0</integer>
+      <key>HP</key>
+      <integer>1</integer>
       <key>CanBeHurt</key>
       <boolean>false</boolean>
       <key>Flag</key>

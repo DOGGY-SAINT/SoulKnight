@@ -35,7 +35,7 @@ void Weapon::initWithValueMap(ValueMap valueMap)
 	_on = false;
 	this->retain();
 	auto map = MainScene::SharedScene()->getMapLayer();
-	map->addWeaponToVec(this);									//添加到release列表
+	map->addActorToVec(this);									//添加到release列表
 	auto file = FileUtils::getInstance();
 	auto defaultMap = file->getValueMapFromFile(PATH_DATA + "WeaponDefaultData.plist");
 	initData(VALUE_AT(defaultMap, "CommonData", ValueMap));
@@ -59,7 +59,7 @@ void Weapon::weaponOn(MovingActor* a2)
 	a2->setMainWeapon(this);
 	_on = true;
 	auto map = MainScene::SharedScene()->getMapLayer();
-	map->removeWeaponFromVec(this);
+	map->removeActorFromVec(this);
 	setAnchorPoint(Vec2(0.5f, 0.5f));
 	setPosition(a2->getContentSize() / 2);
 	//换掩码
@@ -79,7 +79,7 @@ void  Weapon::weaponOff()
 {
 	_on = false;
 	auto map= MainScene::SharedScene()->getMapLayer();
-	map->addWeaponToVec(this);
+	map->addActorToVec(this);
 	auto pos = map->convertToNodeSpace(convertToWorldSpace(getPosition()));
 	removeFromParent();
 	map->addChild(this);
