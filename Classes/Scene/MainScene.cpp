@@ -42,7 +42,6 @@ void MainScene::initMap(std::string mapName)
 	////////////////////////////////////////////////////////////////////////////
 	auto visibleSize = Director::getInstance()->getVisibleSize();
 	auto origin = Director::getInstance()->getVisibleOrigin();
-
 	//ÆÁÄ»ÖÐÐÄ
 	auto centre = Vec2(visibleSize.width / 2, visibleSize.height / 2);
 	auto closeItem = MenuItemImage::create(

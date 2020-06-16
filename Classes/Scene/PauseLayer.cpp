@@ -30,7 +30,11 @@ bool PauseLayer::init()
 	auto visibleSize = Director::getInstance()->getVisibleSize();
 	Vec2 origin = Director::getInstance()->getVisibleOrigin();
 	///////////////
-	auto les = MenuItemToggle::createWithCallback([](Object* sender) {
+	auto musicOnSpr = Sprite::create("musicOn.png");
+	auto musicOffSpr = Sprite::create("musicOff.png");
+	auto musicOn = MenuItemSprite::create(musicOnSpr, musicOnSpr);
+	auto musicOff = MenuItemSprite::create(musicOffSpr, musicOffSpr);
+	auto musicButton = MenuItemToggle::createWithCallback([](Object* sender) {
 		auto audio = CocosDenshion::SimpleAudioEngine::getInstance();
 		if (audio->isBackgroundMusicPlaying() == 1)
 		{
@@ -41,19 +45,19 @@ bool PauseLayer::init()
 			audio->resumeBackgroundMusic();
 		}
 	},
-		MenuItemFont::create("On"), MenuItemFont::create("Off"), NULL);
-	les->setPosition(200, 200);
-	auto menu2 = Menu::create(les, NULL);
+		musicOn, musicOff, NULL);
+	musicButton->setPosition(Vec2((visibleSize.width / 2)- 600, (visibleSize.height / 2) - 475));
+	auto menu2 = Menu::create(musicButton, NULL);
 	this->addChild(menu2, 1);
 	/////////////////////////
-	auto les1 = MenuItemImage::create(
+	auto goBackHome = MenuItemImage::create(
 		"homebutton1.png",
 		"homebutton2.png",
 		[](Object* sender) {
 		Director::getInstance()->replaceScene(CCTransitionFade::create(0.3f, HelloWorld::createScene()));
 	});
-	les1->setPosition(120, 110);
-	auto menu3 = Menu::create(les1, NULL);
+	goBackHome->setPosition(Vec2((visibleSize.width / 2) -425, (visibleSize.height / 2) - 475));
+	auto menu3 = Menu::create(goBackHome, NULL);
 	this->addChild(menu3, 1);
 	////////////////
 	auto closeItem = MenuItemImage::create(
@@ -70,7 +74,7 @@ bool PauseLayer::init()
 	else
 	{
 		float x = visibleSize.width / 2;
-		float y = visibleSize.height / 2;
+		float y = visibleSize.height / 2+75;
 		closeItem->setPosition(Vec2(x, y));
 	}
 	auto menu = Menu::create(closeItem, NULL);
