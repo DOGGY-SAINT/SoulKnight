@@ -20,7 +20,7 @@
       <UniqueIdentifier>{622d5e88-ba0d-437b-96c0-9038bd34b8f6}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\Weapon">
-      <UniqueIdentifier>{a5c6f2f7-34a4-49db-a95e-1494b4d05f7d}</UniqueIdentifier>
+      <UniqueIdentifier>{7ee11805-0553-4a76-a67a-b9567f4ba2b5}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -30,16 +30,16 @@
     <ClCompile Include="..\Classes\AppDelegate.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\HelloWorldScene.cpp">
-      <Filter>src</Filter>
+    <ClCompile Include="..\Classes\Scene\StartGameScene.cpp">
+      <Filter>src\Scene</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\secondScene.cpp">
-      <Filter>src</Filter>
+    <ClCompile Include="..\Classes\Scene\PauseLayer.cpp">
+      <Filter>src\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Scene\MainScene.cpp">
+      <Filter>src\Scene</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\Actor\Actor.cpp">
-      <Filter>src\Actor</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\Actor\Bullet.cpp">
       <Filter>src\Actor</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\Actor\Hero.cpp">
@@ -48,41 +48,26 @@
     <ClCompile Include="..\Classes\Actor\Monster.cpp">
       <Filter>src\Actor</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\Component\Bullet.cpp">
-      <Filter>src\Component</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\Component\State.cpp">
-      <Filter>src\Component</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\Component\StateComponent.cpp">
-      <Filter>src\Component</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\Component\Weapon.cpp">
-      <Filter>src\Component</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\Weapon\MeleeWeapon.cpp">
-      <Filter>src\Weapon</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\Weapon\Shotgun.cpp">
-      <Filter>src\Weapon</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\Weapon\SingleShotgun.cpp">
-      <Filter>src\Weapon</Filter>
+    <ClCompile Include="..\Classes\Actor\Bullet.cpp">
+      <Filter>src\Actor</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\Weapon\Weapon.cpp">
       <Filter>src\Weapon</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\Scene\MainScene.cpp">
-      <Filter>src\Scene</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\Scene\MapLayer.cpp">
       <Filter>src\Scene</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\Scene\PauseLayer.cpp">
-      <Filter>src\Scene</Filter>
+    <ClCompile Include="..\Classes\Actor\MapPortal.cpp">
+      <Filter>src\Actor</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\Scene\StartGameScene.cpp">
-      <Filter>src\Scene</Filter>
+    <ClCompile Include="..\Classes\Actor\RecoverProp.cpp">
+      <Filter>src\Actor</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Actor\Box.cpp">
+      <Filter>src\Actor</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Actor\MovingActor.cpp">
+      <Filter>src\Actor</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -92,16 +77,16 @@
     <ClInclude Include="..\Classes\AppDelegate.h">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\HelloWorldScene.h">
-      <Filter>src</Filter>
+    <ClInclude Include="..\Classes\Scene\StartGameScene.h">
+      <Filter>src\Scene</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\secondScene.h">
-      <Filter>src</Filter>
+    <ClInclude Include="..\Classes\Scene\PauseLayer.h">
+      <Filter>src\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Scene\MainScene.h">
+      <Filter>src\Scene</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\Actor\Actor.h">
-      <Filter>src\Actor</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\Actor\Bullet.h">
       <Filter>src\Actor</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\Actor\Hero.h">
@@ -110,8 +95,11 @@
     <ClInclude Include="..\Classes\Actor\Monster.h">
       <Filter>src\Actor</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\Component\Bullet.h">
-      <Filter>src\Component</Filter>
+    <ClInclude Include="..\Classes\Actor\Bullet.h">
+      <Filter>src\Actor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Weapon\Weapon.h">
+      <Filter>src\Weapon</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\Component\Constant.h">
       <Filter>src\Component</Filter>
@@ -119,35 +107,20 @@
     <ClInclude Include="..\Classes\Component\State.h">
       <Filter>src\Component</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\Component\StateComponent.h">
-      <Filter>src\Component</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\Component\Weapon.h">
-      <Filter>src\Component</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\Weapon\MeleeWeapon.h">
-      <Filter>src\Weapon</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\Weapon\Shotgun.h">
-      <Filter>src\Weapon</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\Weapon\SingleShotgun.h">
-      <Filter>src\Weapon</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\Weapon\Weapon.h">
-      <Filter>src\Weapon</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\Scene\MainScene.h">
-      <Filter>src\Scene</Filter>
-    </ClInclude>
     <ClInclude Include="..\Classes\Scene\MapLayer.h">
       <Filter>src\Scene</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\Scene\PauseLayer.h">
-      <Filter>src\Scene</Filter>
+    <ClInclude Include="..\Classes\Actor\MapPortal.h">
+      <Filter>src\Actor</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\Scene\StartGameScene.h">
-      <Filter>src\Scene</Filter>
+    <ClInclude Include="..\Classes\Actor\RecoverProp.h">
+      <Filter>src\Actor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Actor\Box.h">
+      <Filter>src\Actor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Actor\MovingActor.h">
+      <Filter>src\Actor</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -24,6 +24,7 @@
 
 #include "AppDelegate.h"
 #include "Scene/MainScene.h"
+#include"Component/Constant.h"
 
 
  // #define USE_AUDIO_ENGINE 1
@@ -92,7 +93,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
 	}
 
 	// turn on display FPS
-	director->setDisplayStats(true);
+	director->setDisplayStats(false);
 
 	// set FPS. the default value is 1.0/60 if you don't call this
 	director->setAnimationInterval(1.0f / 80);
@@ -119,7 +120,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
 	register_all_packages();
 
 	// create a scene. it's an autorelease object
-	auto scene = MainScene::create("GameMap1");
+	auto scene = MainScene::create(SAFE_MAP_NAME);
 
 	// run
 	director->runWithScene(scene);

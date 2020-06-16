@@ -24,6 +24,7 @@
       <key>CategoryBitmask</key>
       <integer>2</integer>
       <key>CollisionBitmask</key>
+<<<<<<< HEAD
       <integer>55</integer>
       <key>ContactTestBitmask</key>
       <integer>1</integer>
@@ -31,6 +32,17 @@
       <boolean>true</boolean>
       <key>RotationEnable</key>
       <boolean>false</boolean>
+=======
+      <integer>119</integer>
+      <key>ContactTestBitmask</key>
+      <integer>65</integer>
+      <key>Dynamic</key>
+      <true></true>
+      <key>RotationEnable</key>
+      <false>0</false>
+      <key>VelocityLimit</key>
+      <real>100</real>
+>>>>>>> DOGGY_LEE
     </dict>
     <key>Knight</key>
     <dict>

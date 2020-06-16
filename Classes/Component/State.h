@@ -12,7 +12,11 @@ inline void set##funName##By(varType deta){ if(isImmutable()){varName += deta;se
 inline void set##funName##To(varType num){ if(isImmutable()){varName = num;setStateInLim();} }
 
 //State可以改成模板
+<<<<<<< HEAD
 class State:public Ref
+=======
+class State
+>>>>>>> DOGGY_LEE
 {
 	STATE_DATA(INT32, _state, State);
 	//getState,setStateBy,setStateTo
@@ -37,8 +41,13 @@ public:
 	{}
 
 	State(ValueMap valueMap)
+<<<<<<< HEAD
 		:_stateMax(VALUE_AT(valueMap, "State", Int))
 		, _state(_stateMax)
+=======
+		:_state(VALUE_AT(valueMap, "State", Int))
+		, _stateMax(_state)
+>>>>>>> DOGGY_LEE
 		, _immutable(false)
 		, _recoverGap(VALUE_AT(valueMap, "RecoverGap", Int))
 	{}
@@ -63,9 +72,16 @@ public:
 	}
 
 	//+1
+<<<<<<< HEAD
 	void update(float dt)
 	{
 		setStateBy(1);
+=======
+	void updateRecover(float dt)
+	{
+		if (_recoverGap)
+			setStateBy(1);
+>>>>>>> DOGGY_LEE
 	}
 };
 

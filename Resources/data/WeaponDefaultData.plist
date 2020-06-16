@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<plist version="1.0">
+  <dict>
+    <key>CommonData</key>
+    <dict>
+      <key>Name</key>
+      <string>Weapon</string>
+      <key>Damage</key>
+      <integer>0</integer>
+      <key>CanBeHurt</key>
+      <boolean>false</boolean>
+      <key>Flag</key>
+      <integer>3</integer>
+      <key>LocalZOrder</key>
+      <integer>6</integer>
+    </dict>
+    <key>CollisionData</key>
+    <dict>
+      <key>Collision</key>
+      <true></true>
+      <key>Name</key>
+      <string>Weapon</string>
+      <key>CategoryBitmask</key>
+      <integer>64</integer>
+      <key>CollisionBitmask</key>
+      <integer>0</integer>
+      <key>ContactTestBitmask</key>
+      <integer>2</integer>
+      <key>Dynamic</key>
+      <true></true>
+      <key>RotationEnable</key>
+      <false></false>
+    </dict>
+  </dict>
+</plist>
