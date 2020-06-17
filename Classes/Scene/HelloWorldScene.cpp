@@ -90,7 +90,7 @@ bool HelloWorld::init()
 		// add the sprite as a child to this layer
 		this->addChild(sprite0, 1);
 	}
-	CocosDenshion::SimpleAudioEngine::sharedEngine()->playBackgroundMusic("pigman.mp3");
+	
 	return true;
 }
 

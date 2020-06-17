@@ -30,9 +30,6 @@
     <ClCompile Include="..\Classes\AppDelegate.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\Scene\PauseLayer.cpp">
-      <Filter>src\Scene</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\Scene\MainScene.cpp">
       <Filter>src\Scene</Filter>
     </ClCompile>
@@ -69,6 +66,9 @@
     <ClCompile Include="..\Classes\Scene\HelloWorldScene.cpp">
       <Filter>src\Scene</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\Scene\PauseScene.cpp">
+      <Filter>src\Scene</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -76,9 +76,6 @@
     </ClInclude>
     <ClInclude Include="..\Classes\AppDelegate.h">
       <Filter>src</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\Scene\PauseLayer.h">
-      <Filter>src\Scene</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\Scene\MainScene.h">
       <Filter>src\Scene</Filter>
@@ -120,6 +117,9 @@
       <Filter>src\Actor</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\Scene\HelloWorldScene.h">
+      <Filter>src\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Scene\PauseScene.h">
       <Filter>src\Scene</Filter>
     </ClInclude>
   </ItemGroup>

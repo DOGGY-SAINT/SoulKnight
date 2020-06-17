@@ -3,7 +3,7 @@
 #include"cocos2d.h"
 class Hero;
 class MapLayer;
-class PauseLayer;
+class PauseScene;
 class TMXMap;
 class Actor;
 
@@ -12,7 +12,7 @@ class MainScene :public Scene
 {
 	CC_SYNTHESIZE(EventListener*, _mouseListener, MouseListener);
 	CC_SYNTHESIZE(MapLayer*, _mapLayer, MapLayer);
-	CC_SYNTHESIZE(PauseLayer*, _pauseLayer, PauseLayer);
+	CC_SYNTHESIZE(PauseScene*, _pauseLayer, PauseScene);
 	CC_SYNTHESIZE(Hero*, _hero, Hero);
 private:
 
@@ -66,10 +66,12 @@ public:
 	static MainScene* SharedScene();
 
 
-	void gameBegin();
+	void gameRestart();
 
 	/*void changeMap(std::string mapName);*/
 	void menuCloseCallback(cocos2d::Ref* pSender);
+
+	void releaseAllActor();
 
 
 };

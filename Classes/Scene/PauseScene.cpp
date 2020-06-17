@@ -1,13 +1,13 @@
-#include "PauseLayer.h"
+#include "PauseScene.h"
 #include "SimpleAudioEngine.h"
 #include "MainScene.h"
 #include "HelloWorldScene.h"
 
 USING_NS_CC;
 
-Scene* PauseLayer::createScene()
+Scene* PauseScene::createScene()
 {
-	return PauseLayer::create();
+	return PauseScene::create();
 }
 
 // Print useful error message instead of segfaulting when files are not there.
@@ -18,7 +18,7 @@ static void problemLoading(const char* filename)
 }
 
 // on "init" you need to initialize your instance
-bool PauseLayer::init()
+bool PauseScene::init()
 {
 	//////////////////////////////
 	// 1. super init first
@@ -46,24 +46,23 @@ bool PauseLayer::init()
 		}
 	},
 		musicOn, musicOff, NULL);
-	musicButton->setPosition(Vec2((visibleSize.width / 2)- 600, (visibleSize.height / 2) - 475));
+	musicButton->setPosition(Vec2((visibleSize.width / 2) - 600, (visibleSize.height / 2) - 475));
 	auto menu2 = Menu::create(musicButton, NULL);
 	this->addChild(menu2, 1);
 	/////////////////////////
 	auto goBackHome = MenuItemImage::create(
 		"homebutton1.png",
 		"homebutton2.png",
-		[](Object* sender) {
-		Director::getInstance()->replaceScene(CCTransitionFade::create(0.3f, HelloWorld::createScene()));
-	});
-	goBackHome->setPosition(Vec2((visibleSize.width / 2) -425, (visibleSize.height / 2) - 475));
+		CC_CALLBACK_0(MainScene::gameRestart, MainScene::SharedScene())
+	);
+	goBackHome->setPosition(Vec2((visibleSize.width / 2) - 425, (visibleSize.height / 2) - 475));
 	auto menu3 = Menu::create(goBackHome, NULL);
 	this->addChild(menu3, 1);
 	////////////////
 	auto closeItem = MenuItemImage::create(
 		"startbutton2.png",
 		"button2.1.jpg",
-		CC_CALLBACK_1(PauseLayer::menuCloseCallback, this));
+		CC_CALLBACK_1(PauseScene::menuCloseCallback, this));
 
 	if (closeItem == nullptr ||
 		closeItem->getContentSize().width <= 0 ||
@@ -74,17 +73,31 @@ bool PauseLayer::init()
 	else
 	{
 		float x = visibleSize.width / 2;
-		float y = visibleSize.height / 2+75;
+		float y = visibleSize.height / 2 + 75;
 		closeItem->setPosition(Vec2(x, y));
 	}
 	auto menu = Menu::create(closeItem, NULL);
 	menu->setPosition(Vec2::ZERO);
 	this->addChild(menu, 1);
 
+	initKeyBoardListener();
 	return true;
 }
 
-void PauseLayer::menuCloseCallback(Ref* pSender)
+void PauseScene::initKeyBoardListener()
+{
+	auto keyboardListener = EventListenerKeyboard::create();
+	keyboardListener->onKeyPressed = CC_CALLBACK_2(PauseScene::onKeyPressed, this);
+	_eventDispatcher->addEventListenerWithSceneGraphPriority(keyboardListener, this);
+}
+
+void PauseScene::onKeyPressed(EventKeyboard::KeyCode keyCode, Event* event)
+{
+	if (keyCode == EventKeyboard::KeyCode::KEY_ESCAPE)
+		menuCloseCallback(nullptr);
+}
+
+void PauseScene::menuCloseCallback(Ref* pSender)
 {
 	Director::getInstance()->popScene();
 }

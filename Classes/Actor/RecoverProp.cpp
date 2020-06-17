@@ -53,5 +53,6 @@ void RecoverProp::recover()
 	else if(_type==Power)
 		state = MainScene::SharedScene()->getHero()->getPower();
 	state->setStateBy(_recoverNum);
+	MainScene::SharedScene()->onRPressed = nullptr;
 	afterDead();
 }

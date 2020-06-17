@@ -3,7 +3,8 @@
 #include"Component/Constant.h"
 #include"Actor/Hero.h"
 #include"Weapon/Weapon.h"
-#include"PauseLayer.h"
+#include"PauseScene.h"
+#include"Scene/HelloWorldScene.h"
 
 USING_NS_CC;
 
@@ -39,7 +40,7 @@ void MainScene::initMap(std::string mapName)
 {
 	_mapLayer = MapLayer::create(mapName);
 	_mapLayer->setPosition(Vec2::ZERO);
-	addChild(_mapLayer,MAP_LAYER);
+	addChild(_mapLayer, MAP_LAYER);
 	////////////////////////////////////////////////////////////////////////////
 	auto visibleSize = Director::getInstance()->getVisibleSize();
 	auto origin = Director::getInstance()->getVisibleOrigin();
@@ -66,7 +67,6 @@ void MainScene::initMap(std::string mapName)
 		closeItem->setPosition(Vec2(x, y));
 	}
 
-	// create menu, it's an autorelease object
 	auto menu = Menu::create(closeItem, NULL);
 	menu->setPosition(Vec2::ZERO);
 	this->addChild(menu, 1);
@@ -96,7 +96,7 @@ void MainScene::initContactListener()
 {
 	auto contactListener = EventListenerPhysicsContact::create();
 	contactListener->onContactBegin = CC_CALLBACK_1(MainScene::onContactBegin, this);
-	contactListener->onContactSeparate= CC_CALLBACK_1(MainScene::onContactSeparate, this);
+	contactListener->onContactSeparate = CC_CALLBACK_1(MainScene::onContactSeparate, this);
 	_eventDispatcher->addEventListenerWithSceneGraphPriority(contactListener, this);
 }
 
@@ -129,12 +129,12 @@ void MainScene::updateMapPosition(float dt)
 	auto visibleSize = Director::getInstance()->getVisibleSize();
 	auto centre = Vec2(visibleSize.width / 2, visibleSize.height / 2);
 	auto heroPos = getHero()->getPosition();
-	_mapLayer->setPosition(centre-heroPos);
+	_mapLayer->setPosition(centre - heroPos);
 }
 
 void MainScene::onMouseDown(EventMouse *event)
 {
-	gameBegin();
+	/*gameBegin();*/
 }
 
 void MainScene::onMouseMove(EventMouse *event)
@@ -172,6 +172,9 @@ void MainScene::onKeyPressed(EventKeyboard::KeyCode keyCode, Event* event)
 		if (onTPressed)
 			onTPressed();
 		break;
+	case EventKeyboard::KeyCode::KEY_ESCAPE:
+		menuCloseCallback(nullptr);
+		break;
 	}
 }
 
@@ -199,13 +202,13 @@ bool MainScene::onContactBegin(PhysicsContact & contact)
 {
 	auto Actor1 = dynamic_cast<Actor*>(contact.getShapeA()->getBody()->getNode());
 	auto Actor2 = dynamic_cast<Actor*>(contact.getShapeB()->getBody()->getNode());
-	bool ret1=false, ret2=false;
+	bool ret1 = false, ret2 = false;
 	if (Actor1&&Actor2)
 	{
 		ret1 = Actor1->onContactBegin(Actor2);
 		ret2 = Actor2->onContactBegin(Actor1);
 	}
-	return ret1&&ret2;
+	return ret1 && ret2;
 }
 
 bool MainScene::onContactSeparate(PhysicsContact & contact)
@@ -233,12 +236,16 @@ MainScene* MainScene::SharedScene()
 	return _sharedScene;
 }
 
-void MainScene::gameBegin()
+void MainScene::gameRestart()
 {
-	_hero->release();
-	initHero();
-	changeMap(SAFE_MAP_NAME);
+	releaseAllActor();
+	_sharedScene = nullptr;
+	auto scene = HelloWorld::createScene();
+	this->release();
+	Director::getInstance()->replaceScene(CCTransitionFade::create(0.3f, HelloWorld::createScene()));
+
 }
+
 
 
 void MainScene::changeMap(std::string mapName)
@@ -263,7 +270,14 @@ void MainScene::changeHero()
 
 void MainScene::menuCloseCallback(Ref* pSender)
 {
-	//Close the cocos2d-x game scene and quit the application
-	Director::getInstance()->pushScene(PauseLayer::createScene());
+	_hero->initController();
+	Director::getInstance()->pushScene(PauseScene::createScene());
 
+}
+
+void MainScene::releaseAllActor()
+{
+	_mapLayer->addActorToVec(_hero);
+	_mapLayer->addActorToVec(_hero->getMainWeapon());
+	_mapLayer->releaseAllActor();
 }
