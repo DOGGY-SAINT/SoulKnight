@@ -9,7 +9,7 @@
       <key>CanBeHurt</key>
       <boolean>true</boolean>
       <key>LocalZOrder</key>
-      <integer>3</integer>
+      <integer>6</integer>
     </dict>
     <key>CollisionData</key>
     <dict>
