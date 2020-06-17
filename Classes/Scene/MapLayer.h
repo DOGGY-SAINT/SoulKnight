@@ -1,37 +1,47 @@
 #pragma once
 #include"cocos2d.h"
-#include"Weapon/Weapon.h"
+#include<vector>
 class Hero;
 class PauseLayer;
-
+class Weapon;
+class Actor;
 
 USING_NS_CC;
-class MapLayer:public Layer
+class MapLayer :public Layer
 {
-private:
 	CC_SYNTHESIZE(Vec2, _bornPlace, BornPlace);
-	CC_SYNTHESIZE(Hero*, _myHero, MyHero);
 	CC_SYNTHESIZE(TMXTiledMap*, _tiledMap, TiledMap);
+private:
+	void initMap(std::string mapName);
+
+	void initTileLayer();
+
+	void initObjectLayer();
+
+	void initBornLayer();
+
+	void initMapPortalLayer();
+
+	void initBoxLayer();
+
+	void initMonsterLayer();
+
+	void initHeroLayer();
 public:
+	std::vector<Actor*> toRelease;
 
 	static MapLayer* create(std::string mapName);
 
 	virtual bool init(std::string mapName);
 
-	static Vec2 TileSpaceToNodeSpace(float x,float y);
-
 	static Vec2 getObjectNodeSpace(ValueMap);
 
-	void initMap(std::string mapName);
+	void releaseAllActor();
 
-	void initTile();
+	void addHero(Hero*);
 
-	void initObject();
+	void addActorToVec(Actor * actor);
 
-	void addHero(Hero*,Vec2);
+	void removeActorFromVec(Actor * actor);
 
-	virtual void onKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event* event);
-
-	Weapon* mainWeapon;
-	Weapon* secondaryWeapon;
 };

@@ -1,6 +1,7 @@
 #include "Actor.h"
 #include"Scene/MapLayer.h"
 #include"Component/Constant.h"
+#include"Scene/MainScene.h"
 
 
 
@@ -23,6 +24,7 @@ bool Actor::initWithSprite(Sprite* sp, ValueMap valueMap)
 		return false;
 	auto size = getContentSize();
 	setAnchorPoint(Vec2::ZERO);
+	auto position = sp->getPosition();
 	setPosition(sp->getPosition());
 	initData(valueMap);
 	initCollision(valueMap);
@@ -45,13 +47,13 @@ Actor* Actor::createWithObject(ValueMap valueMap)
 //对象初始化
 bool Actor::initWithObject(ValueMap valueMap)
 {
-	if (!initWithFile(VALUE_AT(valueMap,"Texture",String)))
+	if (!initWithFile(VALUE_AT(valueMap, "TexturePath", String)))
 		return false;
 	setAnchorPoint(Vec2::ZERO);
 	auto position = MapLayer::getObjectNodeSpace(valueMap);
 	setPosition(position);
 	initData(valueMap);
-	initCollision(valueMap);	
+	initCollision(valueMap);
 	return true;
 }
 
@@ -60,6 +62,7 @@ void Actor::initData(ValueMap valueMap)
 	SET_DATA(valueMap, CanBeHurt, Bool);
 	SET_DATA(valueMap, Damage, Int);
 	SET_DATA(valueMap, LocalZOrder, Int);
+	auto n = VALUE_AT(valueMap, "Name", String);
 	SET_DATA(valueMap, Name, String);
 	SET_DATA(valueMap, Flag, Int);
 	_HP = State(VALUE_AT(valueMap, "HP", Int));
@@ -70,16 +73,60 @@ void Actor::initCollision(ValueMap valueMap)
 	if (VALUE_AT(valueMap, "Collision", Bool))
 	{
 		auto body = PhysicsBody::createBox(getContentSize(), defaultMaterial);
-		body->SET_DATA(valueMap,Name,String);
+		body->SET_DATA(valueMap, Name, String);
 		body->SET_DATA(valueMap, CategoryBitmask, Int);
 		body->SET_DATA(valueMap, CollisionBitmask, Int);
 		body->SET_DATA(valueMap, ContactTestBitmask, Int);
 		body->SET_DATA(valueMap, Dynamic, Bool);
 		body->SET_DATA(valueMap, RotationEnable, Bool);
-		addComponent(body);
+		setPhysicsBody(body);
 	}
+}
+
+inline void Actor::afterDead()
+{
+	this->removeFromParent();
+}
+
+inline void Actor::getHurt(INT32 dmg)
+{
+	_HP.setStateBy(-dmg);
+	if (isDead())
+		afterDead();
+}
+
+inline bool Actor::isDead()
+{
+	return _HP.isEmpty();
+}
+
+inline void Actor::setCanBeHurt(bool num)
+{
+	_HP.setImmutable(!num);
+}
+
+inline bool Actor::getCanBeHurt()
+{
+	return !(_HP.getImmutable());
+}
+
+//Flag不一样才受伤
+inline bool Actor::onContactBegin(Actor* a2)
+{
+	if (isAnotherFlag(a2)&&a2->_flag!=FLAG_NOHURT)
+	{
+		getHurt(a2->_damage);
+		return true;
+	}
+	return false;
+}
+
+//Flag不一样
+inline bool Actor::isAnotherFlag(Actor* a2)
+{
+	return _flag != a2->getFlag();
 }
 
 
 //密度 弹性 摩擦力
-PhysicsMaterial Actor::defaultMaterial = PhysicsMaterial(0.0f, 0.0f, 0.0f);
+const PhysicsMaterial Actor::defaultMaterial = PhysicsMaterial(0.0f, 0.0f, 0.0f);

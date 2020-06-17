@@ -27,25 +27,11 @@ public:
 	//换下武器，未完成
 	//virtual void weaponOff();
 
-	//按下鼠标左键
-	inline void onLeftPressed();
-
-	//松开鼠标左键
-	inline void onLeftReleased();
 
 	//单次攻击,未实现
 	virtual void attack(float dt);
 };
 
-inline void Shotgun::onLeftPressed()
-{
-	schedule(schedule_selector(Shotgun::attack), _gapTime, CC_REPEAT_FOREVER, _gapTime);
-}
-
-inline void Shotgun::onLeftReleased()
-{
-	unschedule(schedule_selector(Shotgun::attack));
-}
 
 inline void Shotgun::updateRotation()
 {

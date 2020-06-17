@@ -12,7 +12,7 @@ inline void set##funName##By(varType deta){ if(isImmutable()){varName += deta;se
 inline void set##funName##To(varType num){ if(isImmutable()){varName = num;setStateInLim();} }
 
 //State可以改成模板
-class State:public Ref
+class State
 {
 	STATE_DATA(INT32, _state, State);
 	//getState,setStateBy,setStateTo
@@ -37,8 +37,8 @@ public:
 	{}
 
 	State(ValueMap valueMap)
-		:_stateMax(VALUE_AT(valueMap, "State", Int))
-		, _state(_stateMax)
+		:_state(VALUE_AT(valueMap, "State", Int))
+		, _stateMax(_state)
 		, _immutable(false)
 		, _recoverGap(VALUE_AT(valueMap, "RecoverGap", Int))
 	{}
@@ -63,9 +63,10 @@ public:
 	}
 
 	//+1
-	void update(float dt)
+	void updateRecover(float dt)
 	{
-		setStateBy(1);
+		if (_recoverGap)
+			setStateBy(1);
 	}
 };
 

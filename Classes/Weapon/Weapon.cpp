@@ -48,10 +48,9 @@ void  Weapon::weaponOn()
 {
 	updateRotation();
 	MainScene* runningScene = dynamic_cast<MainScene*>(Director::getInstance()->getRunningScene());
-	MapLayer* runningLayer = dynamic_cast<MapLayer*>(runningScene->getMyMapLayer());
-	Hero* myHero = runningLayer->getMyHero();
+	Hero* myHero = runningScene->getHero();
 	myHero->addChild(this);
-	myHero->setWeapon1(this);
+	myHero->setMainWeapon(this);
 	setFlag(myHero->getFlag());
 	auto heroSize = myHero->getContentSize();
 	this->setPosition(Vec2(heroSize.width / 2, heroSize.height / 2));
@@ -63,10 +62,10 @@ void  Weapon::weaponOff()
 	this->removeFromParent();
 	//获取当前英雄和层
 	MainScene* runningScene = dynamic_cast<MainScene*>(Director::getInstance()->getRunningScene());
-	MapLayer* runningLayer = dynamic_cast<MapLayer*>(runningScene->getMyMapLayer());
-	Hero* myHero = runningLayer->getMyHero();
+	MapLayer* runningLayer = dynamic_cast<MapLayer*>(runningScene->getMapLayer());
+	Hero* myHero = runningScene->getHero();
 	//将武器从hero移向地图
-	myHero->setWeapon1(NULL);
+	myHero->setMainWeapon(NULL);
 	runningLayer->addChild(this, 6);
 	setPosition(myHero->getPosition());
 	setDirection(Vec2(1, 0));

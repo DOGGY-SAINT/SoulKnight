@@ -55,10 +55,12 @@ void Shotgun::initBulletData(ValueMap valueMap)
 }
 
 void Shotgun::attack(float dt) {
-	//判断是否有能量，未完成
-	auto bullet1 = Sprite::createWithTexture(getBulletTexture());
-	auto bullet2 = Sprite::createWithTexture(getBulletTexture());
-	auto bullet3 = Sprite::createWithTexture(getBulletTexture());
+	auto bullet1 = Bullet::createByTexture(getBulletTexture(), getBulletData());
+	auto bullet2 = Bullet::createByTexture(getBulletTexture(), getBulletData());
+	auto bullet3 = Bullet::createByTexture(getBulletTexture(), getBulletData());
+	bullet1->setFlag(getFlag());
+	bullet2->setFlag(getFlag());
+	bullet3->setFlag(getFlag());
 
 	//子弹模型
 	auto bulletSize = bullet1->getContentSize();
@@ -93,7 +95,7 @@ void Shotgun::attack(float dt) {
 	auto weaponPosition = getPosition();
 
 	MainScene* runningScene = dynamic_cast<MainScene*>(Director::getInstance()->getRunningScene());
-	MapLayer* runningLayer = dynamic_cast<MapLayer*>(runningScene->getMyMapLayer());
+	MapLayer* runningLayer = dynamic_cast<MapLayer*>(runningScene->getMapLayer());
 	runningLayer->addChild(bullet1, 6);
 	runningLayer->addChild(bullet2, 6);
 	runningLayer->addChild(bullet3, 6);

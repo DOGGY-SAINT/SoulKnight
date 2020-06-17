@@ -30,44 +30,6 @@
     <ClCompile Include="..\Classes\AppDelegate.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\Scene\StartGameScene.cpp">
-      <Filter>src\Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\Component\StateComponent.cpp">
-      <Filter>src\Component</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\Scene\PauseLayer.cpp">
-      <Filter>src\Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\Scene\MainScene.cpp">
-      <Filter>src\Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\Component\Weapon.cpp">
-      <Filter>src\Component</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\Actor\Actor.cpp">
-      <Filter>src\Actor</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\Actor\Hero.cpp">
-      <Filter>src\Actor</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\Actor\Monster.cpp">
-      <Filter>src\Actor</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\Component\Bullet.cpp">
-      <Filter>src\Component</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\HelloWorldScene.cpp" />
-    <ClCompile Include="..\Classes\secondScene.cpp" />
-    <ClCompile Include="..\Classes\Actor\Bullet.cpp">
-      <Filter>src\Actor</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\Component\State.cpp">
-      <Filter>src\Component</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\Scene\MapLayer.cpp">
-      <Filter>src\Scene</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\Weapon\Weapon.cpp">
       <Filter>src\Weapon</Filter>
     </ClCompile>
@@ -80,6 +42,45 @@
     <ClCompile Include="..\Classes\Weapon\MeleeWeapon.cpp">
       <Filter>src\Weapon</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\Actor\Actor.cpp">
+      <Filter>src\Actor</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Actor\Box.cpp">
+      <Filter>src\Actor</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Actor\Bullet.cpp">
+      <Filter>src\Actor</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Actor\Hero.cpp">
+      <Filter>src\Actor</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Actor\MapPortal.cpp">
+      <Filter>src\Actor</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Actor\Monster.cpp">
+      <Filter>src\Actor</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Actor\MovingActor.cpp">
+      <Filter>src\Actor</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Actor\RecoverProp.cpp">
+      <Filter>src\Actor</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Component\State.cpp">
+      <Filter>src\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Scene\MainScene.cpp">
+      <Filter>src\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Scene\MapLayer.cpp">
+      <Filter>src\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Scene\PauseLayer.cpp">
+      <Filter>src\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Scene\StartGameScene.cpp">
+      <Filter>src\Scene</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -87,47 +88,6 @@
     </ClInclude>
     <ClInclude Include="..\Classes\AppDelegate.h">
       <Filter>src</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\Scene\StartGameScene.h">
-      <Filter>src\Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\Component\StateComponent.h">
-      <Filter>src\Component</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\Scene\PauseLayer.h">
-      <Filter>src\Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\Scene\MainScene.h">
-      <Filter>src\Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\Component\Weapon.h">
-      <Filter>src\Component</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\Actor\Actor.h">
-      <Filter>src\Actor</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\Actor\Hero.h">
-      <Filter>src\Actor</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\Actor\Monster.h">
-      <Filter>src\Actor</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\Component\Bullet.h">
-      <Filter>src\Component</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\HelloWorldScene.h" />
-    <ClInclude Include="..\Classes\secondScene.h" />
-    <ClInclude Include="..\Classes\Actor\Bullet.h">
-      <Filter>src\Actor</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\Component\Constant.h">
-      <Filter>src\Component</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\Component\State.h">
-      <Filter>src\Component</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\Scene\MapLayer.h">
-      <Filter>src\Scene</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\Weapon\Weapon.h">
       <Filter>src\Weapon</Filter>
@@ -140,6 +100,48 @@
     </ClInclude>
     <ClInclude Include="..\Classes\Weapon\MeleeWeapon.h">
       <Filter>src\Weapon</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Actor\Actor.h">
+      <Filter>src\Actor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Actor\Box.h">
+      <Filter>src\Actor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Actor\Bullet.h">
+      <Filter>src\Actor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Actor\Hero.h">
+      <Filter>src\Actor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Actor\MapPortal.h">
+      <Filter>src\Actor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Actor\Monster.h">
+      <Filter>src\Actor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Actor\MovingActor.h">
+      <Filter>src\Actor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Actor\RecoverProp.h">
+      <Filter>src\Actor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Component\Constant.h">
+      <Filter>src\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Component\State.h">
+      <Filter>src\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Scene\MainScene.h">
+      <Filter>src\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Scene\MapLayer.h">
+      <Filter>src\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Scene\PauseLayer.h">
+      <Filter>src\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Scene\StartGameScene.h">
+      <Filter>src\Scene</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

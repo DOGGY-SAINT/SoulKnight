@@ -55,7 +55,8 @@ void SingleShotgun::initBulletData(ValueMap valueMap)
 }
 
 void SingleShotgun::attack(float dt) {
-	auto bullet = Sprite::createWithTexture(getBulletTexture());
+	auto bullet = Bullet::createByTexture(getBulletTexture(),getBulletData());
+	bullet->setFlag(getFlag());
 
 	//×Óµ¯Ä£ÐÍ
 	auto bulletSize = bullet->getContentSize();
@@ -73,7 +74,7 @@ void SingleShotgun::attack(float dt) {
 	auto weaponPosition = getPosition();
 
 	MainScene* runningScene = dynamic_cast<MainScene*>(Director::getInstance()->getRunningScene());
-	MapLayer* runningLayer = dynamic_cast<MapLayer*>(runningScene->getMyMapLayer());
+	MapLayer* runningLayer = dynamic_cast<MapLayer*>(runningScene->getMapLayer());
 	runningLayer->addChild(bullet, 6);
 
 	//float x = weaponPosition.x - sin * weaponSize.height / 2 + cos * weaponSize.width / 2;

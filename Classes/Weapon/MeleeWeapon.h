@@ -27,26 +27,9 @@ public:
 	//换下武器，未完成
 	//virtual void weaponOff();
 
-	//按下鼠标左键
-	inline void onLeftPressed();
-
-	//松开鼠标左键
-	inline void onLeftReleased();
-
 	//单次攻击
 	virtual void attack(float dt);
 };
-
-
-inline void MeleeWeapon::onLeftPressed()
-{
-	schedule(schedule_selector(MeleeWeapon::attack), _gapTime*1.5, CC_REPEAT_FOREVER, _gapTime*1.5);
-}
-
-inline void MeleeWeapon::onLeftReleased()
-{
-	unschedule(schedule_selector(MeleeWeapon::attack));
-}
 
 inline void MeleeWeapon::updateRotation()
 {

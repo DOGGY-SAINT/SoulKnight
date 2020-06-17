@@ -64,8 +64,7 @@ void MeleeWeapon::initBulletData(ValueMap valueMap)
 
 void MeleeWeapon::attack(float dt) {
 	MainScene* runningScene = dynamic_cast<MainScene*>(Director::getInstance()->getRunningScene());
-	MapLayer* runningLayer = dynamic_cast<MapLayer*>(runningScene->getMyMapLayer());
-	Hero* myHero = runningLayer->getMyHero();
+	Hero* myHero = runningScene->getHero();
 	setFlag(myHero->getFlag());
 	Vec2 angle60(1, 1.732);
 	CCRotateBy* rt0 = CCRotateBy::create(0, -CC_RADIANS_TO_DEGREES(angle60.getAngle()));
