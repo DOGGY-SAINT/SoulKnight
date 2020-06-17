@@ -160,7 +160,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)\Resources\" /D /E /I /F /Y
     <ClCompile Include="..\Classes\Scene\MainScene.cpp" />
     <ClCompile Include="..\Classes\Scene\MapLayer.cpp" />
     <ClCompile Include="..\Classes\Scene\PauseLayer.cpp" />
-    <ClCompile Include="..\Classes\Scene\StartGameScene.cpp" />
+    <ClCompile Include="..\Classes\Scene\HelloWorldScene.cpp" />
     <ClCompile Include="..\Classes\Weapon\Weapon.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
@@ -179,7 +179,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)\Resources\" /D /E /I /F /Y
     <ClInclude Include="..\Classes\Scene\MainScene.h" />
     <ClInclude Include="..\Classes\Scene\MapLayer.h" />
     <ClInclude Include="..\Classes\Scene\PauseLayer.h" />
-    <ClInclude Include="..\Classes\Scene\StartGameScene.h" />
+    <ClInclude Include="..\Classes\Scene\HelloWorldScene.h" />
     <ClInclude Include="..\Classes\Weapon\Weapon.h" />
     <ClInclude Include="main.h" />
   </ItemGroup>

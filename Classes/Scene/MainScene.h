@@ -65,7 +65,13 @@ public:
 
 	static MainScene* SharedScene();
 
+
 	void gameBegin();
+
+	/*void changeMap(std::string mapName);*/
+	void menuCloseCallback(cocos2d::Ref* pSender);
+
+
 };
 
 
