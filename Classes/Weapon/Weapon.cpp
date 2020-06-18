@@ -78,7 +78,7 @@ void Weapon::weaponOn(MovingActor* a2)
 void  Weapon::weaponOff()
 {
 	_on = false;
-	auto map= MainScene::SharedScene()->getMapLayer();
+	auto map = MainScene::SharedScene()->getMapLayer();
 	map->addActorToVec(this);
 	auto pos = map->convertToNodeSpace(convertToWorldSpace(getPosition()));
 	removeFromParent();

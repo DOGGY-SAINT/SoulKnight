@@ -32,6 +32,7 @@ bool MainScene::init(std::string mapName)
 	initHero();
 	initListener();
 	initScheduler();
+	initInfoLayer();
 	return true;
 }
 
@@ -41,7 +42,10 @@ void MainScene::initMap(std::string mapName)
 	_mapLayer = MapLayer::create(mapName);
 	_mapLayer->setPosition(Vec2::ZERO);
 	addChild(_mapLayer, MAP_LAYER);
-	////////////////////////////////////////////////////////////////////////////
+}
+
+void MainScene::initInfoLayer()
+{
 	auto visibleSize = Director::getInstance()->getVisibleSize();
 	auto origin = Director::getInstance()->getVisibleOrigin();
 	//ÆÁÄ»ÖÐÐÄ
@@ -54,9 +58,7 @@ void MainScene::initMap(std::string mapName)
 	if (closeItem == nullptr ||
 		closeItem->getContentSize().width <= 0 ||
 		closeItem->getContentSize().height <= 0)
-	{
-
-	}
+	{}
 	else
 	{
 		closeItem->setAnchorPoint(ccp(1.0f, 1.0f));
@@ -70,6 +72,7 @@ void MainScene::initMap(std::string mapName)
 	auto menu = Menu::create(closeItem, NULL);
 	menu->setPosition(Vec2::ZERO);
 	this->addChild(menu, 1);
+
 }
 
 void MainScene::initHero()

@@ -18,6 +18,8 @@ private:
 
 	void initMap(std::string mapName);
 
+	void initInfoLayer();
+
 	void initHero();
 
 	void initPhysicsWorld();
