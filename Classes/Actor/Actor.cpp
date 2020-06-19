@@ -127,4 +127,4 @@ inline bool Actor::isAnotherFlag(Actor* a2)
 
 
 //ÃÜ¶È µ¯ÐÔ Ä¦²ÁÁ¦
-const PhysicsMaterial Actor::defaultMaterial = PhysicsMaterial(100.0f, 0.0f, 0.0f);
+const PhysicsMaterial Actor::defaultMaterial = PhysicsMaterial(0.0f, 0.0f, 0.0f);

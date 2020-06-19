@@ -60,11 +60,11 @@ mapName[dataName].as##typeName##()
 #define BULLET_CONTACT        0b0010111110
 #define HERO_CONTACT          0b0011001001
 #define WALL_CONTACT          0b0000000001
-#define EXFLOOR_CONTACT       0b0000100011
+#define EXFLOOR_CONTACT       0b0010100011
 //#define CLOSE_DOOR_CONTACT    0b0000000001
 #define MONSTER_CONTACT       0b0010001001
 #define PROP_CONTACT          0b0000000010
-#define WEAPON_CONTACT        0b0000100011
+#define WEAPON_CONTACT        0b0000101011
 
 
 

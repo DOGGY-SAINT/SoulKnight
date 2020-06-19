@@ -60,6 +60,10 @@ void Weapon::initBulletData(ValueMap valueMap)
 //拿上武器,还要考虑设置位置的事情
 void  Weapon::weaponOn(MovingActor* myHero)
 {
+	removeFromParent();
+	myHero->addChild(this);
+	auto Parent = dynamic_cast<Actor*> (getParent());
+	setFlag(Parent->getFlag());
 	myHero->setMainWeapon(this);
 	_on = true;
 	auto map = MainScene::SharedScene()->getMapLayer();
@@ -67,14 +71,8 @@ void  Weapon::weaponOn(MovingActor* myHero)
 	setAnchorPoint(Vec2(0.5f, 0.5f));
 	setPosition(myHero->getContentSize() / 2);
 	//换掩码
-	auto body = getPhysicsBody();
-	body->setCategoryBitmask(WEAPON_CATAGORY);
-	body->setCollisionBitmask(WEAPON_COLLISION);
-	body->setContactTestBitmask(WEAPON_CONTACT);
-	removeFromParent();
-	myHero->addChild(this);
-	auto Parent = dynamic_cast<Actor*> (getParent());
-	setFlag(Parent->getFlag());
+	bitMaskOn();
+	
 }
 
 //换下武器，还要考虑设置位置的事情
@@ -120,6 +118,27 @@ void Weapon::attack(float dt) {
 	
 	bullet->setPosition(weaponPosition.x + cos * weaponSize.width / 2, weaponPosition.y + sin * weaponSize.height / 2);
 	bullet->getPhysicsBody()->setVelocity(Vec2(100 * cos, 100 * sin));
+}
+
+void Weapon::bitMaskOn()
+{
+	auto body = getPhysicsBody();
+	if (body)
+	{
+		body->setCategoryBitmask(WEAPON_CATAGORY);
+		body->setCollisionBitmask(WEAPON_COLLISION);
+		int contact= WEAPON_CONTACT;
+		if (_flag == FLAG_HERO)
+			contact ^= HERO_CATAGORY;
+		else if (_flag == FLAG_MONSTER)
+			contact ^= MONSTER_CATAGORY;
+		body->setContactTestBitmask(contact);
+	}
+}
+
+void Weapon::updateNohurt(float dt)
+{
+	setFlag(FLAG_NOHURT);
 }
 
 bool Weapon::onContactBegin(Actor *a2)

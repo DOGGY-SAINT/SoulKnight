@@ -72,9 +72,6 @@ void SingleShotgun::attack(float dt) {
 
 	//子弹模型
 	auto bulletSize = bullet->getContentSize();
-	auto bulletBody = PhysicsBody::createEdgeBox(bulletSize, PhysicsMaterial(0.0f, 1.0f, 0.0f));
-	bulletBody->setDynamic(false);
-	bullet->setPhysicsBody(bulletBody);
 
 	//子弹位置和角度
 	auto weaponSize = getContentSize();

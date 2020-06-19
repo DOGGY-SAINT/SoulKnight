@@ -136,7 +136,6 @@ void MainScene::updateMapPosition(float dt)
 
 void MainScene::onMouseDown(EventMouse *event)
 {
-	/*gameBegin();*/
 	if (event->getMouseButton() == EventMouse::MouseButton::BUTTON_LEFT)
 		_hero->setAttackOn();
 }
@@ -252,11 +251,9 @@ MainScene* MainScene::SharedScene()
 
 void MainScene::gameRestart()
 {
-
 	_mapLayer->unscheduleAllCallbacks();
 	releaseAllActor();
 	auto scene = HelloWorld::createScene();
-	this->release();
 	Director::getInstance()->replaceScene(CCTransitionFade::create(0.3f, HelloWorld::createScene()));
 }
 

@@ -30,7 +30,7 @@ public:
 	virtual void update(float dt);
 
 	//µ¥´Î¹¥»÷
-	virtual void attack(float dt);
+	virtual void attack(float dt)override;
 };
 
 inline void MeleeWeapon::updateRotation()

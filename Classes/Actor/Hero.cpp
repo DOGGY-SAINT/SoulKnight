@@ -173,6 +173,12 @@ void Hero::heroOff()
 	body->setContactTestBitmask(PROP_CONTACT);
 }
 
+void Hero::afterDead()
+{
+	MainScene::SharedScene()->gameRestart();
+}
+
+
 void Hero::initState(ValueMap valueMap)
 {
 	_HP = State(VALUE_AT(valueMap, "HP", ValueMap));

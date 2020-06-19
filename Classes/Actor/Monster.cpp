@@ -33,7 +33,7 @@ bool Monster::initWithObject(ValueMap valueMap)
 
 void Monster::initScheduler()
 {
-	schedule(schedule_selector(Monster::updateVelocity),0.1f);
+	schedule(schedule_selector(Monster::updateVelocity),0.2f);
 	schedule(schedule_selector(Monster::updateWeaponDirection));
 	setAttackOn();
 }
@@ -65,6 +65,6 @@ void Monster::setAttackOn()
 	if (_mainWeapon)
 	{
 		float gapTime = _mainWeapon->getGapTime();
-		_mainWeapon->schedule(schedule_selector(Weapon::attack), gapTime*3, CC_REPEAT_FOREVER, gapTime / 2);
+		_mainWeapon->schedule(schedule_selector(Weapon::attack), gapTime*2, CC_REPEAT_FOREVER, gapTime / 2);
 	}
 }

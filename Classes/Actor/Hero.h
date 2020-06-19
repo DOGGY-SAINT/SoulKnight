@@ -78,6 +78,8 @@ public:
 
 	void heroOff();
 
+	void afterDead()override;
+
 };
 
 //³õÊ¼»¯£¬¿ªÆô»Ö¸´
