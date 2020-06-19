@@ -77,7 +77,7 @@ public:
 
 	float getPercentage()
 	{
-		return static_cast<float> (_state) / _stateMax;
+		return 100 * static_cast<float> (_state) / _stateMax;
 	}
 
 	//+1
@@ -86,6 +86,7 @@ public:
 		if (_recoverGap)
 			setStateBy(1);
 	}
+	ProgressTimer* createBar(std::string file);
 };
 
 #endif

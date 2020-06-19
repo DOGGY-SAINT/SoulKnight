@@ -5,6 +5,7 @@
 #include"Weapon/Weapon.h"
 #include"PauseScene.h"
 #include"Scene/HelloWorldScene.h"
+#include"Component/State.h"
 
 USING_NS_CC;
 
@@ -80,6 +81,9 @@ void MainScene::initHero()
 {
 	_hero = Hero::createWithName(DEFAULT_HERO_NAME);
 	_mapLayer->addHero(_hero);
+	_HPBar = _hero->getHP()->createBar("picture/interface/blood.png");
+	_ACBar = _hero->getAC()->createBar("picture/interface/armor.png");
+	_powerBar = _hero->getPower()->createBar("picture/interface/engery.png");
 }
 
 void MainScene::initPhysicsWorld()
@@ -125,7 +129,7 @@ void MainScene::initMouseListener()
 void MainScene::initScheduler()
 {
 	schedule(schedule_selector(MainScene::updateMapPosition));
-
+	schedule(schedule_selector(MainScene::updateStateBar));
 }
 
 //保持英雄在正中央
@@ -295,6 +299,16 @@ void MainScene::releaseAllActor()
 	_mapLayer->releaseAllActor();
 }
 
+void MainScene::updateStateBar(float dt)
+{
+	auto HP = _hero->getHP();
+	auto AC = _hero->getAC();
+	auto power = _hero->getPower();
+	_HPBar->setPercentage(HP->getPercentage());
+	_ACBar->setPercentage(AC->getPercentage());
+	_powerBar->setPercentage(power->getPercentage());
+}
+
 
 void MainScene::initEnergyStrand()
 {
@@ -303,15 +317,14 @@ void MainScene::initEnergyStrand()
 	//屏幕中心
 	auto centre = Vec2(visibleSize.width / 2, visibleSize.height / 2);
 	auto tripleBackground = Sprite::create("picture/interface/tripleBoard.png");
-	auto engery = Sprite::create("picture/interface/engery.png");
 	float x1 = visibleSize.width-805+27;
 	float y1 = visibleSize.height-125-18;
 	float x2 = visibleSize.width - 790;
 	float y2 = visibleSize.height - 125;
-	engery->setPosition(Vec2(x1, y1));
+	_powerBar->setPosition(Vec2(x1, y1));
 	tripleBackground->setPosition(Vec2(x2, y2));
 	this->addChild(tripleBackground, 1);
-	this->addChild(engery, 1);
+	this->addChild(_powerBar, 2);
 }
 
 void MainScene::initBloodStrand()
@@ -320,11 +333,12 @@ void MainScene::initBloodStrand()
 	auto origin = Director::getInstance()->getVisibleOrigin();
 	//屏幕中心
 	auto centre = Vec2(visibleSize.width / 2, visibleSize.height / 2);
-	auto blood = Sprite::create("picture/interface/blood.png");
+
+
 	float x = visibleSize.width - 805+27;
 	float y = visibleSize.height - 125 + 22;
-	blood->setPosition(Vec2(x, y));
-	this->addChild(blood, 1);
+	_HPBar->setPosition(Vec2(x, y));
+	this->addChild(_HPBar, 2);
 }
 
 void MainScene::initArmorStrand()
@@ -333,9 +347,9 @@ void MainScene::initArmorStrand()
 	auto origin = Director::getInstance()->getVisibleOrigin();
 	//屏幕中心
 	auto centre = Vec2(visibleSize.width / 2, visibleSize.height / 2);
-	auto armor = Sprite::create("picture/interface/armor.png");
+
 	float x = visibleSize.width - 805+27;
 	float y = visibleSize.height - 125+2;
-	armor->setPosition(Vec2(x, y));
-	this->addChild(armor, 1);
+	_ACBar->setPosition(Vec2(x, y));
+	this->addChild(_ACBar, 2);
 }

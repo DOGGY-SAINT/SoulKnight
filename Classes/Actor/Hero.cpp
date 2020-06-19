@@ -71,7 +71,6 @@ bool Hero::initWithObject(ValueMap valueMap)
 
 void Hero::initData(ValueMap valueMap)
 {
-	SET_DATA(valueMap, CanBeHurt, Bool);
 	SET_DATA(valueMap, Damage, Int);
 	SET_DATA(valueMap, LocalZOrder, Int);
 	SET_DATA(valueMap, Flag, Int);

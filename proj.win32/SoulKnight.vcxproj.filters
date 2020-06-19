@@ -78,6 +78,9 @@
     <ClCompile Include="..\Classes\Weapon\SingleShotgun.cpp">
       <Filter>src\Weapon</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\Component\State.cpp">
+      <Filter>src\Component</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
