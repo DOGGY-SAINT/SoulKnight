@@ -76,8 +76,8 @@ bool HelloWorld::init()
 		this->addChild(sprite0, 1);
 	}
 	//ÎäÆ÷ÒôÐ§Ô¤¼ÓÔØ
-	CocosDenshion::SimpleAudioEngine::sharedEngine()->preloadBackgroundMusic("Shotgun.mp3");
-	CocosDenshion::SimpleAudioEngine::sharedEngine()->preloadBackgroundMusic("SingleShotgun.mp3");
+	CocosDenshion::SimpleAudioEngine::sharedEngine()->preloadBackgroundMusic("music/Shotgun.mp3");
+	CocosDenshion::SimpleAudioEngine::sharedEngine()->preloadBackgroundMusic("music/SingleShotgun.mp3");
 	return true;
 }
 
