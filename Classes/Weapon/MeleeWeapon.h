@@ -27,6 +27,8 @@ public:
 	//换下武器，未完成
 	//virtual void weaponOff();
 
+	virtual void update(float dt);
+
 	//单次攻击
 	virtual void attack(float dt);
 };

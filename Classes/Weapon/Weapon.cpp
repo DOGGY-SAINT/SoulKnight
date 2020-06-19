@@ -1,13 +1,24 @@
 #include "Weapon.h"
+#include"Weapon/Shotgun.h"
+#include"Weapon/SingleShotgun.h"
+#include"Weapon/MeleeWeapon.h"
 #include"Actor/Hero.h"
+#include"Actor/MovingActor.h"
 #include "Component\Constant.h"
 #include"Scene/MainScene.h"
 #include"Scene/MapLayer.h"
 
-/*Weapon* Weapon::createWithName(std::string weaponName)
+Weapon* Weapon::createWithName(std::string weaponName)
 {
-	Weapon* weapon = new(std::nothrow)Weapon;
-	if (weapon && weapon->initWithName(weaponName))
+	auto file = FileUtils::getInstance();
+	auto weaponMap = file->getValueMapFromFile(PATH_DATA + "WeaponData.plist");
+	auto thisMap = weaponMap[weaponName].asValueMap();
+	auto weaponType = VALUE_AT(thisMap, "weaponType", String);
+	Weapon* weapon = NULL;
+	WEAPON_JUDGE(weaponType, Shotgun);
+	WEAPON_JUDGE(weaponType, SingleShotgun);
+	WEAPON_JUDGE(weaponType, MeleeWeapon);
+	if (weapon && weapon->initWithName(weaponName, thisMap))
 	{
 		weapon->autorelease();
 		return weapon;
@@ -17,14 +28,11 @@
 }
 
 //注意看好格式
-bool Weapon::initWithName(std::string weaponName)
+bool Weapon::initWithName(std::string weaponName,ValueMap valueMap)
 {
 	if (!initWithFile(PATH_PICTURE_WEAPON + weaponName + ".png"))
 		return false;
-	auto file = FileUtils::getInstance();
-	auto weaponMap = file->getValueMapFromFile(PATH_DATA + "WeaponData.plist");
-	auto thisMap = weaponMap[weaponName].asValueMap();
-	initWithValueMap(thisMap);
+	initWithValueMap(valueMap);
 	return true;
 }
 
@@ -41,19 +49,17 @@ void Weapon::initBulletData(ValueMap valueMap)
 	SET_DATA(valueMap, BulletData, ValueMap);
 	auto bulletPath = PATH_PICTURE_BULLET + "Bullet" + ".png";
 	setBulletTexture(_director->getTextureCache()->addImage(bulletPath));
-}*/
+}
 
 //拿上武器,还要考虑设置位置的事情
-void  Weapon::weaponOn()
+void  Weapon::weaponOn(MovingActor* myHero)
 {
 	updateRotation();
-	MainScene* runningScene = dynamic_cast<MainScene*>(Director::getInstance()->getRunningScene());
-	Hero* myHero = runningScene->getHero();
 	myHero->addChild(this);
 	myHero->setMainWeapon(this);
 	setFlag(myHero->getFlag());
 	auto heroSize = myHero->getContentSize();
-	this->setPosition(Vec2(heroSize.width / 2, heroSize.height / 2));
+	this->setPosition(Vec2(heroSize.width / 2-10, heroSize.height / 2-10));
 }
 
 //换下武器，还要考虑设置位置的事情
@@ -74,8 +80,11 @@ void  Weapon::weaponOff()
 	unschedule(schedule_selector(Weapon::attack));
 }
 
+void Weapon::update(float dt) {
+	updateRotation();
+}
 
-//void Weapon::attack(float dt) {
+void Weapon::attack(float dt) {
 	/*MainScene* runningScene = dynamic_cast<MainScene*>(Director::getInstance()->getRunningScene());
 	MapLayer* runningLayer = dynamic_cast<MapLayer*>(runningScene->getMyMapLayer());
 	Hero* myHero = runningLayer->getMyHero();
@@ -102,4 +111,4 @@ void  Weapon::weaponOff()
 	
 	bullet->setPosition(weaponPosition.x + cos * weaponSize.width / 2, weaponPosition.y + sin * weaponSize.height / 2);
 	bullet->getPhysicsBody()->setVelocity(Vec2(100 * cos, 100 * sin));*/
-//}
+}

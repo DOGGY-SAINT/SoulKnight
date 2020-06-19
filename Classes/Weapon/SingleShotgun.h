@@ -27,6 +27,7 @@ public:
 	//换下武器，未完成
 	//virtual void weaponOff();
 
+	virtual void update(float dt);
 
 	//单次攻击
 	virtual void attack(float dt);
@@ -35,6 +36,7 @@ public:
 
 inline void SingleShotgun::updateRotation()
 {
+	setFlipY(_direction.x <= 0);
 	setRotation(-CC_RADIANS_TO_DEGREES(_direction.getAngle()));
 }
 #endif

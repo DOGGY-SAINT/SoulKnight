@@ -1,8 +1,5 @@
 #include "MovingActor.h"
 #include"Weapon/Weapon.h"
-#include"Weapon/MeleeWeapon.h"
-#include"Weapon/Shotgun.h"
-#include"Weapon/SingleShotgun.h"
 #include"Component/Constant.h"
 
 void MovingActor::initCollision(ValueMap valueMap)
@@ -40,7 +37,7 @@ void MovingActor::setAttackOff()
 
 void MovingActor::initWeapon(std::string weaponName)
 {
-	auto weapon = SingleShotgun::createWithName(weaponName);
-	weapon->weaponOn();
+	auto weapon=Weapon::createWithName(weaponName);
+	weapon->weaponOn(this);
 }
 

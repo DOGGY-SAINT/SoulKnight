@@ -2,9 +2,6 @@
 #include"Scene/MainScene.h"
 #include"RecoverProp.h"
 #include"Weapon/Weapon.h"
-#include"Weapon/MeleeWeapon.h"
-#include"Weapon/Shotgun.h"
-#include"Weapon/SingleShotgun.h"
 #include"Scene/MapLayer.h"
 #include<time.h>
 #include<stdlib.h>
@@ -56,7 +53,7 @@ void Box::randProp(ValueMap valueMap)
 		{
 			_prop = RecoverProp::createWithName(map.first);
 			MainScene::SharedScene()->getMapLayer()->addChild(_prop, 100);
-			_prop->setPosition(getPosition());
+			_prop->setPosition(getPosition() + getContentSize() / 2);
 			_prop->getPhysicsBody()->setEnabled(false);
 			_prop->setVisible(false);
 			return;
@@ -72,10 +69,9 @@ void Box::randWeapon(ValueMap valueMap)
 		auto n = rand();
 		if (n)
 		{
-			//_prop = Weapon::createWithName(map.first);
-			_prop = SingleShotgun::createWithName(map.first);
+			_prop = Weapon::createWithName(map.first);
 			MainScene::SharedScene()->getMapLayer()->addChild(_prop, 100);
-			_prop->setPosition(getPosition());
+			_prop->setPosition(getPosition() + getContentSize() / 2);
 			if (_prop->getPhysicsBody())
 				_prop->getPhysicsBody()->setEnabled(false);
 			_prop->setVisible(false);

@@ -2,7 +2,7 @@
 #include"cocos2d.h"
 #include<vector>
 class Hero;
-class PauseLayer;
+class PauseScene;
 class Weapon;
 class Actor;
 

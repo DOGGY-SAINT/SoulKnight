@@ -27,9 +27,6 @@
     <ClCompile Include="main.cpp">
       <Filter>win32</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\AppDelegate.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\Weapon\Weapon.cpp">
       <Filter>src\Weapon</Filter>
     </ClCompile>
@@ -69,6 +66,9 @@
     <ClCompile Include="..\Classes\Component\State.cpp">
       <Filter>src\Component</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\Scene\HelloWorldScene.cpp">
+      <Filter>src\Scene</Filter>
+    </ClCompile>
     <ClCompile Include="..\Classes\Scene\MainScene.cpp">
       <Filter>src\Scene</Filter>
     </ClCompile>
@@ -78,16 +78,22 @@
     <ClCompile Include="..\Classes\Scene\PauseLayer.cpp">
       <Filter>src\Scene</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\Scene\PauseScene.cpp">
+      <Filter>src\Scene</Filter>
+    </ClCompile>
     <ClCompile Include="..\Classes\Scene\StartGameScene.cpp">
       <Filter>src\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\AppDelegate.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\PauseLayer.cpp">
+      <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
       <Filter>win32</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\AppDelegate.h">
-      <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\Weapon\Weapon.h">
       <Filter>src\Weapon</Filter>
@@ -131,6 +137,9 @@
     <ClInclude Include="..\Classes\Component\State.h">
       <Filter>src\Component</Filter>
     </ClInclude>
+    <ClInclude Include="..\Classes\Scene\HelloWorldScene.h">
+      <Filter>src\Scene</Filter>
+    </ClInclude>
     <ClInclude Include="..\Classes\Scene\MainScene.h">
       <Filter>src\Scene</Filter>
     </ClInclude>
@@ -140,8 +149,17 @@
     <ClInclude Include="..\Classes\Scene\PauseLayer.h">
       <Filter>src\Scene</Filter>
     </ClInclude>
+    <ClInclude Include="..\Classes\Scene\PauseScene.h">
+      <Filter>src\Scene</Filter>
+    </ClInclude>
     <ClInclude Include="..\Classes\Scene\StartGameScene.h">
       <Filter>src\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\AppDelegate.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\PauseLayer.h">
+      <Filter>src</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

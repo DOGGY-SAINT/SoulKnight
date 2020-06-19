@@ -3,6 +3,8 @@
 #include"Actor/Bullet.h"
 #include"cocos2d.h"
 #include"Actor/Actor.h"
+#include"Actor/Hero.h"
+#include"Actor/MovingActor.h"
 USING_NS_CC;
 
 //Weapon可以考虑储存Bullet名字或者怎么样
@@ -17,22 +19,26 @@ class Weapon :
 
     public:
 	//这里考虑武器信息都在plist内，因此用name初始化，后续可以考虑load时创造instance然后这里直接copy
-	virtual bool initWithName(std::string weaponName)=0;
+	static Weapon* createWithName(std::string weaponName);
 
-	virtual void initWithValueMap(ValueMap)=0;
+	virtual bool initWithName(std::string weaponName, ValueMap valueMap);
 
-	virtual void initBulletData(ValueMap)=0;
+	virtual void initWithValueMap(ValueMap);
+
+	virtual void initBulletData(ValueMap);
 
 	virtual inline void updateRotation();
 
+	virtual void update(float dt);
+
 	//拿上武器
-	virtual void weaponOn();
+	virtual void weaponOn(MovingActor* myHero);
 
 	//换下武器
 	virtual void weaponOff();
 
 	//单次攻击
-	virtual void attack(float dt)=0;
+	virtual void attack(float dt);
 };
 
 //设定了delay

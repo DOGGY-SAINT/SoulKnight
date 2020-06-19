@@ -37,7 +37,6 @@ bool MeleeWeapon::initWithName(std::string weaponName)
 	weaponBody->setDynamic(false);
 	setPhysicsBody(weaponBody);
 	setAnchorPoint(Vec2(0.1, 0.5));
-	this->setScale(0.5);
 
 	auto file = FileUtils::getInstance();
 	auto weaponMap = file->getValueMapFromFile(PATH_DATA + "WeaponData.plist");
@@ -51,6 +50,7 @@ void MeleeWeapon::initWithValueMap(ValueMap valueMap)
 {
 	SET_DATA(valueMap, Name, String);
 	SET_DATA(valueMap, GapTime, Float);
+	this->setScale(VALUE_AT(valueMap, "Scale", Float));
 	initBulletData(valueMap);
 }
 
@@ -61,6 +61,11 @@ void MeleeWeapon::initBulletData(ValueMap valueMap)
 	auto bulletPath = PATH_PICTURE_BULLET + "Bullet" + ".png";
 	setBulletTexture(_director->getTextureCache()->addImage(bulletPath));
 }
+
+void MeleeWeapon::update(float dt) {
+	updateRotation();
+}
+
 
 void MeleeWeapon::attack(float dt) {
 	MainScene* runningScene = dynamic_cast<MainScene*>(Director::getInstance()->getRunningScene());

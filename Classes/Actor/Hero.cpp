@@ -146,6 +146,7 @@ void Hero::heroOn()
 	auto mainScene = MainScene::SharedScene();
 	mainScene->setHero(this);
 	mainScene->getMapLayer()->removeActorFromVec(this);
+	mainScene->getMapLayer()->removeActorFromVec(_mainWeapon);
 	initScheduler();
 
 	auto body = getPhysicsBody();
@@ -163,6 +164,7 @@ void Hero::heroOff()
 	if (mainScene->getHero() == this)
 		mainScene->setHero(nullptr);
 	mainScene->getMapLayer()->addActorToVec(this);
+	mainScene->getMapLayer()->addActorToVec(_mainWeapon);
 
 	auto body = getPhysicsBody();
 	body->setVelocity(Vec2::ZERO);
@@ -230,7 +232,7 @@ void Hero::changeWeapon()
 	if (_weaponToOn)
 	{
 		_mainWeapon->weaponOff();
-		_weaponToOn->weaponOn();
+		_weaponToOn->weaponOn(this);
 	}
 }
 

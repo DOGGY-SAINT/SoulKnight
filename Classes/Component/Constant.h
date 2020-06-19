@@ -4,6 +4,10 @@
 #define SET_DATA(mapName,dataName,typeName)\
 set##dataName(mapName[#dataName].as##typeName##())
 
+#define WEAPON_JUDGE(string,weaponType)\
+if(string==#weaponType)\
+weapon=new(std::nothrow)##weaponType
+
 //dataName需要双引号
 #define VALUE_AT(mapName,dataName,typeName)\
 mapName[dataName].as##typeName##()
@@ -29,7 +33,7 @@ mapName[dataName].as##typeName##()
 
 #define SAFE_MAP_NAME         std::string("SafeMap")
 #define DEFAULT_HERO_NAME     std::string("Knight")
-#define DEFAULT_WEAPON_NAME   std::string("Pistol")
+#define DEFAULT_WEAPON_NAME   std::string("Shotgun")
 
 
 //catagory&contact!=0 事件发送

@@ -32,7 +32,6 @@ bool MapLayer::init(std::string mapName)
 	initMap(mapName);
 	initTileLayer();
 	initObjectLayer();
-
 	return true;
 }
 
