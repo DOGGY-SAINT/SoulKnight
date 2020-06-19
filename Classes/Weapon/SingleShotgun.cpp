@@ -42,6 +42,15 @@ bool SingleShotgun::initWithName(std::string weaponName)
 
 void SingleShotgun::initWithValueMap(ValueMap valueMap)
 {
+	_on = false;
+	this->retain();
+	auto map = MainScene::SharedScene()->getMapLayer();
+	map->addActorToVec(this);									//添加到release列表
+	auto file = FileUtils::getInstance();
+	auto defaultMap = file->getValueMapFromFile(PATH_DATA + "WeaponDefaultData.plist");
+	initData(VALUE_AT(defaultMap, "CommonData", ValueMap));
+	initCollision(VALUE_AT(defaultMap, "CollisionData", ValueMap));
+
 	SET_DATA(valueMap, Name, String);
 	SET_DATA(valueMap, GapTime, Float);
 	initBulletData(valueMap);
@@ -69,12 +78,6 @@ void SingleShotgun::attack(float dt) {
 
 	auto bullet = Bullet::createByTexture(getBulletTexture(),getBulletData());
 	bullet->setFlag(getFlag());
-
-	//子弹模型
-	auto bulletSize = bullet->getContentSize();
-	auto bulletBody = PhysicsBody::createEdgeBox(bulletSize, PhysicsMaterial(0.0f, 1.0f, 0.0f));
-	bulletBody->setDynamic(false);
-	bullet->setPhysicsBody(bulletBody);
 
 	//子弹位置和角度
 	auto weaponSize = getContentSize();

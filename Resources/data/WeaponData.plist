@@ -11,9 +11,11 @@
       <key>weaponType</key>
       <string>Shotgun</string>
       <key>SizeX</key>
-      <integer>130</integer>
+      <integer>44</integer>
       <key>SizeY</key>
       <integer>5</integer>
+      <key>Scale</key>
+      <real>1</real>
       <key>PowerCost</key>
       <integer>3</integer>
       <key>BulletData</key>
@@ -31,9 +33,11 @@
       <key>weaponType</key>
       <string>SingleShotgun</string>
       <key>SizeX</key>
-      <integer>70</integer>
+      <integer>40</integer>
       <key>SizeY</key>
       <integer>8</integer>
+      <key>Scale</key>
+      <real>1</real>
       <key>PowerCost</key>
       <integer>2</integer>
       <key>BulletData</key>
@@ -41,7 +45,7 @@
         <key>Damage</key>
         <integer>5</integer>
       </dict>
-  </dict>
+   </dict>
     <key>Pistol</key>
     <dict>
       <key>GapTime</key>
@@ -51,9 +55,11 @@
       <key>weaponType</key>
       <string>SingleShotgun</string>
       <key>SizeX</key>
-      <integer>70</integer>
+      <integer>29</integer>
       <key>SizeY</key>
       <integer>10</integer>
+      <key>Scale</key>
+      <real>1</real>
       <key>PowerCost</key>
       <integer>0</integer>
       <key>BulletData</key>
@@ -65,12 +71,12 @@
     <key>Lightsaber</key>
     <dict>
       <key>GapTime</key>
-      <real>0.3</real>
+      <real>0.5</real>
       <key>Name</key>
       <string>Lightsaber</string>
       <key>weaponType</key>
       <string>MeleeWeapon</string>
-      <ket>Scale</ket>
+      <key>Scale</key>
       <real>0.6</real>
       <key>PowerCost</key>
       <integer>2</integer>
@@ -83,12 +89,12 @@
     <key>Hatchet</key>
     <dict>
       <key>GapTime</key>
-      <real>0.7</real>
+      <real>1</real>
       <key>Name</key>
       <string>Hatchet</string>
       <key>weaponType</key>
-      <string>MelleWeapon</string>
-      <ket>Scale</ket>
+      <string>MeleeWeapon</string>
+      <key>Scale</key>
       <real>0.7</real>
       <key>PowerCost</key>
       <integer>2</integer>
@@ -107,9 +113,11 @@
       <key>weaponType</key>
       <string>SingleShotgun</string>
       <key>SizeX</key>
-      <integer>70</integer>
+      <integer>39</integer>
       <key>SizeY</key>
       <integer>6</integer>
+      <key>Scale</key>
+      <real>1</real>
       <key>PowerCost</key>
       <integer>1</integer>
       <key>BulletData</key>

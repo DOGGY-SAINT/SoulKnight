@@ -151,7 +151,9 @@ void MainScene::onMouseMove(EventMouse *event)
 	auto visibleSize = Director::getInstance()->getVisibleSize();
 	auto centre = this->convertToWorldSpace(Vec2(visibleSize.width / 2, visibleSize.height / 2));
 	auto pos = CCDirector::sharedDirector()->convertToUI(event->getLocation());
-	auto dir = pos - centre;
+	auto wpos = _hero->getMainWeapon()->getPosition();
+	auto dir = pos - wpos - centre;
+	
 	_hero->getMainWeapon()->setDirection(dir);
 	_hero->getMainWeapon()->updateRotation();
 }

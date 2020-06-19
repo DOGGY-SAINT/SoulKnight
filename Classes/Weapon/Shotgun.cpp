@@ -35,6 +35,15 @@ bool Shotgun::initWithName(std::string weaponName)
 
 void Shotgun::initWithValueMap(ValueMap valueMap)
 {
+	_on = false;
+	this->retain();
+	auto map = MainScene::SharedScene()->getMapLayer();
+	map->addActorToVec(this);									//添加到release列表
+	auto file = FileUtils::getInstance();
+	auto defaultMap = file->getValueMapFromFile(PATH_DATA + "WeaponDefaultData.plist");
+	initData(VALUE_AT(defaultMap, "CommonData", ValueMap));
+	initCollision(VALUE_AT(defaultMap, "CollisionData", ValueMap));
+
 	SET_DATA(valueMap, Name, String);
 	SET_DATA(valueMap, GapTime, Float);
 	initBulletData(valueMap);
@@ -66,7 +75,6 @@ void Shotgun::attack(float dt) {
 	bullet1->setFlag(getFlag());
 	bullet2->setFlag(getFlag());
 	bullet3->setFlag(getFlag());
-	auto flag = bullet1->getFlag();
 
 	//子弹位置和角度
 	auto weaponSize = getContentSize();
@@ -89,19 +97,18 @@ void Shotgun::attack(float dt) {
 
 	MainScene* runningScene = dynamic_cast<MainScene*>(Director::getInstance()->getRunningScene());
 	MapLayer* runningLayer = dynamic_cast<MapLayer*>(runningScene->getMapLayer());
-	auto myHero = runningScene->getHero();
 
 	runningLayer->addChild(bullet1, 6);
 	runningLayer->addChild(bullet2, 6);
 	runningLayer->addChild(bullet3, 6);
 
-	auto heroPosition = myHero->getPosition();
+	auto heroPosition = getParent()->getPosition();
 	auto weaponPosition = getPosition();
 	auto hx = heroPosition.x, hy = heroPosition.y;
 	auto wx = weaponPosition.x, wy = weaponPosition.y;
 
-	float x = hx + wx - pending * sin * 5 / 2 + cos * 70 / 2;
-	float y = hy + wy + pending * cos * 5 / 2 + sin * 70 / 2;
+	float x = hx + wx - pending * sin * height  + cos * width ;
+	float y = hy + wy + pending * cos * height  + sin * width ;
 
 	bullet1->setPosition(x, y);
 	bullet1->getPhysicsBody()->setVelocity(Vec2(200 * cos, 200 * sin));

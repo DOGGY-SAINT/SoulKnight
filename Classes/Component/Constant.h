@@ -33,7 +33,7 @@ mapName[dataName].as##typeName##()
 
 #define SAFE_MAP_NAME         std::string("SafeMap")
 #define DEFAULT_HERO_NAME     std::string("Knight")
-#define DEFAULT_WEAPON_NAME   std::string("Shotgun")
+#define DEFAULT_WEAPON_NAME   std::string("Lightsaber")
 
 
 //catagory&contact!=0 ÊÂ¼þ·¢ËÍ

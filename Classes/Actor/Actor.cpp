@@ -86,7 +86,6 @@ void Actor::initCollision(ValueMap valueMap)
 void Actor::afterDead()
 {
 	this->removeFromParent();
-	release();
 }
 
 inline void Actor::getHurt(INT32 dmg)

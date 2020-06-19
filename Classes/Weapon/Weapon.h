@@ -15,6 +15,7 @@ class Weapon :
 	CC_SYNTHESIZE(float, _gapTime, GapTime);
 	CC_SYNTHESIZE(ValueMap, _bulletDate, BulletData);
 	CC_SYNTHESIZE(Texture2D*, _bulletTexture, BulletTexture);
+	CC_SYNTHESIZE(bool, _on, On);
 protected:
 	Vec2 _direction;
 public:
@@ -25,7 +26,7 @@ public:
 	//这里考虑武器信息都在plist内，因此用name初始化，后续可以考虑load时创造instance然后这里直接copy
 	static Weapon* createWithName(std::string weaponName);
 
-	virtual bool initWithName(std::string weaponName, ValueMap valueMap);
+	virtual bool initWithName(std::string weaponName);
 
 	virtual void initWithValueMap(ValueMap);
 

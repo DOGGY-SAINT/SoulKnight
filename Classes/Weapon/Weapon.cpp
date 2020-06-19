@@ -18,7 +18,7 @@ Weapon* Weapon::createWithName(std::string weaponName)
 	WEAPON_JUDGE(weaponType, Shotgun);
 	WEAPON_JUDGE(weaponType, SingleShotgun);
 	WEAPON_JUDGE(weaponType, MeleeWeapon);
-	if (weapon && weapon->initWithName(weaponName, thisMap))
+	if (weapon && weapon->initWithName(weaponName))
 	{
 		weapon->retain();
 		return weapon;
@@ -28,30 +28,31 @@ Weapon* Weapon::createWithName(std::string weaponName)
 }
 
 //注意看好格式
-bool Weapon::initWithName(std::string weaponName,ValueMap valueMap)
+bool Weapon::initWithName(std::string weaponName)
 {
 	if (!initWithFile(PATH_PICTURE_WEAPON + weaponName + ".png"))
 		return false;
-	initWithValueMap(valueMap);
+	auto file = FileUtils::getInstance();
+	auto weaponMap = file->getValueMapFromFile(PATH_DATA + "WeaponData.plist");
+	auto thisMap = weaponMap[weaponName].asValueMap();
+	initWithValueMap(thisMap);
 	return true;
 }
 
 void Weapon::initWithValueMap(ValueMap valueMap)
 {
-//<<<<<<< HEAD
-//	_on = false;
-//	this->retain();
-//	auto map = MainScene::SharedScene()->getMapLayer();
-//	map->addActorToVec(this);									//添加到release列表
-//	auto file = FileUtils::getInstance();
-//	auto defaultMap = file->getValueMapFromFile(PATH_DATA + "WeaponDefaultData.plist");
-//	initData(VALUE_AT(defaultMap, "CommonData", ValueMap));
-//	initCollision(VALUE_AT(defaultMap, "CollisionData", ValueMap));
-//=======
-//>>>>>>> Kite
+	/*_on = false;
+	this->retain();
+	auto map = MainScene::SharedScene()->getMapLayer();
+	map->addActorToVec(this);									//添加到release列表
+	auto file = FileUtils::getInstance();
+	auto defaultMap = file->getValueMapFromFile(PATH_DATA + "WeaponDefaultData.plist");
+	initData(VALUE_AT(defaultMap, "CommonData", ValueMap));
+	initCollision(VALUE_AT(defaultMap, "CollisionData", ValueMap));
+
 	SET_DATA(valueMap, Name, String);
 	SET_DATA(valueMap, GapTime, Float);
-	initBulletData(valueMap);
+	initBulletData(valueMap);*/
 }
 
 
@@ -67,18 +68,17 @@ void  Weapon::weaponOn(MovingActor* myHero)
 {
 //<<<<<<< HEAD
 //	a2->setMainWeapon(this);
-//	_on = true;
-//	auto map = MainScene::SharedScene()->getMapLayer();
-//	map->removeActorFromVec(this);
-//	setAnchorPoint(Vec2(0.5f, 0.5f));
-//	setPosition(a2->getContentSize() / 2);
-//	//换掩码
-//	auto body = getPhysicsBody();
-//	body->setCategoryBitmask(WEAPON_CATAGORY);
-//	body->setCollisionBitmask(WEAPON_COLLISION);
-//	body->setContactTestBitmask(WEAPON_CONTACT);
+	_on = true;
+	auto map = MainScene::SharedScene()->getMapLayer();
+	map->removeActorFromVec(this);
+
+	//换掩码
+	auto body = getPhysicsBody();
+	body->setCategoryBitmask(WEAPON_CATAGORY);
+	body->setCollisionBitmask(WEAPON_COLLISION);
+	body->setContactTestBitmask(WEAPON_CONTACT);
 //
-//	removeFromParent();
+	removeFromParent();
 //	a2->addChild(this);
 //	auto Parent = dynamic_cast<Actor*> (getParent());
 //	setFlag(Parent->getFlag());
@@ -104,15 +104,17 @@ void  Weapon::weaponOff()
 //	map->addChild(this);
 //	setPosition(pos);
 //=======
-	this->removeFromParent();
+	_on = false;
+	removeFromParent();
 	//获取当前英雄和层
 	MainScene* runningScene = dynamic_cast<MainScene*>(Director::getInstance()->getRunningScene());
 	MapLayer* runningLayer = dynamic_cast<MapLayer*>(runningScene->getMapLayer());
 	Hero* myHero = runningScene->getHero();
+	auto pos = runningLayer->convertToNodeSpace(convertToWorldSpace(getPosition()));
 	//将武器从hero移向地图
 	myHero->setMainWeapon(NULL);
 	runningLayer->addChild(this, 6);
-	setPosition(myHero->getPosition());
+	setPosition(pos);
 //>>>>>>> Kite
 	setDirection(Vec2(1, 0));
 	updateRotation();
