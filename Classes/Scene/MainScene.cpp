@@ -33,6 +33,8 @@ bool MainScene::init(std::string mapName)
 	initListener();
 	initScheduler();
 	initInfoLayer();
+	initEnergyStrand();
+	initBloodStrand();
 	return true;
 }
 
@@ -294,4 +296,39 @@ void MainScene::releaseAllActor()
 	_mapLayer->addActorToVec(_hero);
 	_mapLayer->addActorToVec(_hero->getMainWeapon());
 	_mapLayer->releaseAllActor();
+}
+
+
+
+void MainScene::initEnergyStrand()
+{
+	auto visibleSize = Director::getInstance()->getVisibleSize();
+	auto origin = Director::getInstance()->getVisibleOrigin();
+	//屏幕中心
+	auto centre = Vec2(visibleSize.width / 2, visibleSize.height / 2);
+	auto engeryBackground = Sprite::create("engeryBackground.jpg");
+	auto engery = Sprite::create("engery.png");
+	float x = visibleSize.width-825;
+	float y = visibleSize.height-125;
+	engery->setPosition(Vec2(x, y));
+	engeryBackground->setPosition(Vec2(x, y));
+	this->addChild(engeryBackground, 1);
+	this->addChild(engery, 1);
+}
+
+
+void MainScene::initBloodStrand()
+{
+	auto visibleSize = Director::getInstance()->getVisibleSize();
+	auto origin = Director::getInstance()->getVisibleOrigin();
+	//屏幕中心
+	auto centre = Vec2(visibleSize.width / 2, visibleSize.height / 2);
+	auto bloodBackground = Sprite::create("bloodBackground.jpg");
+	auto blood = Sprite::create("blood.png");
+	float x = visibleSize.width - 825;
+	float y = visibleSize.height - 125 + 26;
+	blood->setPosition(Vec2(x, y));
+	bloodBackground->setPosition(Vec2(x, y));
+	this->addChild(bloodBackground, 1);
+	this->addChild(blood, 1);
 }

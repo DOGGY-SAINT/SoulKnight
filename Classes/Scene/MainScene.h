@@ -15,6 +15,11 @@ class MainScene :public Scene
 	CC_SYNTHESIZE(PauseScene*, _pauseLayer, PauseScene);
 	CC_SYNTHESIZE(Hero*, _hero, Hero);
 private:
+	void initEnergyStrand();
+
+	void initBloodStrand();
+
+	//void initArmorStrand();
 
 	void initMap(std::string mapName);
 

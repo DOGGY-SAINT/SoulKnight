@@ -4,7 +4,6 @@
 #include"Scene/MainScene.h"
 
 
-
 Actor* Actor::createWithSprite(Sprite* sp, ValueMap valueMap)
 {
 	Actor* actor = new(std::nothrow)Actor;
@@ -98,6 +97,7 @@ bool Actor::isDead()
 {
 	return _HP.isEmpty();
 }
+
 
 void Actor::setCanBeHurt(bool num)
 {
