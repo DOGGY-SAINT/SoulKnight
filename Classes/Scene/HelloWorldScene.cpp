@@ -30,15 +30,15 @@ bool HelloWorld::init()
 
 
 	auto closeItem = MenuItemImage::create(
-		"startbutton2.png",
-		"button2.1.jpg",
+		"picture/interface/startbutton2.png",
+		"picture/interface/button2.1.jpg",
 		CC_CALLBACK_1(HelloWorld::menuCloseCallback, this));
 
 	if (closeItem == nullptr ||
 		closeItem->getContentSize().width <= 0 ||
 		closeItem->getContentSize().height <= 0)
 	{
-		problemLoading("'startbutton2.png' and 'button2.1.jpg'");
+		problemLoading("'picture/interface/startbutton2.png' and 'picture/interface/button2.1.jpg'");
 	}
 	else
 	{
@@ -64,10 +64,10 @@ bool HelloWorld::init()
 		this->addChild(label, 1);
 	}
 
-	auto sprite0 = Sprite::create("startscene.jpg");
+	auto sprite0 = Sprite::create("picture/interface/startscene.jpg");
 	if (sprite0 == nullptr)
 	{
-		problemLoading("'startscene.jpg'");
+		problemLoading("'picture/interface/startscene.jpg'");
 	}
 	else
 	{

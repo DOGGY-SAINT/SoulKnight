@@ -54,8 +54,8 @@ void MainScene::initInfoLayer()
 	//屏幕中心
 	auto centre = Vec2(visibleSize.width / 2, visibleSize.height / 2);
 	auto closeItem = MenuItemImage::create(
-		"pausebutton.png",
-		"pausebutton2.png",
+		"picture/interface/pausebutton.png",
+		"picture/interface/pausebutton2.png",
 		CC_CALLBACK_1(MainScene::menuCloseCallback, this));
 
 	if (closeItem == nullptr ||
@@ -263,8 +263,6 @@ void MainScene::gameRestart()
 
 }
 
-
-
 void MainScene::changeMap(std::string mapName)
 {
 	_mapLayer->releaseAllActor();
@@ -300,15 +298,14 @@ void MainScene::releaseAllActor()
 }
 
 
-
 void MainScene::initEnergyStrand()
 {
 	auto visibleSize = Director::getInstance()->getVisibleSize();
 	auto origin = Director::getInstance()->getVisibleOrigin();
 	//屏幕中心
 	auto centre = Vec2(visibleSize.width / 2, visibleSize.height / 2);
-	auto tripleBackground = Sprite::create("tripleBoard.png");
-	auto engery = Sprite::create("engery.png");
+	auto tripleBackground = Sprite::create("picture/interface/tripleBoard.png");
+	auto engery = Sprite::create("picture/interface/engery.png");
 	float x1 = visibleSize.width-805+27;
 	float y1 = visibleSize.height-125-18;
 	float x2 = visibleSize.width - 790;
@@ -319,20 +316,18 @@ void MainScene::initEnergyStrand()
 	this->addChild(engery, 1);
 }
 
-
 void MainScene::initBloodStrand()
 {
 	auto visibleSize = Director::getInstance()->getVisibleSize();
 	auto origin = Director::getInstance()->getVisibleOrigin();
 	//屏幕中心
 	auto centre = Vec2(visibleSize.width / 2, visibleSize.height / 2);
-	auto blood = Sprite::create("blood.png");
+	auto blood = Sprite::create("picture/interface/blood.png");
 	float x = visibleSize.width - 805+27;
 	float y = visibleSize.height - 125 + 22;
 	blood->setPosition(Vec2(x, y));
 	this->addChild(blood, 1);
 }
-
 
 void MainScene::initArmorStrand()
 {
@@ -340,7 +335,7 @@ void MainScene::initArmorStrand()
 	auto origin = Director::getInstance()->getVisibleOrigin();
 	//屏幕中心
 	auto centre = Vec2(visibleSize.width / 2, visibleSize.height / 2);
-	auto armor = Sprite::create("armor.png");
+	auto armor = Sprite::create("picture/interface/armor.png");
 	float x = visibleSize.width - 805+27;
 	float y = visibleSize.height - 125+2;
 	armor->setPosition(Vec2(x, y));

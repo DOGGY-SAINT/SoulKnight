@@ -30,8 +30,8 @@ bool PauseScene::init()
 	auto visibleSize = Director::getInstance()->getVisibleSize();
 	Vec2 origin = Director::getInstance()->getVisibleOrigin();
 	///////////////
-	auto musicOnSpr = Sprite::create("musicOn.png");
-	auto musicOffSpr = Sprite::create("musicOff.png");
+	auto musicOnSpr = Sprite::create("picture/interface/musicOn.png");
+	auto musicOffSpr = Sprite::create("picture/interface/musicOff.png");
 	auto musicOn = MenuItemSprite::create(musicOnSpr, musicOnSpr);
 	auto musicOff = MenuItemSprite::create(musicOffSpr, musicOffSpr);
 	auto musicButton = MenuItemToggle::createWithCallback([](Object* sender) {
@@ -46,34 +46,34 @@ bool PauseScene::init()
 		}
 	},
 		musicOn, musicOff, NULL);
-	musicButton->setPosition(Vec2((visibleSize.width / 2) - 600, (visibleSize.height / 2) - 475));
+	musicButton->setPosition(Vec2((visibleSize.width / 2) - 660, 14));
 	auto menu2 = Menu::create(musicButton, NULL);
 	this->addChild(menu2, 1);
 	/////////////////////////
 	auto goBackHome = MenuItemImage::create(
-		"homebutton1.png",
-		"homebutton2.png",
+		"picture/interface/homebutton1.png",
+		"picture/interface/homebutton2.png",
 		CC_CALLBACK_0(MainScene::gameRestart, MainScene::SharedScene())
 	);
-	goBackHome->setPosition(Vec2((visibleSize.width / 2) - 425, (visibleSize.height / 2) - 475));
+	goBackHome->setPosition(Vec2((visibleSize.width / 2) - 365, 15));
 	auto menu3 = Menu::create(goBackHome, NULL);
 	this->addChild(menu3, 1);
 	////////////////
 	auto closeItem = MenuItemImage::create(
-		"startbutton2.png",
-		"button2.1.jpg",
+		"picture/interface/startbutton2.png",
+		"picture/interface/button2.1.jpg",
 		CC_CALLBACK_1(PauseScene::menuCloseCallback, this));
 
 	if (closeItem == nullptr ||
 		closeItem->getContentSize().width <= 0 ||
 		closeItem->getContentSize().height <= 0)
 	{
-		problemLoading("'startbutton2.png' and 'button2.1.jpg'");
+		problemLoading("'picture/interface/startbutton2.png' and 'picture/interface/button2.1.jpg'");
 	}
 	else
 	{
 		float x = visibleSize.width / 2;
-		float y = visibleSize.height / 2 + 75;
+		float y = visibleSize.height / 2 + 15;
 		closeItem->setPosition(Vec2(x, y));
 	}
 	auto menu = Menu::create(closeItem, NULL);
