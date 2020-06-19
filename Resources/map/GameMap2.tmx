@@ -224,7 +224,7 @@
     <property name="HP" type="int" value="1"/>
     <property name="LocalZOrder" type="int" value="3"/>
     <property name="Name" value="MapPortal"/>
-    <property name="NextMap" value="GameMap1"/>
+    <property name="NextMap" value="GameMap3"/>
     <property name="RotationEnable" type="bool" value="false"/>
     <property name="TexturePath" value="picture/mapportal/MapPortal1.png"/>
    </properties>

@@ -5,7 +5,7 @@
     <key>SmallRedGlass</key>
     <dict>
       <key>Type</key>
-      <string>Prop</string>
+      <string>HP</string>
       <key>Path</key>
       <string>data/PropData.plist</string>
       <key>Name</key>
@@ -14,7 +14,7 @@
     <key>SmallBlueGlass</key>
     <dict>
       <key>Type</key>
-      <string>Prop</string>
+      <string>Power</string>
       <key>Path</key>
       <string>data/PropData.plist</string>
       <key>Name</key>

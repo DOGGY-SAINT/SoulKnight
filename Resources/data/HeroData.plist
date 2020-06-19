@@ -57,6 +57,8 @@
         <key>RecoverGap</key>
         <real>0</real>
       </dict>
+      <key>defaultWeapon</key>
+      <string>Shotgun</string>
     </dict>
     <key>Enchanter</key>
     <dict>
@@ -81,6 +83,8 @@
         <key>RecoverGap</key>
         <real>1</real>
       </dict>
+      <key>defaultWeapon</key>
+      <string>Shotgun</string>
     </dict>
   </dict>
 </plist>

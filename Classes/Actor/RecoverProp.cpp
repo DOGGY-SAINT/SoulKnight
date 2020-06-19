@@ -23,6 +23,7 @@ bool RecoverProp::initWithName(std::string name)
 	auto thisMap = map[name].asValueMap();
 	auto defaultMap= file->getValueMapFromFile(PATH_DATA + "PropDefaultData.plist");
 	initData(VALUE_AT(defaultMap,"CommonData",ValueMap));
+	_HP = State();
 	initCollision(VALUE_AT(defaultMap, "CollisionData", ValueMap));
 	initOther(thisMap);
 	return true;
@@ -30,6 +31,7 @@ bool RecoverProp::initWithName(std::string name)
 
 void RecoverProp::initOther(ValueMap valueMap)
 {
+	this->getHP();
 	auto type = VALUE_AT(valueMap,"Type",String);
 	if (type == "HP")
 		_type = HP;
