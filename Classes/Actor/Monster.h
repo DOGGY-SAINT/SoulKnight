@@ -19,6 +19,8 @@ public:
 	void updateWeaponDirection(float dt);
 
 	float rand();
+
+	void setAttackOn()override;
 };
 
 

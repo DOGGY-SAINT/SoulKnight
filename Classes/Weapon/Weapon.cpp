@@ -18,7 +18,7 @@ Weapon* Weapon::createWithName(std::string weaponName)
 	WEAPON_JUDGE(weaponType, Shotgun);
 	WEAPON_JUDGE(weaponType, SingleShotgun);
 	WEAPON_JUDGE(weaponType, MeleeWeapon);
-	if (weapon && weapon->initWithName(weaponName))
+	if (weapon && weapon->initWithName(weaponName, thisMap))
 	{
 		weapon->retain();
 		return weapon;
@@ -28,31 +28,25 @@ Weapon* Weapon::createWithName(std::string weaponName)
 }
 
 //注意看好格式
-bool Weapon::initWithName(std::string weaponName)
+bool Weapon::initWithName(std::string weaponName,ValueMap valueMap)
 {
 	if (!initWithFile(PATH_PICTURE_WEAPON + weaponName + ".png"))
 		return false;
+	MainScene::SharedScene()->getMapLayer()->addActorToVec(this);
 	auto file = FileUtils::getInstance();
-	auto weaponMap = file->getValueMapFromFile(PATH_DATA + "WeaponData.plist");
-	auto thisMap = weaponMap[weaponName].asValueMap();
-	initWithValueMap(thisMap);
+	auto defaultMap = file->getValueMapFromFile(PATH_DATA + "WeaponDefaultData.plist");
+	initData(VALUE_AT(defaultMap, "CommonData", ValueMap));
+	initCollision(VALUE_AT(defaultMap, "CollisionData", ValueMap));
+	weaponOff();
+	initWithValueMap(valueMap);
 	return true;
 }
 
 void Weapon::initWithValueMap(ValueMap valueMap)
 {
-	/*_on = false;
-	this->retain();
-	auto map = MainScene::SharedScene()->getMapLayer();
-	map->addActorToVec(this);									//添加到release列表
-	auto file = FileUtils::getInstance();
-	auto defaultMap = file->getValueMapFromFile(PATH_DATA + "WeaponDefaultData.plist");
-	initData(VALUE_AT(defaultMap, "CommonData", ValueMap));
-	initCollision(VALUE_AT(defaultMap, "CollisionData", ValueMap));
-
 	SET_DATA(valueMap, Name, String);
 	SET_DATA(valueMap, GapTime, Float);
-	initBulletData(valueMap);*/
+	initBulletData(valueMap);
 }
 
 
@@ -66,56 +60,33 @@ void Weapon::initBulletData(ValueMap valueMap)
 //拿上武器,还要考虑设置位置的事情
 void  Weapon::weaponOn(MovingActor* myHero)
 {
-//<<<<<<< HEAD
-//	a2->setMainWeapon(this);
+	myHero->setMainWeapon(this);
 	_on = true;
 	auto map = MainScene::SharedScene()->getMapLayer();
 	map->removeActorFromVec(this);
-
+	setAnchorPoint(Vec2(0.5f, 0.5f));
+	setPosition(myHero->getContentSize() / 2);
 	//换掩码
 	auto body = getPhysicsBody();
 	body->setCategoryBitmask(WEAPON_CATAGORY);
 	body->setCollisionBitmask(WEAPON_COLLISION);
 	body->setContactTestBitmask(WEAPON_CONTACT);
-//
 	removeFromParent();
-//	a2->addChild(this);
-//	auto Parent = dynamic_cast<Actor*> (getParent());
-//	setFlag(Parent->getFlag());
-//=======
-	updateRotation();
 	myHero->addChild(this);
-	myHero->setMainWeapon(this);
-	setFlag(myHero->getFlag());
-	auto heroSize = myHero->getContentSize();
-	this->setPosition(Vec2(heroSize.width / 2-10, heroSize.height / 2-10));
-//>>>>>>> Kite
+	auto Parent = dynamic_cast<Actor*> (getParent());
+	setFlag(Parent->getFlag());
 }
 
 //换下武器，还要考虑设置位置的事情
 void  Weapon::weaponOff()
 {
-//<<<<<<< HEAD
-//	_on = false;
-//	auto map = MainScene::SharedScene()->getMapLayer();
-//	map->addActorToVec(this);
-//	auto pos = map->convertToNodeSpace(convertToWorldSpace(getPosition()));
-//	removeFromParent();
-//	map->addChild(this);
-//	setPosition(pos);
-//=======
 	_on = false;
+	auto map = MainScene::SharedScene()->getMapLayer();
+	map->addActorToVec(this);
+	auto pos = map->convertToNodeSpace(convertToWorldSpace(getPosition()));
 	removeFromParent();
-	//获取当前英雄和层
-	MainScene* runningScene = dynamic_cast<MainScene*>(Director::getInstance()->getRunningScene());
-	MapLayer* runningLayer = dynamic_cast<MapLayer*>(runningScene->getMapLayer());
-	Hero* myHero = runningScene->getHero();
-	auto pos = runningLayer->convertToNodeSpace(convertToWorldSpace(getPosition()));
-	//将武器从hero移向地图
-	myHero->setMainWeapon(NULL);
-	runningLayer->addChild(this, 6);
+	map->addChild(this);
 	setPosition(pos);
-//>>>>>>> Kite
 	setDirection(Vec2(1, 0));
 	updateRotation();
 	//关闭时间调度器
@@ -127,7 +98,6 @@ void Weapon::attack(float dt) {
 	MainScene* runningScene = dynamic_cast<MainScene*>(Director::getInstance()->getRunningScene());
 	MapLayer* runningLayer = dynamic_cast<MapLayer*>(runningScene->getMapLayer());
 	Hero* myHero = runningScene->getHero();
-	//if(myHero->_power>)
 
 	auto bullet = Sprite::createWithTexture(getBulletTexture());
 
@@ -150,4 +120,32 @@ void Weapon::attack(float dt) {
 	
 	bullet->setPosition(weaponPosition.x + cos * weaponSize.width / 2, weaponPosition.y + sin * weaponSize.height / 2);
 	bullet->getPhysicsBody()->setVelocity(Vec2(100 * cos, 100 * sin));
+}
+
+bool Weapon::onContactBegin(Actor *a2)
+{
+	if (_on)
+		return weaponOnContact(a2);
+	else
+		return weaponOffContact(a2);
+}
+
+bool Weapon::weaponOffContact(Actor *a2)
+{
+	if (a2->getName() == "Hero")
+	{
+		auto hero = MainScene::SharedScene()->getHero();
+		hero->setWeaponToOn(this);
+		MainScene::SharedScene()->onTPressed = CC_CALLBACK_0(Hero::changeWeapon, hero);
+	}
+	return false;
+}
+
+bool Weapon::weaponOnContact(Actor *a2)
+{
+	if (isAnotherFlag(a2) && (a2->getFlag() != FLAG_NOHURT))
+	{
+		getHurt(a2->getDamage());
+	}
+	return false;
 }

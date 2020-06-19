@@ -59,3 +59,12 @@ inline float Monster::rand()
 	float f = num / 100.0f;
 	return f;
 }
+
+void Monster::setAttackOn()
+{
+	if (_mainWeapon)
+	{
+		float gapTime = _mainWeapon->getGapTime();
+		_mainWeapon->schedule(schedule_selector(Weapon::attack), gapTime*3, CC_REPEAT_FOREVER, gapTime / 2);
+	}
+}

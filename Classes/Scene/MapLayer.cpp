@@ -98,6 +98,8 @@ void MapLayer::initMapPortalLayer()
 void MapLayer::initBoxLayer()
 {
 	auto layer = _tiledMap->getObjectGroup("BoxLayer");
+	if (!layer)
+		return;
 	auto Group = layer->getObjects();
 	for (auto obj : Group)
 	{
@@ -153,7 +155,10 @@ Vec2 MapLayer::getObjectNodeSpace(ValueMap valueMap)
 void MapLayer::releaseAllActor()
 {
 	for (auto weapon : toRelease)
+	{
+		weapon->unscheduleAllCallbacks();
 		weapon->release();
+	}
 }
 
 void MapLayer::addHero(Hero* hero)

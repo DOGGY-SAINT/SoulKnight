@@ -64,7 +64,6 @@ void Actor::initData(ValueMap valueMap)
 	SET_DATA(valueMap, Damage, Int);
 	SET_DATA(valueMap, LocalZOrder, Int);
 	SET_DATA(valueMap, Name, String);
-	auto n = getName();
 	SET_DATA(valueMap, Flag, Int);
 }
 
@@ -85,7 +84,8 @@ void Actor::initCollision(ValueMap valueMap)
 
 void Actor::afterDead()
 {
-	this->removeFromParent();
+	if (getParent())
+		this->removeFromParent();
 }
 
 inline void Actor::getHurt(INT32 dmg)
@@ -111,7 +111,7 @@ inline bool Actor::getCanBeHurt()
 //Flag不一样才受伤
 inline bool Actor::onContactBegin(Actor* a2)
 {
-	if (isAnotherFlag(a2)&&a2->_flag!=FLAG_NOHURT)
+	if (isAnotherFlag(a2) && a2->_flag != FLAG_NOHURT)
 	{
 		getHurt(a2->_damage);
 		return true;

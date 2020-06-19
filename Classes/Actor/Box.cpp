@@ -69,8 +69,8 @@ void Box::randWeapon(ValueMap valueMap)
 		auto n = rand();
 		if (n)
 		{
+			//ÒÑ¾­addchild
 			_prop = Weapon::createWithName(map.first);
-			MainScene::SharedScene()->getMapLayer()->addChild(_prop, 100);
 			_prop->setPosition(getPosition() + getContentSize() / 2);
 			if (_prop->getPhysicsBody())
 				_prop->getPhysicsBody()->setEnabled(false);
