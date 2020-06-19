@@ -114,8 +114,7 @@ bool Hero::onContactBegin(Actor *a2)
 
 bool Hero::onContactSeparate(Actor *)
 {
-	if (!_on)
-		MainScene::SharedScene()->onTPressed = nullptr;
+	if (!_on)	MainScene::SharedScene()->onTPressed = nullptr;
 	return false;
 }
 
