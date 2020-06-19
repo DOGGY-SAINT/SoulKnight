@@ -23,6 +23,7 @@ Hero* Hero::createWithName(std::string Name)
 
 bool Hero::initWithName(std::string Name)
 {
+	auto path = PATH_PICTURE_HERO + Name + ".png";
 	if (!Sprite::initWithFile(PATH_PICTURE_HERO + Name + ".png"))
 		return false;
 	retain();
@@ -32,11 +33,12 @@ bool Hero::initWithName(std::string Name)
 	auto valueMap = file->getValueMapFromFile(PATH_DATA + "HeroData.plist");
 	setAnchorPoint(Vec2::ZERO);
 
+	auto heroMap = VALUE_AT(valueMap, Name, ValueMap);
 	initController();
-	initState(VALUE_AT(valueMap, Name, ValueMap));
+	initState(heroMap);
 	initData(VALUE_AT(valueMap, "CommonData", ValueMap));
 	initCollision(VALUE_AT(valueMap, "CollisionData", ValueMap));
-	initWeapon(DEFAULT_WEAPON_NAME);
+	initWeapon(VALUE_AT(heroMap,"defaultWeapon",String));
 	initScheduler();
 	return true;
 }

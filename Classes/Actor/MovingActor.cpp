@@ -25,7 +25,7 @@ void MovingActor::setAttackOn()
 	if (_mainWeapon)
 	{
 		float gapTime = _mainWeapon->getGapTime();
-		_mainWeapon->schedule(schedule_selector(Weapon::attack, _mainWeapon), gapTime, CC_REPEAT_FOREVER, gapTime / 2);
+		_mainWeapon->schedule(schedule_selector(Weapon::attack), gapTime, CC_REPEAT_FOREVER, gapTime / 2);
 	}
 }
 

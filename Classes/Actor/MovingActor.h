@@ -18,9 +18,9 @@ class MovingActor
 public:
 	void initCollision(ValueMap)override;
 
-	void setAttackOn();
+	virtual void setAttackOn();
 
-	void setAttackOff();
+	virtual void setAttackOff();
 
 	virtual void initWeapon(std::string weaponName);
 

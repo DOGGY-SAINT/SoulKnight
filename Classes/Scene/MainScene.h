@@ -69,7 +69,6 @@ public:
 
 	static MainScene* SharedScene();
 
-
 	void gameRestart();
 
 	/*void changeMap(std::string mapName);*/

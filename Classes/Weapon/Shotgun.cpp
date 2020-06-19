@@ -45,7 +45,7 @@ void Shotgun::initBulletData(ValueMap valueMap)
 {
 	SET_DATA(valueMap, BulletData, ValueMap);
 	auto bulletPath = PATH_PICTURE_BULLET + "Bullet" + ".png";
-	setBulletTexture(_director->getTextureCache()->addImage(bulletPath));
+	setBulletTexture(Director::sharedDirector()->getTextureCache()->addImage(bulletPath));
 }
 
 void Shotgun::update(float dt) {
@@ -95,9 +95,9 @@ void Shotgun::attack(float dt) {
 	runningLayer->addChild(bullet2, 6);
 	runningLayer->addChild(bullet3, 6);
 
-	auto heroPosition = myHero->getPosition();
+	auto parentPosition = getParent()->getPosition();
 	auto weaponPosition = getPosition();
-	auto hx = heroPosition.x, hy = heroPosition.y;
+	auto hx = parentPosition.x, hy = parentPosition.y;
 	auto wx = weaponPosition.x, wy = weaponPosition.y;
 
 	float x = hx + wx - pending * sin * 5 / 2 + cos * 70 / 2;

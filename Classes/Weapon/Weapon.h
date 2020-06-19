@@ -15,9 +15,17 @@ class Weapon :
 	CC_SYNTHESIZE(float, _gapTime, GapTime);
 	CC_SYNTHESIZE(ValueMap, _bulletDate, BulletData);
 	CC_SYNTHESIZE(Texture2D*, _bulletTexture, BulletTexture);
+	CC_SYNTHESIZE(bool, _on, IsOn);
 protected:
 	Vec2 _direction;
 public:
+	bool onContactBegin(Actor* a2)override;
+
+	bool weaponOffContact(Actor*);
+
+	bool weaponOnContact(Actor*);
+
+
 	Vec2 getDirection() { return _direction; }
 
 	void setDirection(Vec2 dir) { _direction = dir; updateRotation(); }

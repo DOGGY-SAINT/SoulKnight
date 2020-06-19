@@ -252,18 +252,19 @@ MainScene* MainScene::SharedScene()
 
 void MainScene::gameRestart()
 {
+
+	_mapLayer->unscheduleAllCallbacks();
 	releaseAllActor();
-	_sharedScene = nullptr;
 	auto scene = HelloWorld::createScene();
 	this->release();
 	Director::getInstance()->replaceScene(CCTransitionFade::create(0.3f, HelloWorld::createScene()));
-
 }
 
 
 
 void MainScene::changeMap(std::string mapName)
 {
+	_hero->setAttackOff();
 	_mapLayer->releaseAllActor();
 	_hero->retain();
 	_mapLayer->removeFromParent();
