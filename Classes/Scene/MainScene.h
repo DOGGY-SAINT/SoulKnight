@@ -19,7 +19,7 @@ private:
 
 	void initBloodStrand();
 
-	//void initArmorStrand();
+	void initArmorStrand();
 
 	void initMap(std::string mapName);
 
