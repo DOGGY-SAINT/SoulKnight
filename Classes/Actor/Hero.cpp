@@ -33,8 +33,8 @@ bool Hero::initWithName(std::string Name)
 	setAnchorPoint(Vec2::ZERO);
 
 	initController();
-	initData(VALUE_AT(valueMap, "CommonData", ValueMap));
 	initState(VALUE_AT(valueMap, Name, ValueMap));
+	initData(VALUE_AT(valueMap, "CommonData", ValueMap));
 	initCollision(VALUE_AT(valueMap, "CollisionData", ValueMap));
 	initWeapon(DEFAULT_WEAPON_NAME);
 	initScheduler();
@@ -100,8 +100,6 @@ void Hero::getHurt(INT32 dmg)
 		correct = dmg - _AC.getState();
 	_AC.setStateBy(-dmg);
 	_HP.setStateBy(-correct);
-	if (isDead())
-		afterDead();
 }
 
 bool Hero::onContactBegin(Actor *a2)

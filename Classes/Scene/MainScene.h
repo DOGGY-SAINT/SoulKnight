@@ -59,6 +59,8 @@ public:
 
 	void onMouseDown(EventMouse *event);
 
+	void onMouseUp(EventMouse *event);
+
 	void onMouseMove(EventMouse *event);
 	
 	void changeMap(std::string mapName);

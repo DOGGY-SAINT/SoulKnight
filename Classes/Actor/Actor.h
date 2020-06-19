@@ -50,10 +50,10 @@ public:
 	//µôÑª
 	inline virtual void getHurt(INT32 dmg);
 
-	inline bool isDead();
+	bool isDead();
 
 	//ËÀÍö»Øµ÷
-	inline virtual void afterDead();
+	virtual void afterDead();
 
 	State* getHP() { return &_HP; }
 };

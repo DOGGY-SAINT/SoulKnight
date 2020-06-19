@@ -8,16 +8,16 @@ USING_NS_CC;
 #define STATE_DATA(varType, varName, funName)\
 protected: varType varName; \
 public:inline varType get##funName(void) const { return varName; } \
-inline void set##funName##By(varType deta){ if(isImmutable()){varName += deta;setStateInLim();} }\
-inline void set##funName##To(varType num){ if(isImmutable()){varName = num;setStateInLim();} }
+inline void set##funName##By(varType deta){ if(!isImmutable()){varName += deta;setStateInLim();} }\
+inline void set##funName##To(varType num){ if(!isImmutable()){varName = num;setStateInLim();} }
 
 //State可以改成模板
 class State
 {
-	STATE_DATA(INT32, _state, State);
+	CC_SYNTHESIZE(INT32, _state, State);
 	//getState,setStateBy,setStateTo
 
-	STATE_DATA(INT32, _stateMax, StateMax);
+	CC_SYNTHESIZE(INT32, _stateMax, StateMax);
 	//getStateMax,setStateMaxBy,setStateMaxTo
 
 	CC_SYNTHESIZE(bool, _immutable, Immutable);
@@ -29,6 +29,24 @@ public:
 	bool isImmutable()
 	{
 		return _immutable;
+	}
+
+	void setStateBy(int deta)
+	{
+		if (!isImmutable())
+		{
+			_state += deta;
+			setStateInLim();
+		}
+	}
+
+	void setStateTo(int num)
+	{
+		if (!isImmutable())
+		{
+			_state = num;
+			setStateInLim();
+		}
 	}
 
 	//初始不可被伤害,1HP

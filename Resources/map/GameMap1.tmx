@@ -91,7 +91,7 @@
    <property name="Collision" type="bool" value="true"/>
    <property name="CollisionBitmask" type="int" value="35"/>
    <property name="ContactTestBitmask" type="int" value="35"/>
-   <property name="Damage" type="int" value="1"/>
+   <property name="Damage" type="int" value="0"/>
    <property name="Dynamic" type="bool" value="false"/>
    <property name="Flag" type="int" value="2"/>
    <property name="HP" type="int" value="1"/>
@@ -129,7 +129,7 @@
    <property name="Collision" type="bool" value="true"/>
    <property name="CollisionBitmask" type="int" value="35"/>
    <property name="ContactTestBitmask" type="int" value="35"/>
-   <property name="Damage" type="int" value="1"/>
+   <property name="Damage" type="int" value="0"/>
    <property name="Dynamic" type="bool" value="false"/>
    <property name="Flag" type="int" value="1"/>
    <property name="HP" type="int" value="1"/>
@@ -323,7 +323,7 @@
     <property name="TexturePath" value="picture/monster/YellowMonster.png"/>
     <property name="V" type="int" value="50"/>
     <property name="VelocityLim" type="float" value="150"/>
-    <property name="WeaponName" value="RedGun"/>
+    <property name="WeaponName" value="Shotgun"/>
    </properties>
   </object>
   <object id="8" gid="21" x="251" y="158" width="70" height="70">
@@ -343,7 +343,7 @@
     <property name="TexturePath" value="picture/monster/YellowMonster.png"/>
     <property name="V" type="int" value="50"/>
     <property name="VelocityLim" type="float" value="150"/>
-    <property name="WeaponName" value="RedGun"/>
+    <property name="WeaponName" value="Shotgun"/>
    </properties>
   </object>
  </objectgroup>

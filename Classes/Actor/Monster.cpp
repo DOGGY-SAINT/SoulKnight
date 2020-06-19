@@ -35,6 +35,7 @@ void Monster::initScheduler()
 {
 	schedule(schedule_selector(Monster::updateVelocity),0.1f);
 	schedule(schedule_selector(Monster::updateWeaponDirection));
+	setAttackOn();
 }
 
 void Monster::updateVelocity(float dt)
