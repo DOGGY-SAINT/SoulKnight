@@ -2,26 +2,58 @@
 
 <plist version="1.0">
   <dict>
-    <key>M2</key>
+    <key>Shotgun</key>
     <dict>
       <key>GapTime</key>
       <real>0.5</real>
       <key>Name</key>
-      <string>Weapon</string>
+      <string>Shotgun</string>
+      <key>weaponType</key>
+      <string>Shotgun</string>
+      <key>SizeX</key>
+      <integer>130</integer>
+      <key>SizeY</key>
+      <integer>5</integer>
       <key>PowerCost</key>
-      <integer>1</integer>
+      <integer>3</integer>
       <key>BulletData</key>
       <dict>
         <key>Damage</key>
-        <integer>2</integer>
+        <integer>4</integer>
       </dict>
     </dict>
-    <key>RedGun</key>
+    <key>Redgun</key>
     <dict>
       <key>GapTime</key>
       <real>0.5</real>
       <key>Name</key>
-      <string>Weapon</string>
+      <string>Redgun</string>
+      <key>weaponType</key>
+      <string>SingleShotgun</string>
+      <key>SizeX</key>
+      <integer>70</integer>
+      <key>SizeY</key>
+      <integer>8</integer>
+      <key>PowerCost</key>
+      <integer>2</integer>
+      <key>BulletData</key>
+      <dict>
+        <key>Damage</key>
+        <integer>5</integer>
+      </dict>
+  </dict>
+    <key>Pistol</key>
+    <dict>
+      <key>GapTime</key>
+      <real>0.3</real>
+      <key>Name</key>
+      <string>Pistol</string>
+      <key>weaponType</key>
+      <string>SingleShotgun</string>
+      <key>SizeX</key>
+      <integer>70</integer>
+      <key>SizeY</key>
+      <integer>10</integer>
       <key>PowerCost</key>
       <integer>0</integer>
       <key>BulletData</key>
@@ -30,5 +62,62 @@
         <integer>2</integer>
       </dict>
     </dict>
+    <key>Lightsaber</key>
+    <dict>
+      <key>GapTime</key>
+      <real>0.3</real>
+      <key>Name</key>
+      <string>Lightsaber</string>
+      <key>weaponType</key>
+      <string>MeleeWeapon</string>
+      <ket>Scale</ket>
+      <real>0.6</real>
+      <key>PowerCost</key>
+      <integer>2</integer>
+      <key>BulletData</key>
+      <dict>
+        <key>Damage</key>
+        <integer>5</integer>
+      </dict>
+    </dict>
+    <key>Hatchet</key>
+    <dict>
+      <key>GapTime</key>
+      <real>0.7</real>
+      <key>Name</key>
+      <string>Hatchet</string>
+      <key>weaponType</key>
+      <string>MelleWeapon</string>
+      <ket>Scale</ket>
+      <real>0.7</real>
+      <key>PowerCost</key>
+      <integer>2</integer>
+      <key>BulletData</key>
+      <dict>
+        <key>Damage</key>
+        <integer>6</integer>
+      </dict>
+    </dict>
+    <key>Machinegun</key>
+    <dict>
+      <key>GapTime</key>
+      <real>0.15</real>
+      <key>Name</key>
+      <string>Machinegun</string>
+      <key>weaponType</key>
+      <string>SingleShotgun</string>
+      <key>SizeX</key>
+      <integer>70</integer>
+      <key>SizeY</key>
+      <integer>6</integer>
+      <key>PowerCost</key>
+      <integer>1</integer>
+      <key>BulletData</key>
+      <dict>
+        <key>Damage</key>
+        <integer>2</integer>
+      </dict>
+    
+  </dict>
   </dict>
 </plist>

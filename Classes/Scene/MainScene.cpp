@@ -68,11 +68,9 @@ void MainScene::initInfoLayer()
 		float y = visibleSize.height - closeItem->getContentSize().height / 2;
 		closeItem->setPosition(Vec2(x, y));
 	}
-
 	auto menu = Menu::create(closeItem, NULL);
 	menu->setPosition(Vec2::ZERO);
 	this->addChild(menu, 1);
-
 }
 
 void MainScene::initHero()
@@ -115,6 +113,7 @@ void MainScene::initMouseListener()
 {
 	auto mouseListener = EventListenerMouse::create();
 	mouseListener->onMouseDown = CC_CALLBACK_1(MainScene::onMouseDown, this);
+	mouseListener->onMouseUp = CC_CALLBACK_1(MainScene::onMouseUp, this);
 	mouseListener->onMouseMove = CC_CALLBACK_1(MainScene::onMouseMove, this);
 	_eventDispatcher->addEventListenerWithSceneGraphPriority(mouseListener, this);
 
@@ -138,6 +137,13 @@ void MainScene::updateMapPosition(float dt)
 void MainScene::onMouseDown(EventMouse *event)
 {
 	/*gameBegin();*/
+	if (event->getMouseButton() == EventMouse::MouseButton::BUTTON_LEFT)
+		_hero->setAttackOn();
+}
+
+void MainScene::onMouseUp(EventMouse* event) {
+	if (event->getMouseButton() == EventMouse::MouseButton::BUTTON_LEFT)
+		_hero->setAttackOff();
 }
 
 void MainScene::onMouseMove(EventMouse *event)
@@ -147,6 +153,7 @@ void MainScene::onMouseMove(EventMouse *event)
 	auto pos = CCDirector::sharedDirector()->convertToUI(event->getLocation());
 	auto dir = pos - centre;
 	_hero->getMainWeapon()->setDirection(dir);
+	_hero->getMainWeapon()->updateRotation();
 }
 
 
