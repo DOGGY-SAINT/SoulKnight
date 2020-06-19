@@ -59,13 +59,13 @@ bool Actor::initWithObject(ValueMap valueMap)
 
 void Actor::initData(ValueMap valueMap)
 {
+	_HP = State(VALUE_AT(valueMap, "HP", Int));
 	SET_DATA(valueMap, CanBeHurt, Bool);
 	SET_DATA(valueMap, Damage, Int);
 	SET_DATA(valueMap, LocalZOrder, Int);
-	auto n = VALUE_AT(valueMap, "Name", String);
 	SET_DATA(valueMap, Name, String);
+	auto n = getName();
 	SET_DATA(valueMap, Flag, Int);
-	_HP = State(VALUE_AT(valueMap, "HP", Int));
 }
 
 void Actor::initCollision(ValueMap valueMap)
@@ -83,24 +83,23 @@ void Actor::initCollision(ValueMap valueMap)
 	}
 }
 
-inline void Actor::afterDead()
+void Actor::afterDead()
 {
 	this->removeFromParent();
+	release();
 }
 
 inline void Actor::getHurt(INT32 dmg)
 {
 	_HP.setStateBy(-dmg);
-	if (isDead())
-		afterDead();
 }
 
-inline bool Actor::isDead()
+bool Actor::isDead()
 {
 	return _HP.isEmpty();
 }
 
-inline void Actor::setCanBeHurt(bool num)
+void Actor::setCanBeHurt(bool num)
 {
 	_HP.setImmutable(!num);
 }
@@ -129,4 +128,4 @@ inline bool Actor::isAnotherFlag(Actor* a2)
 
 
 //ÃÜ¶È µ¯ÐÔ Ä¦²ÁÁ¦
-const PhysicsMaterial Actor::defaultMaterial = PhysicsMaterial(0.0f, 0.0f, 0.0f);
+const PhysicsMaterial Actor::defaultMaterial = PhysicsMaterial(100.0f, 0.0f, 0.0f);

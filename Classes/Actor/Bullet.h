@@ -20,8 +20,6 @@ public:
 inline void Bullet::getHurt(INT32 dmg)
 {
 	_HP.setStateBy(-1);
-	if (isDead())
-		afterDead();
 }
 
 #endif

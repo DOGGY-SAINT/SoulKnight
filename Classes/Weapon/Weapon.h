@@ -11,13 +11,17 @@ USING_NS_CC;
 class Weapon :
 	public Actor
 {
-	
+
 	CC_SYNTHESIZE(float, _gapTime, GapTime);
 	CC_SYNTHESIZE(ValueMap, _bulletDate, BulletData);
 	CC_SYNTHESIZE(Texture2D*, _bulletTexture, BulletTexture);
-	CC_SYNTHESIZE(Vec2, _direction, Direction);
+protected:
+	Vec2 _direction;
+public:
+	Vec2 getDirection() { return _direction; }
 
-    public:
+	void setDirection(Vec2 dir) { _direction = dir; updateRotation(); }
+
 	//这里考虑武器信息都在plist内，因此用name初始化，后续可以考虑load时创造instance然后这里直接copy
 	static Weapon* createWithName(std::string weaponName);
 
@@ -28,8 +32,6 @@ class Weapon :
 	virtual void initBulletData(ValueMap);
 
 	virtual inline void updateRotation();
-
-	virtual void update(float dt);
 
 	//拿上武器
 	virtual void weaponOn(MovingActor* myHero);

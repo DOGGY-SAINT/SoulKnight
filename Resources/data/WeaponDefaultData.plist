@@ -11,7 +11,7 @@
       <key>HP</key>
       <integer>1</integer>
       <key>CanBeHurt</key>
-      <boolean>false</boolean>
+      <false></false>
       <key>Flag</key>
       <integer>3</integer>
       <key>LocalZOrder</key>

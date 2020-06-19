@@ -69,6 +69,15 @@
     <ClCompile Include="..\Classes\Scene\PauseScene.cpp">
       <Filter>src\Scene</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\Weapon\MeleeWeapon.cpp">
+      <Filter>src\Weapon</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Weapon\Shotgun.cpp">
+      <Filter>src\Weapon</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Weapon\SingleShotgun.cpp">
+      <Filter>src\Weapon</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -121,6 +130,15 @@
     </ClInclude>
     <ClInclude Include="..\Classes\Scene\PauseScene.h">
       <Filter>src\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Weapon\MeleeWeapon.h">
+      <Filter>src\Weapon</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Weapon\Shotgun.h">
+      <Filter>src\Weapon</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Weapon\SingleShotgun.h">
+      <Filter>src\Weapon</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

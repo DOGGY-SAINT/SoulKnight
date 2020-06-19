@@ -18,8 +18,11 @@ bool Bullet::initByTexture(Texture2D* texture, ValueMap valueMap)
 {
 	if (!initWithTexture(texture))
 		return false;
-	initData(valueMap);
-	initCollision(valueMap);
+	auto file = FileUtils::getInstance();
+	auto defaultMap = file->getValueMapFromFile(PATH_DATA + "BulletDefaultData.plist");
+	initData(VALUE_AT(defaultMap,"CommonData",ValueMap));
+	initCollision(VALUE_AT(defaultMap, "CollisionData", ValueMap));
+	SET_DATA(valueMap, Damage, Int);
 	return true;
 }
 

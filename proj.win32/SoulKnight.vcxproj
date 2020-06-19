@@ -161,6 +161,9 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)\Resources\" /D /E /I /F /Y
     <ClCompile Include="..\Classes\Scene\MapLayer.cpp" />
     <ClCompile Include="..\Classes\Scene\PauseScene.cpp" />
     <ClCompile Include="..\Classes\Scene\HelloWorldScene.cpp" />
+    <ClCompile Include="..\Classes\Weapon\MeleeWeapon.cpp" />
+    <ClCompile Include="..\Classes\Weapon\Shotgun.cpp" />
+    <ClCompile Include="..\Classes\Weapon\SingleShotgun.cpp" />
     <ClCompile Include="..\Classes\Weapon\Weapon.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
@@ -180,6 +183,9 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)\Resources\" /D /E /I /F /Y
     <ClInclude Include="..\Classes\Scene\MapLayer.h" />
     <ClInclude Include="..\Classes\Scene\PauseScene.h" />
     <ClInclude Include="..\Classes\Scene\HelloWorldScene.h" />
+    <ClInclude Include="..\Classes\Weapon\MeleeWeapon.h" />
+    <ClInclude Include="..\Classes\Weapon\Shotgun.h" />
+    <ClInclude Include="..\Classes\Weapon\SingleShotgun.h" />
     <ClInclude Include="..\Classes\Weapon\Weapon.h" />
     <ClInclude Include="main.h" />
   </ItemGroup>

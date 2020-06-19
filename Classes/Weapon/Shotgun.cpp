@@ -6,14 +6,7 @@
 #include"Shotgun.h"
 #include"SimpleAudioEngine.h"
 
-Shotgun::Shotgun()
-{
-}
 
-
-Shotgun::~Shotgun()
-{
-}
 Shotgun* Shotgun::createWithName(std::string weaponName)
 {
 	Shotgun* weapon = new(std::nothrow)Shotgun;
@@ -74,18 +67,6 @@ void Shotgun::attack(float dt) {
 	bullet2->setFlag(getFlag());
 	bullet3->setFlag(getFlag());
 	auto flag = bullet1->getFlag();
-
-	//子弹模型
-	auto bulletSize = bullet1->getContentSize();
-	auto bulletBody1 = PhysicsBody::createEdgeBox(bulletSize, PhysicsMaterial(0.0f, 1.0f, 0.0f));
-	bulletBody1->setDynamic(false);
-	auto bulletBody2 = PhysicsBody::createEdgeBox(bulletSize, PhysicsMaterial(0.0f, 1.0f, 0.0f));
-	bulletBody2->setDynamic(false);
-	auto bulletBody3 = PhysicsBody::createEdgeBox(bulletSize, PhysicsMaterial(0.0f, 1.0f, 0.0f));
-	bulletBody3->setDynamic(false);
-	bullet1->setPhysicsBody(bulletBody1);
-	bullet2->setPhysicsBody(bulletBody2);
-	bullet3->setPhysicsBody(bulletBody3);
 
 	//子弹位置和角度
 	auto weaponSize = getContentSize();

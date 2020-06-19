@@ -217,6 +217,10 @@ bool MainScene::onContactBegin(PhysicsContact & contact)
 	{
 		ret1 = Actor1->onContactBegin(Actor2);
 		ret2 = Actor2->onContactBegin(Actor1);
+		if (Actor1->isDead())
+			Actor1->afterDead();
+		if (Actor2->isDead())
+			Actor2->afterDead();
 	}
 	return ret1 && ret2;
 }

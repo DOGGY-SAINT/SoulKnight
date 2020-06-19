@@ -20,7 +20,7 @@ Weapon* Weapon::createWithName(std::string weaponName)
 	WEAPON_JUDGE(weaponType, MeleeWeapon);
 	if (weapon && weapon->initWithName(weaponName, thisMap))
 	{
-		weapon->autorelease();
+		weapon->retain();
 		return weapon;
 	}
 	CC_SAFE_DELETE(weapon);
@@ -83,12 +83,12 @@ void  Weapon::weaponOn(MovingActor* myHero)
 //	auto Parent = dynamic_cast<Actor*> (getParent());
 //	setFlag(Parent->getFlag());
 //=======
-//	updateRotation();
-//	myHero->addChild(this);
-//	myHero->setMainWeapon(this);
-//	setFlag(myHero->getFlag());
-//	auto heroSize = myHero->getContentSize();
-//	this->setPosition(Vec2(heroSize.width / 2-10, heroSize.height / 2-10));
+	updateRotation();
+	myHero->addChild(this);
+	myHero->setMainWeapon(this);
+	setFlag(myHero->getFlag());
+	auto heroSize = myHero->getContentSize();
+	this->setPosition(Vec2(heroSize.width / 2-10, heroSize.height / 2-10));
 //>>>>>>> Kite
 }
 
@@ -104,15 +104,15 @@ void  Weapon::weaponOff()
 //	map->addChild(this);
 //	setPosition(pos);
 //=======
-//	this->removeFromParent();
-//	//获取当前英雄和层
-//	MainScene* runningScene = dynamic_cast<MainScene*>(Director::getInstance()->getRunningScene());
-//	MapLayer* runningLayer = dynamic_cast<MapLayer*>(runningScene->getMapLayer());
-//	Hero* myHero = runningScene->getHero();
-//	//将武器从hero移向地图
-//	myHero->setMainWeapon(NULL);
-//	runningLayer->addChild(this, 6);
-//	setPosition(myHero->getPosition());
+	this->removeFromParent();
+	//获取当前英雄和层
+	MainScene* runningScene = dynamic_cast<MainScene*>(Director::getInstance()->getRunningScene());
+	MapLayer* runningLayer = dynamic_cast<MapLayer*>(runningScene->getMapLayer());
+	Hero* myHero = runningScene->getHero();
+	//将武器从hero移向地图
+	myHero->setMainWeapon(NULL);
+	runningLayer->addChild(this, 6);
+	setPosition(myHero->getPosition());
 //>>>>>>> Kite
 	setDirection(Vec2(1, 0));
 	updateRotation();
@@ -120,15 +120,12 @@ void  Weapon::weaponOff()
 	unschedule(schedule_selector(Weapon::attack));
 }
 
-void Weapon::update(float dt) {
-	updateRotation();
-}
 
 void Weapon::attack(float dt) {
-	/*MainScene* runningScene = dynamic_cast<MainScene*>(Director::getInstance()->getRunningScene());
-	MapLayer* runningLayer = dynamic_cast<MapLayer*>(runningScene->getMyMapLayer());
-	Hero* myHero = runningLayer->getMyHero();
-	if(myHero->_power>)
+	MainScene* runningScene = dynamic_cast<MainScene*>(Director::getInstance()->getRunningScene());
+	MapLayer* runningLayer = dynamic_cast<MapLayer*>(runningScene->getMapLayer());
+	Hero* myHero = runningScene->getHero();
+	//if(myHero->_power>)
 
 	auto bullet = Sprite::createWithTexture(getBulletTexture());
 
@@ -150,5 +147,5 @@ void Weapon::attack(float dt) {
 	runningLayer->addChild(bullet, 6);
 	
 	bullet->setPosition(weaponPosition.x + cos * weaponSize.width / 2, weaponPosition.y + sin * weaponSize.height / 2);
-	bullet->getPhysicsBody()->setVelocity(Vec2(100 * cos, 100 * sin));*/
+	bullet->getPhysicsBody()->setVelocity(Vec2(100 * cos, 100 * sin));
 }
