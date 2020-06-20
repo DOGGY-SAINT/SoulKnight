@@ -110,7 +110,7 @@ void SingleShotgun::attack(float dt) {
 	float x = hx + wx - pending * sin * height + cos * width;
 	float y = hy + wy + pending * cos * height + sin * width;
 	bullet->setPosition(Vec2(x, y));
-	bullet->getPhysicsBody()->setVelocity(Vec2(200 * cos, 200 * sin));
+	bullet->getPhysicsBody()->setVelocity(Vec2(300 * cos, 300 * sin));
 	auto audio = CocosDenshion::SimpleAudioEngine::getInstance();
 	if (audio->isBackgroundMusicPlaying() == 1)
 	    CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect("music/SingleShotgun.mp3");

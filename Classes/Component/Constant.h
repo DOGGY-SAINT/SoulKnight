@@ -23,16 +23,16 @@ mapName[dataName].as##typeName##()
 #define FLAG_NOHURT   3
 
 //需要双引号
-#define PATH_DATA             std::string("data/")
-#define PATH_PICTURE_WEAPON   std::string("picture/weapon/")
-#define PATH_PICTURE_BULLET   std::string("picture/bullet/")
-#define PATH_PICTURE_HERO     std::string("picture/hero/")
-#define PATH_MAP              std::string("map/")
-#define PATH_PICTURE_PROP     std::string("picture/Prop/")
-
-#define SAFE_MAP_NAME         std::string("SafeMap")
-#define DEFAULT_HERO_NAME     std::string("Knight")
-#define DEFAULT_WEAPON_NAME   std::string("Lightsaber")
+#define PATH_DATA               std::string("data/")
+#define PATH_PICTURE_WEAPON     std::string("picture/weapon/")
+#define PATH_PICTURE_BULLET     std::string("picture/bullet/")
+#define PATH_PICTURE_HERO       std::string("picture/hero/")
+#define PATH_PICTURE_INTERFACE  std::string("picture/interface/")
+#define PATH_MAP                std::string("map/")
+#define PATH_PICTURE_PROP       std::string("picture/Prop/")
+#define SAFE_MAP_NAME           std::string("SafeMap")
+#define DEFAULT_HERO_NAME       std::string("Knight")
+#define DEFAULT_WEAPON_NAME     std::string("Lightsaber")
 
 
 //catagory&contact!=0 事件发送

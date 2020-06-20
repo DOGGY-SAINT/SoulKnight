@@ -64,7 +64,8 @@ void MainScene::initInfoLayer()
 	if (closeItem == nullptr ||
 		closeItem->getContentSize().width <= 0 ||
 		closeItem->getContentSize().height <= 0)
-	{}
+	{
+	}
 	else
 	{
 		closeItem->setAnchorPoint(ccp(1.0f, 1.0f));
@@ -83,9 +84,9 @@ void MainScene::initHero()
 {
 	_hero = Hero::createWithName(DEFAULT_HERO_NAME);
 	_mapLayer->addHero(_hero);
-	_HPBar = _hero->getHP()->createBar("picture/interface/blood.png");
-	_ACBar = _hero->getAC()->createBar("picture/interface/armor.png");
-	_powerBar = _hero->getPower()->createBar("picture/interface/engery.png");
+	_HPBar = _hero->getHP()->createBar(PATH_PICTURE_INTERFACE + "blood.png");
+	_ACBar = _hero->getAC()->createBar(PATH_PICTURE_INTERFACE + "armor.png");
+	_powerBar = _hero->getPower()->createBar(PATH_PICTURE_INTERFACE + "engery.png");
 }
 
 void MainScene::initPhysicsWorld()
@@ -161,7 +162,7 @@ void MainScene::onMouseMove(EventMouse *event)
 	auto pos = CCDirector::sharedDirector()->convertToUI(event->getLocation());
 	auto wpos = _hero->getMainWeapon()->getPosition();
 	auto dir = pos - wpos - centre;
-	
+
 	_hero->getMainWeapon()->setDirection(dir);
 }
 
@@ -312,10 +313,10 @@ void MainScene::updateStateBar(float dt)
 	auto HP = _hero->getHP();
 	auto AC = _hero->getAC();
 	auto power = _hero->getPower();
-	auto HPLabel= static_cast<LabelTTF*>(_HPBar->getChildByName("label"));
+	auto HPLabel = static_cast<LabelTTF*>(_HPBar->getChildByName("label"));
 	auto ACLabel = static_cast<LabelTTF*>(_ACBar->getChildByName("label"));
 	auto powerLabel = static_cast<LabelTTF*>(_powerBar->getChildByName("label"));
-	HPLabel->setString(std::to_string(HP->getState())+'\\'+std::to_string(HP->getStateMax()));
+	HPLabel->setString(std::to_string(HP->getState()) + '\\' + std::to_string(HP->getStateMax()));
 	ACLabel->setString(std::to_string(AC->getState()) + '\\' + std::to_string(AC->getStateMax()));
 	powerLabel->setString(std::to_string(power->getState()) + '\\' + std::to_string(power->getStateMax()));
 	_HPBar->setPercentage(HP->getPercentage());
@@ -337,9 +338,9 @@ void MainScene::initEnergyStrand()
 	auto origin = Director::getInstance()->getVisibleOrigin();
 	//屏幕中心
 	auto centre = Vec2(visibleSize.width / 2, visibleSize.height / 2);
-	auto tripleBackground = Sprite::create("picture/interface/tripleBoard.png");
-	float x1 = visibleSize.width-805+27;
-	float y1 = visibleSize.height-125-18;
+	auto tripleBackground = Sprite::create(PATH_PICTURE_INTERFACE + "tripleBoard.png");
+	float x1 = visibleSize.width - 805 + 27;
+	float y1 = visibleSize.height - 125 - 18;
 	float x2 = visibleSize.width - 790;
 	float y2 = visibleSize.height - 125;
 	_powerBar->setPosition(Vec2(x1, y1));
@@ -356,7 +357,7 @@ void MainScene::initBloodStrand()
 	auto centre = Vec2(visibleSize.width / 2, visibleSize.height / 2);
 
 
-	float x = visibleSize.width - 805+27;
+	float x = visibleSize.width - 805 + 27;
 	float y = visibleSize.height - 125 + 22;
 	_HPBar->setPosition(Vec2(x, y));
 	this->addChild(_HPBar, 2);
@@ -369,8 +370,8 @@ void MainScene::initArmorStrand()
 	//屏幕中心
 	auto centre = Vec2(visibleSize.width / 2, visibleSize.height / 2);
 
-	float x = visibleSize.width - 805+27;
-	float y = visibleSize.height - 125+2;
+	float x = visibleSize.width - 805 + 27;
+	float y = visibleSize.height - 125 + 2;
 	_ACBar->setPosition(Vec2(x, y));
 	this->addChild(_ACBar, 2);
 }

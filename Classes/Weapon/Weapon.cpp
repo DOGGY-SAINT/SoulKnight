@@ -131,7 +131,7 @@ void Weapon::attack(float dt) {
 	runningLayer->addChild(bullet, 6);
 	
 	bullet->setPosition(weaponPosition.x + cos * weaponSize.width / 2, weaponPosition.y + sin * weaponSize.height / 2);
-	bullet->getPhysicsBody()->setVelocity(Vec2(100 * cos, 100 * sin));
+	bullet->getPhysicsBody()->setVelocity(Vec2(300 * cos, 300 * sin));
 }
 
 void Weapon::bitMaskOn()

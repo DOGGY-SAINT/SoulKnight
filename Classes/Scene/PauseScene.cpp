@@ -2,6 +2,7 @@
 #include "SimpleAudioEngine.h"
 #include "MainScene.h"
 #include "HelloWorldScene.h"
+#include"Component/Constant.h"
 
 USING_NS_CC;
 
@@ -30,8 +31,8 @@ bool PauseScene::init()
 	auto visibleSize = Director::getInstance()->getVisibleSize();
 	Vec2 origin = Director::getInstance()->getVisibleOrigin();
 	///////////////
-	auto musicOnSpr = Sprite::create("picture/interface/musicOn.png");
-	auto musicOffSpr = Sprite::create("picture/interface/musicOff.png");
+	auto musicOnSpr = Sprite::create(PATH_PICTURE_INTERFACE + "musicOn.png");
+	auto musicOffSpr = Sprite::create(PATH_PICTURE_INTERFACE + "musicOff.png");
 	auto musicOn = MenuItemSprite::create(musicOnSpr, musicOnSpr);
 	auto musicOff = MenuItemSprite::create(musicOffSpr, musicOffSpr);
 	auto musicButton = MenuItemToggle::createWithCallback([](Object* sender) {
@@ -51,8 +52,8 @@ bool PauseScene::init()
 	this->addChild(menu2, 1);
 	/////////////////////////
 	auto goBackHome = MenuItemImage::create(
-		"picture/interface/homebutton1.png",
-		"picture/interface/homebutton2.png",
+		PATH_PICTURE_INTERFACE + "homebutton1.png",
+		PATH_PICTURE_INTERFACE + "homebutton2.png",
 		CC_CALLBACK_0(MainScene::gameRestart, MainScene::SharedScene())
 	);
 	goBackHome->setPosition(Vec2((visibleSize.width / 2) - 365, 15));
@@ -60,8 +61,8 @@ bool PauseScene::init()
 	this->addChild(menu3, 1);
 	////////////////
 	auto closeItem = MenuItemImage::create(
-		"picture/interface/startbutton2.png",
-		"picture/interface/button2.1.jpg",
+		PATH_PICTURE_INTERFACE + "startbutton2.png",
+		PATH_PICTURE_INTERFACE + "button2.1.jpg",
 		CC_CALLBACK_1(PauseScene::menuCloseCallback, this));
 
 	if (closeItem == nullptr ||

@@ -119,11 +119,11 @@ void Shotgun::attack(float dt) {
 	float y = hy + wy + pending * cos * 5 / 2 + sin * 70 / 2;
 
 	bullet1->setPosition(x, y);
-	bullet1->getPhysicsBody()->setVelocity(Vec2(200 * cos, 200 * sin));
+	bullet1->getPhysicsBody()->setVelocity(Vec2(300 * cos, 300 * sin));
 	bullet2->setPosition(x, y);
-	bullet2->getPhysicsBody()->setVelocity(Vec2(200 * cosadd20, 200 * sinadd20));
+	bullet2->getPhysicsBody()->setVelocity(Vec2(300 * cosadd20, 300 * sinadd20));
 	bullet3->setPosition(x, y);
-	bullet3->getPhysicsBody()->setVelocity(Vec2(200 * cosmin20, 200 * sinmin20));
+	bullet3->getPhysicsBody()->setVelocity(Vec2(300 * cosmin20, 300 * sinmin20));
 	auto audio = CocosDenshion::SimpleAudioEngine::getInstance();
 	if (audio->isBackgroundMusicPlaying() == 1)
 		CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect("music/Shotgun.mp3");

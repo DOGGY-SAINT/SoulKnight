@@ -1,6 +1,7 @@
 #include "HelloWorldScene.h"
 #include "SimpleAudioEngine.h"
 #include "MainScene.h"
+#include "Component/Constant.h"
 #define SAFE_MAP_NAME         std::string("SafeMap")
 
 USING_NS_CC;
@@ -20,8 +21,6 @@ static void problemLoading(const char* filename)
 // on "init" you need to initialize your instance
 bool HelloWorld::init()
 {
-	//////////////////////////////
-	// 1. super init first
 	if (!Scene::init())
 	{
 		return false;
@@ -30,21 +29,16 @@ bool HelloWorld::init()
 	auto visibleSize = Director::getInstance()->getVisibleSize();
 	Vec2 origin = Director::getInstance()->getVisibleOrigin();
 
-	/////////////////////////////
-	// 2. add a menu item with "X" image, which is clicked to quit the program
-	//    you may modify it.
-
-	// add a "close" icon to exit the progress. it's an autorelease object
 	auto closeItem = MenuItemImage::create(
-		"startbutton2.png",
-		"button2.1.jpg",
+		PATH_PICTURE_INTERFACE+"startbutton2.png",
+		PATH_PICTURE_INTERFACE + "button2.1.png",
 		CC_CALLBACK_1(HelloWorld::menuCloseCallback, this));
 
 	if (closeItem == nullptr ||
 		closeItem->getContentSize().width <= 0 ||
 		closeItem->getContentSize().height <= 0)
 	{
-		problemLoading("'startbutton2.png' and 'button2.1.jpg'");
+		problemLoading("'startbutton2.png' and 'button2.1.png'");
 	}
 	else
 	{
@@ -58,29 +52,11 @@ bool HelloWorld::init()
 	menu->setPosition(Vec2::ZERO);
 	this->addChild(menu, 2);
 
-	/////////////////////////////
-	// 3. add your codes below...
-
-	// add a label shows "Hello World"
-	// create and initialize a label
-
-	auto label = Label::createWithTTF("Soul Knight", "fonts/Marker Felt.ttf", 56);
-	if (label == nullptr)
-	{
-		problemLoading("'fonts/Marker Felt.ttf'");
-	}
-	else
-	{
-		label->setPosition(Vec2(origin.x + visibleSize.width / 2,
-			origin.y - 135 + visibleSize.height - label->getContentSize().height));
-		this->addChild(label, 1);
-	}
-
 	// add "HelloWorld" splash screen"
-	auto sprite0 = Sprite::create("startscene.jpg");
+	auto sprite0 = Sprite::create(PATH_PICTURE_INTERFACE + "startscene.png");
 	if (sprite0 == nullptr)
 	{
-		problemLoading("'startscene.jpg'");
+		problemLoading("startscene.png");
 	}
 	else
 	{
@@ -96,5 +72,4 @@ bool HelloWorld::init()
 void HelloWorld::menuCloseCallback(Ref* pSender)
 {
 	Director::getInstance()->replaceScene(CCTransitionFade::create(1.7f, MainScene::create("SafeMap")));
-
 }
