@@ -67,7 +67,7 @@ void Box::randWeapon(ValueMap valueMap)
 	for (auto map : valueMap)
 	{
 		auto n = rand();
-		if (n)
+		if (n % 2)
 		{
 			//ÒÑ¾­addchild
 			_prop = Weapon::createWithName(map.first);

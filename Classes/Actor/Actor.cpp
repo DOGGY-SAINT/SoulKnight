@@ -4,7 +4,6 @@
 #include"Scene/MainScene.h"
 
 
-
 Actor* Actor::createWithSprite(Sprite* sp, ValueMap valueMap)
 {
 	Actor* actor = new(std::nothrow)Actor;
@@ -98,6 +97,7 @@ bool Actor::isDead()
 	return _HP.isEmpty();
 }
 
+
 void Actor::setCanBeHurt(bool num)
 {
 	_HP.setImmutable(!num);
@@ -127,4 +127,4 @@ inline bool Actor::isAnotherFlag(Actor* a2)
 
 
 //ÃÜ¶È µ¯ÐÔ Ä¦²ÁÁ¦
-const PhysicsMaterial Actor::defaultMaterial = PhysicsMaterial(100.0f, 0.0f, 0.0f);
+const PhysicsMaterial Actor::defaultMaterial = PhysicsMaterial(0.0f, 0.0f, 0.0f);

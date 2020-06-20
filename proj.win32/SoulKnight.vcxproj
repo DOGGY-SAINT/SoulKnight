@@ -158,6 +158,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)\Resources\" /D /E /I /F /Y
     <ClCompile Include="..\Classes\Actor\MovingActor.cpp" />
     <ClCompile Include="..\Classes\Actor\RecoverProp.cpp" />
     <ClCompile Include="..\Classes\AppDelegate.cpp" />
+    <ClCompile Include="..\Classes\Component\State.cpp" />
     <ClCompile Include="..\Classes\Scene\MainScene.cpp" />
     <ClCompile Include="..\Classes\Scene\MapLayer.cpp" />
     <ClCompile Include="..\Classes\Scene\PauseScene.cpp" />

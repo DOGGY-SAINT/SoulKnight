@@ -72,7 +72,6 @@ bool Hero::initWithObject(ValueMap valueMap)
 
 void Hero::initData(ValueMap valueMap)
 {
-	SET_DATA(valueMap, CanBeHurt, Bool);
 	SET_DATA(valueMap, Damage, Int);
 	SET_DATA(valueMap, LocalZOrder, Int);
 	SET_DATA(valueMap, Flag, Int);
@@ -115,8 +114,7 @@ bool Hero::onContactBegin(Actor *a2)
 
 bool Hero::onContactSeparate(Actor *)
 {
-	if (!_on)
-		MainScene::SharedScene()->onTPressed = nullptr;
+	if (!_on)	MainScene::SharedScene()->onTPressed = nullptr;
 	return false;
 }
 
@@ -173,6 +171,12 @@ void Hero::heroOff()
 	body->setCollisionBitmask(PROP_COLLISION);
 	body->setContactTestBitmask(PROP_CONTACT);
 }
+
+void Hero::afterDead()
+{
+	MainScene::SharedScene()->gameRestart();
+}
+
 
 void Hero::initState(ValueMap valueMap)
 {

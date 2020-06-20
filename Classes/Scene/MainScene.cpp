@@ -5,6 +5,7 @@
 #include"Weapon/Weapon.h"
 #include"PauseScene.h"
 #include"Scene/HelloWorldScene.h"
+#include"Component/State.h"
 
 USING_NS_CC;
 
@@ -33,6 +34,9 @@ bool MainScene::init(std::string mapName)
 	initListener();
 	initScheduler();
 	initInfoLayer();
+	initEnergyStrand();
+	initBloodStrand();
+	initArmorStrand();
 	return true;
 }
 
@@ -51,8 +55,8 @@ void MainScene::initInfoLayer()
 	//屏幕中心
 	auto centre = Vec2(visibleSize.width / 2, visibleSize.height / 2);
 	auto closeItem = MenuItemImage::create(
-		"pausebutton.png",
-		"pausebutton2.png",
+		"picture/interface/pausebutton.png",
+		"picture/interface/pausebutton2.png",
 		CC_CALLBACK_1(MainScene::menuCloseCallback, this));
 
 	if (closeItem == nullptr ||
@@ -77,6 +81,9 @@ void MainScene::initHero()
 {
 	_hero = Hero::createWithName(DEFAULT_HERO_NAME);
 	_mapLayer->addHero(_hero);
+	_HPBar = _hero->getHP()->createBar("picture/interface/blood.png");
+	_ACBar = _hero->getAC()->createBar("picture/interface/armor.png");
+	_powerBar = _hero->getPower()->createBar("picture/interface/engery.png");
 }
 
 void MainScene::initPhysicsWorld()
@@ -122,7 +129,7 @@ void MainScene::initMouseListener()
 void MainScene::initScheduler()
 {
 	schedule(schedule_selector(MainScene::updateMapPosition));
-
+	schedule(schedule_selector(MainScene::updateStateBar));
 }
 
 //保持英雄在正中央
@@ -136,7 +143,6 @@ void MainScene::updateMapPosition(float dt)
 
 void MainScene::onMouseDown(EventMouse *event)
 {
-	/*gameBegin();*/
 	if (event->getMouseButton() == EventMouse::MouseButton::BUTTON_LEFT)
 		_hero->setAttackOn();
 }
@@ -254,15 +260,11 @@ MainScene* MainScene::SharedScene()
 
 void MainScene::gameRestart()
 {
-
 	_mapLayer->unscheduleAllCallbacks();
 	releaseAllActor();
 	auto scene = HelloWorld::createScene();
-	this->release();
 	Director::getInstance()->replaceScene(CCTransitionFade::create(0.3f, HelloWorld::createScene()));
 }
-
-
 
 void MainScene::changeMap(std::string mapName)
 {
@@ -297,4 +299,59 @@ void MainScene::releaseAllActor()
 	_mapLayer->addActorToVec(_hero);
 	_mapLayer->addActorToVec(_hero->getMainWeapon());
 	_mapLayer->releaseAllActor();
+}
+
+void MainScene::updateStateBar(float dt)
+{
+	auto HP = _hero->getHP();
+	auto AC = _hero->getAC();
+	auto power = _hero->getPower();
+	_HPBar->setPercentage(HP->getPercentage());
+	_ACBar->setPercentage(AC->getPercentage());
+	_powerBar->setPercentage(power->getPercentage());
+}
+
+
+void MainScene::initEnergyStrand()
+{
+	auto visibleSize = Director::getInstance()->getVisibleSize();
+	auto origin = Director::getInstance()->getVisibleOrigin();
+	//屏幕中心
+	auto centre = Vec2(visibleSize.width / 2, visibleSize.height / 2);
+	auto tripleBackground = Sprite::create("picture/interface/tripleBoard.png");
+	float x1 = visibleSize.width-805+27;
+	float y1 = visibleSize.height-125-18;
+	float x2 = visibleSize.width - 790;
+	float y2 = visibleSize.height - 125;
+	_powerBar->setPosition(Vec2(x1, y1));
+	tripleBackground->setPosition(Vec2(x2, y2));
+	this->addChild(tripleBackground, 1);
+	this->addChild(_powerBar, 2);
+}
+
+void MainScene::initBloodStrand()
+{
+	auto visibleSize = Director::getInstance()->getVisibleSize();
+	auto origin = Director::getInstance()->getVisibleOrigin();
+	//屏幕中心
+	auto centre = Vec2(visibleSize.width / 2, visibleSize.height / 2);
+
+
+	float x = visibleSize.width - 805+27;
+	float y = visibleSize.height - 125 + 22;
+	_HPBar->setPosition(Vec2(x, y));
+	this->addChild(_HPBar, 2);
+}
+
+void MainScene::initArmorStrand()
+{
+	auto visibleSize = Director::getInstance()->getVisibleSize();
+	auto origin = Director::getInstance()->getVisibleOrigin();
+	//屏幕中心
+	auto centre = Vec2(visibleSize.width / 2, visibleSize.height / 2);
+
+	float x = visibleSize.width - 805+27;
+	float y = visibleSize.height - 125+2;
+	_ACBar->setPosition(Vec2(x, y));
+	this->addChild(_ACBar, 2);
 }

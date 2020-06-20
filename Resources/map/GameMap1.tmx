@@ -90,7 +90,7 @@
    <property name="CategoryBitmask" type="int" value="8"/>
    <property name="Collision" type="bool" value="true"/>
    <property name="CollisionBitmask" type="int" value="35"/>
-   <property name="ContactTestBitmask" type="int" value="35"/>
+   <property name="ContactTestBitmask" type="int" value="163"/>
    <property name="Damage" type="int" value="0"/>
    <property name="Dynamic" type="bool" value="false"/>
    <property name="Flag" type="int" value="2"/>
@@ -128,7 +128,7 @@
    <property name="CategoryBitmask" type="int" value="8"/>
    <property name="Collision" type="bool" value="true"/>
    <property name="CollisionBitmask" type="int" value="35"/>
-   <property name="ContactTestBitmask" type="int" value="35"/>
+   <property name="ContactTestBitmask" type="int" value="163"/>
    <property name="Damage" type="int" value="0"/>
    <property name="Dynamic" type="bool" value="false"/>
    <property name="Flag" type="int" value="1"/>

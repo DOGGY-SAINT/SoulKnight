@@ -1,5 +1,3 @@
-
-
 #include "AppDelegate.h"
 #include "Scene/MainScene.h"
 #include"Component/Constant.h"
@@ -102,7 +100,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
 	auto scene = HelloWorld::createScene();
 
 	director->runWithScene(scene);
-	CocosDenshion::SimpleAudioEngine::sharedEngine()->playBackgroundMusic("pigman.mp3");
+	CocosDenshion::SimpleAudioEngine::sharedEngine()->playBackgroundMusic("music/pigman.mp3");
 	return true;
 }
 

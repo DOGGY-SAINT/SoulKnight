@@ -13,7 +13,7 @@ class Weapon :
 {
 
 	CC_SYNTHESIZE(float, _gapTime, GapTime);
-	CC_SYNTHESIZE(ValueMap, _bulletDate, BulletData);
+	CC_SYNTHESIZE(ValueMap, _bulletData, BulletData);
 	CC_SYNTHESIZE(Texture2D*, _bulletTexture, BulletTexture);
 	CC_SYNTHESIZE(bool, _on, IsOn);
 protected:
@@ -49,6 +49,10 @@ public:
 
 	//单次攻击
 	virtual void attack(float dt);
+
+	void bitMaskOn();
+
+	void updateNohurt(float dt);
 };
 
 //设定了delay

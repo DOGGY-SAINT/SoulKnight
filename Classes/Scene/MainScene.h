@@ -14,7 +14,15 @@ class MainScene :public Scene
 	CC_SYNTHESIZE(MapLayer*, _mapLayer, MapLayer);
 	CC_SYNTHESIZE(PauseScene*, _pauseLayer, PauseScene);
 	CC_SYNTHESIZE(Hero*, _hero, Hero);
+	CC_SYNTHESIZE(ProgressTimer*, _HPBar, HPBar);
+	CC_SYNTHESIZE(ProgressTimer*, _ACBar, ACBar);
+	CC_SYNTHESIZE(ProgressTimer*, _powerBar, PowerBar);
 private:
+	void initEnergyStrand();
+
+	void initBloodStrand();
+
+	void initArmorStrand();
 
 	void initMap(std::string mapName);
 
@@ -76,6 +84,7 @@ public:
 
 	void releaseAllActor();
 
+	void updateStateBar(float dt);
 
 };
 
