@@ -7,6 +7,7 @@
 #include "Component\Constant.h"
 #include"Scene/MainScene.h"
 #include"Scene/MapLayer.h"
+#include"Actor/Monster.h"
 
 Weapon* Weapon::createWithName(std::string weaponName)
 {
@@ -44,7 +45,6 @@ bool Weapon::initWithName(std::string weaponName,ValueMap valueMap)
 
 void Weapon::initWithValueMap(ValueMap valueMap)
 {
-	SET_DATA(valueMap, PowerCost, Int);
 	SET_DATA(valueMap, Name, String);
 	SET_DATA(valueMap, GapTime, Float);
 	initBulletData(valueMap);
@@ -69,8 +69,8 @@ void  Weapon::weaponOn(MovingActor* myHero)
 	_on = true;
 	auto map = MainScene::SharedScene()->getMapLayer();
 	map->removeActorFromVec(this);
-	
-	setPosition(myHero->getContentSize().width / 2 - 10, myHero->getContentSize().height / 2 - 10);
+	setAnchorPoint(Vec2(0.5f, 0.5f));
+	setPosition(myHero->getContentSize() / 2);
 	//换掩码
 	bitMaskOn();
 	
@@ -79,6 +79,7 @@ void  Weapon::weaponOn(MovingActor* myHero)
 //换下武器，还要考虑设置位置的事情
 void  Weapon::weaponOff()
 {
+	bitMaskOff();
 	_on = false;
 	auto map = MainScene::SharedScene()->getMapLayer();
 	map->addActorToVec(this);
@@ -94,8 +95,11 @@ void  Weapon::weaponOff()
 
 
 void Weapon::attack(float dt) {
-	/*
+	if (!Director::getInstance()->getRunningScene())
+		return;
 	MainScene* runningScene = dynamic_cast<MainScene*>(Director::getInstance()->getRunningScene());
+	if (!runningScene)
+		return;
 	MapLayer* runningLayer = dynamic_cast<MapLayer*>(runningScene->getMapLayer());
 	Hero* myHero = runningScene->getHero();
 
@@ -119,7 +123,7 @@ void Weapon::attack(float dt) {
 	runningLayer->addChild(bullet, 6);
 	
 	bullet->setPosition(weaponPosition.x + cos * weaponSize.width / 2, weaponPosition.y + sin * weaponSize.height / 2);
-	bullet->getPhysicsBody()->setVelocity(Vec2(100 * cos, 100 * sin));*/
+	bullet->getPhysicsBody()->setVelocity(Vec2(100 * cos, 100 * sin));
 }
 
 void Weapon::bitMaskOn()
@@ -138,9 +142,26 @@ void Weapon::bitMaskOn()
 	}
 }
 
+void Weapon::bitMaskOff()
+{
+	auto body = getPhysicsBody();
+	if (body)
+	{
+		body->setCategoryBitmask(PROP_CATAGORY);
+		body->setCollisionBitmask(PROP_COLLISION);
+		body->setContactTestBitmask(PROP_CONTACT);
+	}
+}
+
 void Weapon::updateNohurt(float dt)
 {
 	setFlag(FLAG_NOHURT);
+	auto Parent = static_cast<Actor*> (getParent());
+	if (Parent->getName() == "Monster")
+	{
+		Parent = static_cast<Monster*> (Parent);
+		Parent->schedule(schedule_selector(Monster::updateWeaponDirection));
+	}
 }
 
 bool Weapon::onContactBegin(Actor *a2)

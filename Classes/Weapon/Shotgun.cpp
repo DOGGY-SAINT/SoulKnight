@@ -35,7 +35,6 @@ bool Shotgun::initWithName(std::string weaponName)
 
 void Shotgun::initWithValueMap(ValueMap valueMap)
 {
-	SET_DATA(valueMap, PowerCost, Int);
 	SET_DATA(valueMap, Name, String);
 	SET_DATA(valueMap, GapTime, Float);
 	initBulletData(valueMap);
@@ -55,15 +54,8 @@ void Shotgun::update(float dt) {
 
 
 void Shotgun::attack(float dt) {
-	if (dynamic_cast<Hero*>(getParent())) {
-		auto Parent = dynamic_cast<Hero*> (getParent());
-		//ÅÐ¶ÏÄÜÁ¿
-		State* power = Parent->getPower();
-		if (power->getState() < _powerCost)
-			return;
-		power->setStateTo(power->getState() - _powerCost);
-	}
-
+	if (!Director::getInstance()->getRunningScene())
+		return;
 	auto file = FileUtils::getInstance();
 	auto weaponMap = file->getValueMapFromFile(PATH_DATA + "WeaponData.plist");
 	auto thisMap = weaponMap[getName()].asValueMap();
@@ -98,6 +90,8 @@ void Shotgun::attack(float dt) {
 	bullet3->runAction(rt3);
 
 	MainScene* runningScene = dynamic_cast<MainScene*>(Director::getInstance()->getRunningScene());
+	if (!runningScene)
+		return;
 	MapLayer* runningLayer = dynamic_cast<MapLayer*>(runningScene->getMapLayer());
 	auto myHero = runningScene->getHero();
 
@@ -119,7 +113,5 @@ void Shotgun::attack(float dt) {
 	bullet2->getPhysicsBody()->setVelocity(Vec2(200 * cosadd20, 200 * sinadd20));
 	bullet3->setPosition(x, y);
 	bullet3->getPhysicsBody()->setVelocity(Vec2(200 * cosmin20, 200 * sinmin20));
-	auto audio = CocosDenshion::SimpleAudioEngine::getInstance();
-	if (audio->isBackgroundMusicPlaying() == 1)
-	    CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect("Shotgun.mp3");
+	CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect("music/Shotgun.mp3");
 }
