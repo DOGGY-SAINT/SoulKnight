@@ -62,13 +62,14 @@ void SingleShotgun::update(float dt) {
 
 
 void SingleShotgun::attack(float dt) {
-	//获取hero信息
-	auto Parent = static_cast<Hero*> (getParent());
-	//判断能量
-	State* power = Parent->getPower();
-	if (power->getState() < _powerCost)
-		return;
-	power->setStateTo(power->getState() - _powerCost);
+	if (dynamic_cast<Hero*>(getParent())) {
+		auto Parent = dynamic_cast<Hero*> (getParent());
+		//判断能量
+		State* power = Parent->getPower();
+		if (power->getState() < _powerCost)
+			return;
+		power->setStateTo(power->getState() - _powerCost);
+	}
 
 	auto file = FileUtils::getInstance();
 	auto weaponMap = file->getValueMapFromFile(PATH_DATA + "WeaponData.plist");

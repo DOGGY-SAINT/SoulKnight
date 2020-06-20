@@ -68,17 +68,35 @@ void MeleeWeapon::update(float dt) {
 	updateRotation();
 }
 
+void  Weapon::weaponOn(MovingActor* myHero)
+{
+	removeFromParent();
+	myHero->addChild(this);
+	auto Parent = dynamic_cast<Actor*> (getParent());
+	updateNohurt(0);
+	myHero->setMainWeapon(this);
+	_on = true;
+	auto map = MainScene::SharedScene()->getMapLayer();
+	map->removeActorFromVec(this);
+
+	setPosition(myHero->getContentSize().width / 2 - 10, myHero->getContentSize().height / 2 - 10);
+	//换掩码
+	bitMaskOn();
+
+}
+
+
 
 void MeleeWeapon::attack(float dt) {
 	//获取hero信息
-	auto Parent = static_cast<Hero*> (getParent());
-	//判断能量
-	State* power = Parent->getPower();
-	if (power->getState() < _powerCost)
-		return;
-	power->setStateTo(power->getState() - _powerCost);
-	auto t = getGapTime();
-	setFlag(Parent->getFlag());
+	if (dynamic_cast<Hero*>(getParent())) {
+		auto Parent = dynamic_cast<Hero*> (getParent());
+			//判断能量
+		State* power = Parent->getPower();
+		if (power->getState() < _powerCost)
+			return;
+		power->setStateTo(power->getState() - _powerCost);
+	}
 
 	MainScene* runningScene = dynamic_cast<MainScene*>(Director::getInstance()->getRunningScene());
 	Hero* myHero = runningScene->getHero();
