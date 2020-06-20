@@ -64,8 +64,8 @@ void  Weapon::weaponOn(MovingActor* myHero)
 	_on = true;
 	auto map = MainScene::SharedScene()->getMapLayer();
 	map->removeActorFromVec(this);
-	setAnchorPoint(Vec2(0.5f, 0.5f));
-	setPosition(myHero->getContentSize() / 2);
+	
+	setPosition(myHero->getContentSize().width / 2 - 10, myHero->getContentSize().height / 2 - 10);
 	//»»ÑÚÂë
 	auto body = getPhysicsBody();
 	body->setCategoryBitmask(WEAPON_CATAGORY);

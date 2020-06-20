@@ -109,5 +109,7 @@ void Shotgun::attack(float dt) {
 	bullet2->getPhysicsBody()->setVelocity(Vec2(200 * cosadd20, 200 * sinadd20));
 	bullet3->setPosition(x, y);
 	bullet3->getPhysicsBody()->setVelocity(Vec2(200 * cosmin20, 200 * sinmin20));
-	CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect("Shotgun.mp3");
+	auto audio = CocosDenshion::SimpleAudioEngine::getInstance();
+	if (audio->isBackgroundMusicPlaying() == 1)
+	    CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect("Shotgun.mp3");
 }

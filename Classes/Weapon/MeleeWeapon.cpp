@@ -42,6 +42,7 @@ bool MeleeWeapon::initWithName(std::string weaponName)
 
 void MeleeWeapon::initWithValueMap(ValueMap valueMap)
 {
+	setAnchorPoint(Vec2(0.1, 0.5));
 	_on = false;
 	this->retain();
 	auto map = MainScene::SharedScene()->getMapLayer();
@@ -54,7 +55,7 @@ void MeleeWeapon::initWithValueMap(ValueMap valueMap)
 	SET_DATA(valueMap, Name, String);
 	SET_DATA(valueMap, GapTime, Float);
 	setScale(VALUE_AT(valueMap, "Scale", Float));
-	setAnchorPoint(Vec2(0.1, 0.5));
+	
 	initBulletData(valueMap);
 }
 
@@ -74,15 +75,13 @@ void MeleeWeapon::update(float dt) {
 void MeleeWeapon::attack(float dt) {
 	MainScene* runningScene = dynamic_cast<MainScene*>(Director::getInstance()->getRunningScene());
 	Hero* myHero = runningScene->getHero();
-	setFlag(myHero->getFlag());
 	Vec2 angle60(1, 1.732);
 	CCRotateBy* rt0 = CCRotateBy::create(0, -CC_RADIANS_TO_DEGREES(angle60.getAngle()));
 	CCRotateBy* rt1 = CCRotateBy::create(_gapTime*0.6, CC_RADIANS_TO_DEGREES(2 * angle60.getAngle()));
 	CCRotateBy* rt2 = CCRotateBy::create(_gapTime*0.3, -CC_RADIANS_TO_DEGREES(2 * angle60.getAngle()));
-	CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect("MeleeWeapon.mp3");
-	runAction(CCSequence::create(rt0,rt1,NULL));
-	CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect("MeleeWeapon.mp3");
-	runAction(rt2);
+	runAction(CCSequence::create(rt0, rt1, rt2, NULL));
+	auto audio = CocosDenshion::SimpleAudioEngine::getInstance();
+	if (audio->isBackgroundMusicPlaying() == 1)
+	    CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect("MeleeWeapon.mp3");
 	updateRotation();
-	setFlag(FLAG_NOHURT);
 }
