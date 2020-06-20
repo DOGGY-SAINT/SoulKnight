@@ -157,6 +157,7 @@ void Hero::heroOff()
 {
 	_on = false;
 	auto mainScene = MainScene::SharedScene();
+	_mainWeapon->unschedule(schedule_selector(Weapon::attack));
 	removeScheduler();
 	initController();
 	if (mainScene->getHero() == this)

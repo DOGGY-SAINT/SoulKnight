@@ -92,7 +92,7 @@ void MainScene::initPhysicsWorld()
 {
 	auto world = getPhysicsWorld();
 	world->setGravity(Vec2::ZERO);
-	world->setDebugDrawMask(PhysicsWorld::DEBUGDRAW_ALL);
+	/*world->setDebugDrawMask(PhysicsWorld::DEBUGDRAW_ALL);*/
 }
 
 void MainScene::initListener()
@@ -312,6 +312,12 @@ void MainScene::updateStateBar(float dt)
 	auto HP = _hero->getHP();
 	auto AC = _hero->getAC();
 	auto power = _hero->getPower();
+	auto HPLabel= static_cast<LabelTTF*>(_HPBar->getChildByName("label"));
+	auto ACLabel = static_cast<LabelTTF*>(_ACBar->getChildByName("label"));
+	auto powerLabel = static_cast<LabelTTF*>(_powerBar->getChildByName("label"));
+	HPLabel->setString(std::to_string(HP->getState())+'\\'+std::to_string(HP->getStateMax()));
+	ACLabel->setString(std::to_string(AC->getState()) + '\\' + std::to_string(AC->getStateMax()));
+	powerLabel->setString(std::to_string(power->getState()) + '\\' + std::to_string(power->getStateMax()));
 	_HPBar->setPercentage(HP->getPercentage());
 	_ACBar->setPercentage(AC->getPercentage());
 	_powerBar->setPercentage(power->getPercentage());
