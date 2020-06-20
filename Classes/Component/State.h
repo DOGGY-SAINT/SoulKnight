@@ -58,7 +58,7 @@ public:
 		:_state(VALUE_AT(valueMap, "State", Int))
 		, _stateMax(_state)
 		, _immutable(false)
-		, _recoverGap(VALUE_AT(valueMap, "RecoverGap", Int))
+		, _recoverGap(VALUE_AT(valueMap, "RecoverGap", Float))
 	{}
 
 	bool isEmpty()

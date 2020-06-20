@@ -22,6 +22,8 @@ protected:
 public:
 	bool onContactBegin(Actor* a2)override;
 
+	bool onContactSeparate(Actor* a2)override;
+
 	bool weaponOffContact(Actor*);
 
 	bool weaponOnContact(Actor*);
@@ -63,12 +65,12 @@ inline void Weapon::updateRotation(float dt)
 {
 	if (dynamic_cast<Hero*>(getParent())) {
 		auto myHero = dynamic_cast<Hero*> (getParent());
-		if (_direction.x >= 0)
+		if (_direction.x>=0)
 			setPosition(myHero->getContentSize().width / 2 - 10, myHero->getContentSize().height / 2 - 10);
 		else
 			setPosition(myHero->getContentSize().width / 2 + 10, myHero->getContentSize().height / 2 - 10);
 	}
-	setFlipY(_direction.x < 0);
+	setFlipY(_direction.x <= 0);
 	setRotation(-CC_RADIANS_TO_DEGREES(_direction.getAngle()));
 }
 

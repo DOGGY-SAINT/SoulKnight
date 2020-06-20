@@ -34,10 +34,9 @@ bool Box::initWithObject(ValueMap valueMap)
 
 void Box::randAllProp()
 {
-	srand(time(0));
 	auto n = rand();
 	auto file = FileUtils::getInstance();
-	if (n % 2)
+	if (n % 3==0)
 		randProp(file->getValueMapFromFile(PATH_DATA + "PropData.plist"));
 	else
 		randWeapon(file->getValueMapFromFile(PATH_DATA + "WeaponData.plist"));
@@ -49,7 +48,7 @@ void Box::randProp(ValueMap valueMap)
 	for (auto map : valueMap)
 	{
 		auto n = rand();
-		if (n % 2)
+		if (n % 3==0)
 		{
 			_prop = RecoverProp::createWithName(map.first);
 			MainScene::SharedScene()->getMapLayer()->addChild(_prop, 100);
@@ -67,7 +66,7 @@ void Box::randWeapon(ValueMap valueMap)
 	for (auto map : valueMap)
 	{
 		auto n = rand();
-		if (n % 2)
+		if (n % 3==0)
 		{
 			//ÒÑ¾­addchild
 			_prop = Weapon::createWithName(map.first);

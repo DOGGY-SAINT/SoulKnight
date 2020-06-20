@@ -48,7 +48,7 @@ bool MeleeWeapon::initWithName(std::string weaponName)
 void MeleeWeapon::initWithValueMap(ValueMap valueMap)
 {
 	setAnchorPoint(Vec2(0.2, 0.5));
-
+	setFlag(FLAG_NOHURT);
 	SET_DATA(valueMap, PowerCost, Int);
 	SET_DATA(valueMap, Name, String);
 	SET_DATA(valueMap, GapTime, Float);
@@ -73,7 +73,7 @@ void MeleeWeapon::weaponOn(MovingActor* myHero)
 {
 	removeFromParent();
 	myHero->addChild(this);
-	setFlag(myHero->getFlag());
+	updateNohurt(0);
 	myHero->setMainWeapon(this);
 	_on = true;
 	auto map = MainScene::SharedScene()->getMapLayer();

@@ -19,11 +19,6 @@ public:
 
 	virtual inline void updateRotation();
 
-	//拿上武器,未完成
-	//virtual void weaponOn();
-
-	//换下武器，未完成
-	//virtual void weaponOff();
 
 	virtual void update(float dt);
 
