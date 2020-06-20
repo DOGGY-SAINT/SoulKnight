@@ -1,11 +1,12 @@
 #include "Weapon.h"
+#include"Actor/Actor.h"
 #include"Actor/Hero.h"
 #include "Component\Constant.h"
 #include"Scene/MainScene.h"
 #include"Scene/MapLayer.h"
 #include"MeleeWeapon.h"
 #include"SimpleAudioEngine.h"
-#include"iostream"
+#include"Actor/Monster.h"
 
 MeleeWeapon::MeleeWeapon()
 {
@@ -46,7 +47,7 @@ bool MeleeWeapon::initWithName(std::string weaponName)
 
 void MeleeWeapon::initWithValueMap(ValueMap valueMap)
 {
-	setAnchorPoint(Vec2(0.1, 0.5));
+	setAnchorPoint(Vec2(0.2, 0.5));
 
 	SET_DATA(valueMap, PowerCost, Int);
 	SET_DATA(valueMap, Name, String);
@@ -68,18 +69,19 @@ void MeleeWeapon::update(float dt) {
 	updateRotation();
 }
 
-void  Weapon::weaponOn(MovingActor* myHero)
+void MeleeWeapon::weaponOn(MovingActor* myHero)
 {
 	removeFromParent();
 	myHero->addChild(this);
-	auto Parent = dynamic_cast<Actor*> (getParent());
-	updateNohurt(0);
+	setFlag(myHero->getFlag());
 	myHero->setMainWeapon(this);
 	_on = true;
 	auto map = MainScene::SharedScene()->getMapLayer();
 	map->removeActorFromVec(this);
-
-	setPosition(myHero->getContentSize().width / 2 - 10, myHero->getContentSize().height / 2 - 10);
+	setAnchorPoint(Vec2(0.2f, 0.5f));
+	setPosition(myHero->getContentSize() / 2);
+	if (dynamic_cast<Hero*>(getParent()))
+		schedule(schedule_selector(Weapon::updateRotation));
 	//换掩码
 	bitMaskOn();
 
@@ -91,23 +93,33 @@ void MeleeWeapon::attack(float dt) {
 	//获取hero信息
 	if (dynamic_cast<Hero*>(getParent())) {
 		auto Parent = dynamic_cast<Hero*> (getParent());
-			//判断能量
+		//暂停时间调度器
+		unschedule(schedule_selector(Weapon::updateRotation));
+		//判断能量
 		State* power = Parent->getPower();
 		if (power->getState() < _powerCost)
 			return;
 		power->setStateTo(power->getState() - _powerCost);
 	}
-
-	MainScene* runningScene = dynamic_cast<MainScene*>(Director::getInstance()->getRunningScene());
-	Hero* myHero = runningScene->getHero();
-	setFlag(myHero->getFlag());
+	else if (dynamic_cast<Monster*>(getParent())) {
+		auto monster = dynamic_cast<Monster*>(getParent());
+		monster->unschedule(schedule_selector(Monster::updateWeaponDirection));//怪物取消时间调速器
+	}
+	if (!Director::getInstance()->getRunningScene())
+		return;
+	auto actor = dynamic_cast<Actor*> (getParent());
+	setFlag(actor->getFlag());
 	Vec2 angle60(1, 1.732);
 	CCRotateBy* rt0 = CCRotateBy::create(0, -CC_RADIANS_TO_DEGREES(angle60.getAngle()));
 	CCRotateBy* rt1 = CCRotateBy::create(_gapTime*0.6, CC_RADIANS_TO_DEGREES(2 * angle60.getAngle()));
 	CCRotateBy* rt2 = CCRotateBy::create(_gapTime*0.3, -CC_RADIANS_TO_DEGREES(2 * angle60.getAngle()));
 	runAction(CCSequence::create(rt0,rt1,rt2,NULL));
-	updateRotation();
-	scheduleOnce(schedule_selector(MeleeWeapon::updateNohurt),_gapTime*0.9);
+	setRotation(-CC_RADIANS_TO_DEGREES(_direction.getAngle()));
+	//英雄回复时间调度器
+	if (dynamic_cast<Hero*>(getParent()))
+	    schedule(schedule_selector(Weapon::updateRotation), _gapTime, CC_REPEAT_FOREVER, _gapTime*0.9);
+
+	scheduleOnce(schedule_selector(MeleeWeapon::updateNohurt),_gapTime*0.9);//怪物回复时间调度器
 	//音效
 	auto audio = CocosDenshion::SimpleAudioEngine::getInstance();
 	String s = "music/" + getName() + ".mp3";

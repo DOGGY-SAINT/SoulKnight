@@ -191,6 +191,7 @@ void Hero::initController()
 	_aPressed = false;
 	_sPressed = false;
 	_dPressed = false;
+	_isFlip = false;
 }
 
 
@@ -228,6 +229,7 @@ void Hero::updatePower(float dt)
 
 void Hero::updateV(float dt)
 {
+	setFlipX(_isFlip == true);
 	auto v = _v * Vec2(_dPressed - _aPressed, _wPressed - _sPressed);
 	getPhysicsBody()->setVelocity(v);
 }

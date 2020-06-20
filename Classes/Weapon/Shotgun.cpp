@@ -35,6 +35,7 @@ bool Shotgun::initWithName(std::string weaponName)
 
 void Shotgun::initWithValueMap(ValueMap valueMap)
 {
+	SET_DATA(valueMap, PowerCost, Int);
 	SET_DATA(valueMap, Name, String);
 	SET_DATA(valueMap, GapTime, Float);
 	initBulletData(valueMap);
@@ -54,6 +55,16 @@ void Shotgun::update(float dt) {
 
 
 void Shotgun::attack(float dt) {
+	//获取hero信息
+	if (dynamic_cast<Hero*>(getParent())) {
+		auto Parent = dynamic_cast<Hero*> (getParent());
+		//判断能量
+		State* power = Parent->getPower();
+		if (power->getState() < _powerCost)
+			return;
+		power->setStateTo(power->getState() - _powerCost);
+	}
+
 	if (!Director::getInstance()->getRunningScene())
 		return;
 	auto file = FileUtils::getInstance();
@@ -113,5 +124,7 @@ void Shotgun::attack(float dt) {
 	bullet2->getPhysicsBody()->setVelocity(Vec2(200 * cosadd20, 200 * sinadd20));
 	bullet3->setPosition(x, y);
 	bullet3->getPhysicsBody()->setVelocity(Vec2(200 * cosmin20, 200 * sinmin20));
-	CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect("music/Shotgun.mp3");
+	auto audio = CocosDenshion::SimpleAudioEngine::getInstance();
+	if (audio->isBackgroundMusicPlaying() == 1)
+		CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect("music/Shotgun.mp3");
 }

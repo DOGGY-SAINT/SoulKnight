@@ -22,7 +22,7 @@ public:
 	virtual inline void updateRotation();
 
 	//拿上武器,未完成
-	virtual void weaponOn();
+	virtual void weaponOn(MovingActor* myhero);
 
 	//换下武器，未完成
 	//virtual void weaponOff();
@@ -32,6 +32,7 @@ public:
 	//单次攻击
 	virtual void attack(float dt)override;
 };
+
 
 inline void MeleeWeapon::updateRotation()
 {

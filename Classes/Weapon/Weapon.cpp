@@ -58,6 +58,7 @@ void Weapon::initBulletData(ValueMap valueMap)
 	setBulletTexture(_director->getTextureCache()->addImage(bulletPath));
 }
 
+
 //拿上武器,还要考虑设置位置的事情
 void  Weapon::weaponOn(MovingActor* myHero)
 {
@@ -69,8 +70,12 @@ void  Weapon::weaponOn(MovingActor* myHero)
 	_on = true;
 	auto map = MainScene::SharedScene()->getMapLayer();
 	map->removeActorFromVec(this);
-	setAnchorPoint(Vec2(0.5f, 0.5f));
-	setPosition(myHero->getContentSize() / 2);
+	if (dynamic_cast<Monster*>(getParent())) {
+		setAnchorPoint(Vec2(0.5f, 0.5f));
+		setPosition(myHero->getContentSize() / 2);
+	}
+	if (dynamic_cast<Hero*>(getParent()))
+	    schedule(schedule_selector(Weapon::updateRotation));
 	//换掩码
 	bitMaskOn();
 	
@@ -86,11 +91,14 @@ void  Weapon::weaponOff()
 	auto pos = map->convertToNodeSpace(convertToWorldSpace(getPosition()));
 	removeFromParent();
 	map->addChild(this);
+
+	//关闭时间调度器
+	unschedule(schedule_selector(Weapon::updateRotation));
+	unschedule(schedule_selector(Weapon::attack));
+
 	setPosition(pos);
 	setDirection(Vec2(1, 0));
-	updateRotation();
-	//关闭时间调度器
-	unschedule(schedule_selector(Weapon::attack));
+	updateRotation(0);
 }
 
 

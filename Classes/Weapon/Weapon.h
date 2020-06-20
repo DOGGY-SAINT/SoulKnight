@@ -29,7 +29,7 @@ public:
 
 	Vec2 getDirection() { return _direction; }
 
-	void setDirection(Vec2 dir) { _direction = dir; updateRotation(); }
+	void setDirection(Vec2 dir) { _direction = dir; updateRotation(0); }
 
 	//这里考虑武器信息都在plist内，因此用name初始化，后续可以考虑load时创造instance然后这里直接copy
 	static Weapon* createWithName(std::string weaponName);
@@ -40,7 +40,7 @@ public:
 
 	virtual void initBulletData(ValueMap);
 
-	virtual inline void updateRotation();
+	virtual inline void updateRotation(float dt);
 
 	//拿上武器
 	virtual void weaponOn(MovingActor* myHero);
@@ -59,8 +59,16 @@ public:
 };
 
 //设定了delay
-inline void Weapon::updateRotation()
+inline void Weapon::updateRotation(float dt)
 {
+	if (dynamic_cast<Hero*>(getParent())) {
+		auto myHero = dynamic_cast<Hero*> (getParent());
+		if (myHero->getIsFlip() == false)
+			setPosition(myHero->getContentSize().width / 2 - 10, myHero->getContentSize().height / 2 - 10);
+		else
+			setPosition(myHero->getContentSize().width / 2 + 10, myHero->getContentSize().height / 2 - 10);
+	}
+	setFlipY(_direction.x <= 0);
 	setRotation(-CC_RADIANS_TO_DEGREES(_direction.getAngle()));
 }
 

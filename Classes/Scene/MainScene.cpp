@@ -161,7 +161,6 @@ void MainScene::onMouseMove(EventMouse *event)
 	auto dir = pos - wpos - centre;
 	
 	_hero->getMainWeapon()->setDirection(dir);
-	_hero->getMainWeapon()->updateRotation();
 }
 
 
@@ -175,12 +174,14 @@ void MainScene::onKeyPressed(EventKeyboard::KeyCode keyCode, Event* event)
 		break;
 	case EventKeyboard::KeyCode::KEY_A:
 		hero->setAPressed(true);
+		hero->setIsFlip(true);
 		break;
 	case EventKeyboard::KeyCode::KEY_S:
 		hero->setSPressed(true);
 		break;
 	case EventKeyboard::KeyCode::KEY_D:
 		hero->setDPressed(true);
+		hero->setIsFlip(false);
 		break;
 	case EventKeyboard::KeyCode::KEY_R:
 		if (onRPressed)

@@ -21,6 +21,7 @@ protected:
 	CC_SYNTHESIZE(bool, _aPressed, APressed);
 	CC_SYNTHESIZE(bool, _sPressed, SPressed);
 	CC_SYNTHESIZE(bool, _dPressed, DPressed);
+	CC_SYNTHESIZE(bool, _isFlip, IsFlip);
 	CC_SYNTHESIZE(Weapon*, _weaponToOn, WeaponToOn);
 	CC_SYNTHESIZE(Hero*, _heroToOn, HeroToOn);
 	std::vector<Weapon*> _weaponVector;

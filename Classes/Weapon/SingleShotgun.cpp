@@ -42,6 +42,7 @@ bool SingleShotgun::initWithName(std::string weaponName)
 
 void SingleShotgun::initWithValueMap(ValueMap valueMap)
 {
+	SET_DATA(valueMap, PowerCost, Int);
 	SET_DATA(valueMap, Name, String);
 	SET_DATA(valueMap, GapTime, Float);
 	initBulletData(valueMap);
@@ -55,12 +56,19 @@ void SingleShotgun::initBulletData(ValueMap valueMap)
 	setBulletTexture(_director->getTextureCache()->addImage(bulletPath));
 }
 
-void SingleShotgun::update(float dt) {
-	updateRotation();
-}
 
 
 void SingleShotgun::attack(float dt) {
+	//获取hero信息
+	if (dynamic_cast<Hero*>(getParent())) {
+		auto Parent = dynamic_cast<Hero*> (getParent());
+		//判断能量
+		State* power = Parent->getPower();
+		if (power->getState() < _powerCost)
+			return;
+		power->setStateTo(power->getState() - _powerCost);
+	}
+
 	if (!Director::getInstance()->getRunningScene())
 		return;
 	auto file = FileUtils::getInstance();
@@ -103,5 +111,7 @@ void SingleShotgun::attack(float dt) {
 	float y = hy + wy + pending * cos * height + sin * width;
 	bullet->setPosition(Vec2(x, y));
 	bullet->getPhysicsBody()->setVelocity(Vec2(200 * cos, 200 * sin));
-	CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect("music/SingleShotgun.mp3");
+	auto audio = CocosDenshion::SimpleAudioEngine::getInstance();
+	if (audio->isBackgroundMusicPlaying() == 1)
+	    CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect("music/SingleShotgun.mp3");
 }
