@@ -61,6 +61,8 @@ void SingleShotgun::update(float dt) {
 
 
 void SingleShotgun::attack(float dt) {
+	if (!Director::getInstance()->getRunningScene())
+		return;
 	auto file = FileUtils::getInstance();
 	auto weaponMap = file->getValueMapFromFile(PATH_DATA + "WeaponData.plist");
 	auto thisMap = weaponMap[getName()].asValueMap();
@@ -83,12 +85,14 @@ void SingleShotgun::attack(float dt) {
 	bullet->runAction(rt);
 
 	MainScene* runningScene = dynamic_cast<MainScene*>(Director::getInstance()->getRunningScene());
+	if (!runningScene)
+		return;
 	MapLayer* runningLayer = dynamic_cast<MapLayer*>(runningScene->getMapLayer());
 	auto myHero = runningScene->getHero();
 
 	runningLayer->addChild(bullet, 6);
 
-	auto heroPosition = myHero->getPosition();
+	auto heroPosition = getParent()->getPosition();
 	auto weaponPosition = getPosition();
 	auto hx = heroPosition.x, hy = heroPosition.y;
 	auto wx = weaponPosition.x, wy = weaponPosition.y;

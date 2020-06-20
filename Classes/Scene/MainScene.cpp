@@ -262,6 +262,8 @@ void MainScene::gameRestart()
 	releaseAllActor();
 	auto scene = HelloWorld::createScene();
 	Director::getInstance()->replaceScene(CCTransitionFade::create(0.3f, HelloWorld::createScene()));
+	retain();
+	release();
 }
 
 void MainScene::changeMap(std::string mapName)
@@ -308,6 +310,12 @@ void MainScene::updateStateBar(float dt)
 	_ACBar->setPercentage(AC->getPercentage());
 	_powerBar->setPercentage(power->getPercentage());
 }
+
+//void MainScene::onExit()
+//{
+//	Scene::onExit();
+//	_mapLayer->releaseAllActor();
+//}
 
 
 void MainScene::initEnergyStrand()

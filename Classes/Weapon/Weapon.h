@@ -52,6 +52,8 @@ public:
 
 	void bitMaskOn();
 
+	void bitMaskOff();
+
 	void updateNohurt(float dt);
 };
 

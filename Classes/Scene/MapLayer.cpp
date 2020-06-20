@@ -156,7 +156,6 @@ void MapLayer::releaseAllActor()
 {
 	for (auto weapon : toRelease)
 	{
-		weapon->unscheduleAllCallbacks();
 		weapon->release();
 	}
 }

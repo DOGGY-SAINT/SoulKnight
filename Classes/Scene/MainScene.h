@@ -86,6 +86,8 @@ public:
 
 	void updateStateBar(float dt);
 
+	//void onExit()override;
+
 };
 
 

@@ -41,12 +41,12 @@
         <key>State</key>
         <integer>10</integer>
         <key>RecoverGap</key>
-        <real>0</real>
+        <real>2</real>
       </dict>
       <key>AC</key>
       <dict>
         <key>State</key>
-        <integer>10</integer>
+        <integer>20</integer>
         <key>RecoverGap</key>
         <real>1.5</real>
       </dict>
@@ -58,7 +58,7 @@
         <real>0</real>
       </dict>
       <key>defaultWeapon</key>
-      <string>Machinegun</string>
+      <string>Pistol</string>
     </dict>
     <key>Enchanter</key>
     <dict>

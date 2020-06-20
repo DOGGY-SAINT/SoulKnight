@@ -4,6 +4,7 @@
 #include"Scene/MainScene.h"
 #include"Scene/MapLayer.h"
 #include"MeleeWeapon.h"
+#include"Actor/Monster.h"
 
 MeleeWeapon::MeleeWeapon()
 {
@@ -67,17 +68,18 @@ void MeleeWeapon::update(float dt) {
 
 
 void MeleeWeapon::attack(float dt) {
-	auto Parent = static_cast<Actor*> (getParent());
-	setFlag(Parent->getFlag());
-	//auto body = getPhysicsBody();
-	//auto a = body->getCategoryBitmask();
-	//auto b = body->getCollisionBitmask();
-	//auto c = body->getContactTestBitmask();
-
-
+	if (!Director::getInstance()->getRunningScene())
+		return;
 	MainScene* runningScene = dynamic_cast<MainScene*>(Director::getInstance()->getRunningScene());
-	Hero* myHero = runningScene->getHero();
-	setFlag(myHero->getFlag());
+	if (!runningScene)
+		return;
+	auto Parent = static_cast<Actor*> (getParent());
+	if (Parent->getName() == "Monster")
+	{
+		Parent = static_cast<Monster*> (Parent);
+		Parent->unschedule(schedule_selector(Monster::updateWeaponDirection));
+	}
+	setFlag(Parent->getFlag());
 	Vec2 angle60(1, 1.732);
 	CCRotateBy* rt0 = CCRotateBy::create(0, -CC_RADIANS_TO_DEGREES(angle60.getAngle()));
 	CCRotateBy* rt1 = CCRotateBy::create(_gapTime, CC_RADIANS_TO_DEGREES(2 * angle60.getAngle()));

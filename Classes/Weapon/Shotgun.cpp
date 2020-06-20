@@ -54,6 +54,8 @@ void Shotgun::update(float dt) {
 
 
 void Shotgun::attack(float dt) {
+	if (!Director::getInstance()->getRunningScene())
+		return;
 	auto file = FileUtils::getInstance();
 	auto weaponMap = file->getValueMapFromFile(PATH_DATA + "WeaponData.plist");
 	auto thisMap = weaponMap[getName()].asValueMap();
@@ -88,6 +90,8 @@ void Shotgun::attack(float dt) {
 	bullet3->runAction(rt3);
 
 	MainScene* runningScene = dynamic_cast<MainScene*>(Director::getInstance()->getRunningScene());
+	if (!runningScene)
+		return;
 	MapLayer* runningLayer = dynamic_cast<MapLayer*>(runningScene->getMapLayer());
 	auto myHero = runningScene->getHero();
 
