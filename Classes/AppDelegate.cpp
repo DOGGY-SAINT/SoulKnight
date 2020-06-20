@@ -100,7 +100,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
 	auto scene = HelloWorld::createScene();
 
 	director->runWithScene(scene);
-	CocosDenshion::SimpleAudioEngine::sharedEngine()->playBackgroundMusic("music/pigman.mp3");
+	CocosDenshion::SimpleAudioEngine::sharedEngine()->playBackgroundMusic("music/pigman.mp3", true);
 	CocosDenshion::SimpleAudioEngine::sharedEngine()->preloadBackgroundMusic("music/Shotgun.mp3");
 	CocosDenshion::SimpleAudioEngine::sharedEngine()->preloadBackgroundMusic("music/ingleShotgun.mp3");
 	CocosDenshion::SimpleAudioEngine::sharedEngine()->preloadBackgroundMusic("music/Hatchet.mp3");

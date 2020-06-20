@@ -229,7 +229,7 @@ void Hero::updatePower(float dt)
 
 void Hero::updateV(float dt)
 {
-	setFlipX(_isFlip == true);
+	setFlipX(_mainWeapon->getDirection().x < 0);
 	auto v = _v * Vec2(_dPressed - _aPressed, _wPressed - _sPressed);
 	getPhysicsBody()->setVelocity(v);
 }

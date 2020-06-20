@@ -63,12 +63,12 @@ inline void Weapon::updateRotation(float dt)
 {
 	if (dynamic_cast<Hero*>(getParent())) {
 		auto myHero = dynamic_cast<Hero*> (getParent());
-		if (myHero->getIsFlip() == false)
+		if (_direction.x >= 0)
 			setPosition(myHero->getContentSize().width / 2 - 10, myHero->getContentSize().height / 2 - 10);
 		else
 			setPosition(myHero->getContentSize().width / 2 + 10, myHero->getContentSize().height / 2 - 10);
 	}
-	setFlipY(_direction.x <= 0);
+	setFlipY(_direction.x < 0);
 	setRotation(-CC_RADIANS_TO_DEGREES(_direction.getAngle()));
 }
 
