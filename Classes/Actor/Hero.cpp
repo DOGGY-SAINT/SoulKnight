@@ -38,8 +38,7 @@ bool Hero::initWithName(std::string Name)
 	initState(heroMap);
 	initData(VALUE_AT(valueMap, "CommonData", ValueMap));
 	initCollision(VALUE_AT(valueMap, "CollisionData", ValueMap));
-	//initWeapon(VALUE_AT(heroMap,"defaultWeapon",String));
-	initWeapon("Lightsaber");
+	initWeapon(VALUE_AT(heroMap,"defaultWeapon",String));
 	initScheduler();
 	return true;
 }
@@ -191,7 +190,6 @@ void Hero::initController()
 	_aPressed = false;
 	_sPressed = false;
 	_dPressed = false;
-	_isFlip = false;
 }
 
 
@@ -229,7 +227,7 @@ void Hero::updatePower(float dt)
 
 void Hero::updateV(float dt)
 {
-	setFlipX(_isFlip == true);
+	setFlipX(_mainWeapon->getDirection().x<0);
 	auto v = _v * Vec2(_dPressed - _aPressed, _wPressed - _sPressed);
 	getPhysicsBody()->setVelocity(v);
 }
@@ -240,6 +238,7 @@ void Hero::changeWeapon()
 	{
 		_mainWeapon->weaponOff();
 		_weaponToOn->weaponOn(this);
+		MainScene::SharedScene()->onTPressed = nullptr;
 	}
 }
 

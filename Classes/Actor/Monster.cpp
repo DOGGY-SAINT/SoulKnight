@@ -55,7 +55,7 @@ void Monster::updateWeaponDirection(float dt)
 
 inline float Monster::rand()
 {
-	auto num = std::rand() % (400*_v) - 200*_v;
+	auto num = std::rand() % (200*_v) - 100*_v;
 	float f = num / 100.0f;
 	return f;
 }

@@ -180,6 +180,13 @@ bool Weapon::onContactBegin(Actor *a2)
 		return weaponOffContact(a2);
 }
 
+bool Weapon::onContactSeparate(Actor * a2)
+{
+	if (!_on)
+		MainScene::SharedScene()->onTPressed= nullptr;
+	return false;
+}
+
 bool Weapon::weaponOffContact(Actor *a2)
 {
 	if (a2->getName() == "Hero")

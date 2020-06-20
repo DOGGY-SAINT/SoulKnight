@@ -6,6 +6,7 @@
 #include"PauseScene.h"
 #include"Scene/HelloWorldScene.h"
 #include"Component/State.h"
+#include"Weapon/MeleeWeapon.h"
 
 USING_NS_CC;
 
@@ -37,6 +38,7 @@ bool MainScene::init(std::string mapName)
 	initEnergyStrand();
 	initBloodStrand();
 	initArmorStrand();
+	initSrand();
 	return true;
 }
 
@@ -174,14 +176,12 @@ void MainScene::onKeyPressed(EventKeyboard::KeyCode keyCode, Event* event)
 		break;
 	case EventKeyboard::KeyCode::KEY_A:
 		hero->setAPressed(true);
-		hero->setIsFlip(true);
 		break;
 	case EventKeyboard::KeyCode::KEY_S:
 		hero->setSPressed(true);
 		break;
 	case EventKeyboard::KeyCode::KEY_D:
 		hero->setDPressed(true);
-		hero->setIsFlip(false);
 		break;
 	case EventKeyboard::KeyCode::KEY_R:
 		if (onRPressed)
@@ -272,6 +272,9 @@ void MainScene::gameRestart()
 void MainScene::changeMap(std::string mapName)
 {
 	_hero->setAttackOff();
+	auto weapon = dynamic_cast<MeleeWeapon*>(_hero->getMainWeapon());
+	if (weapon)
+		weapon->updateNohurt(0);
 	_mapLayer->releaseAllActor();
 	_hero->retain();
 	_mapLayer->removeFromParent();
@@ -314,11 +317,12 @@ void MainScene::updateStateBar(float dt)
 	_powerBar->setPercentage(power->getPercentage());
 }
 
-//void MainScene::onExit()
-//{
-//	Scene::onExit();
-//	_mapLayer->releaseAllActor();
-//}
+void MainScene::initSrand()
+{
+	srand(time(NULL));
+}
+
+
 
 
 void MainScene::initEnergyStrand()

@@ -42,6 +42,8 @@ private:
 
 	void initScheduler();
 
+	void initSrand();
+
 	void updateMapPosition(float dt);
 public:
 	static MainScene* _sharedScene;
@@ -85,8 +87,6 @@ public:
 	void releaseAllActor();
 
 	void updateStateBar(float dt);
-
-	//void onExit()override;
 
 };
 

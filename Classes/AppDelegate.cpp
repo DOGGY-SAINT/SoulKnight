@@ -98,13 +98,16 @@ bool AppDelegate::applicationDidFinishLaunching() {
 
 	// create a scene. it's an autorelease object
 	auto scene = HelloWorld::createScene();
-
 	director->runWithScene(scene);
-	CocosDenshion::SimpleAudioEngine::sharedEngine()->playBackgroundMusic("music/pigman.mp3");
-	CocosDenshion::SimpleAudioEngine::sharedEngine()->preloadBackgroundMusic("music/Shotgun.mp3");
-	CocosDenshion::SimpleAudioEngine::sharedEngine()->preloadBackgroundMusic("music/ingleShotgun.mp3");
-	CocosDenshion::SimpleAudioEngine::sharedEngine()->preloadBackgroundMusic("music/Hatchet.mp3");
-	CocosDenshion::SimpleAudioEngine::sharedEngine()->preloadBackgroundMusic("music/Lightsaber.mp3");
+
+	auto engine = CocosDenshion::SimpleAudioEngine::sharedEngine();
+	
+	engine->playBackgroundMusic("music/pigman.mp3",true);
+
+	engine->preloadBackgroundMusic("music/Shotgun.mp3");
+	engine->preloadBackgroundMusic("music/ingleShotgun.mp3");
+	engine->preloadBackgroundMusic("music/Hatchet.mp3");
+	engine->preloadBackgroundMusic("music/Lightsaber.mp3");
 	return true;
 }
 

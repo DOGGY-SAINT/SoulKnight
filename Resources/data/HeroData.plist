@@ -39,21 +39,21 @@
       <key>HP</key>
       <dict>
         <key>State</key>
-        <integer>10</integer>
+        <integer>15</integer>
         <key>RecoverGap</key>
-        <real>2</real>
+        <real>1</real>
       </dict>
       <key>AC</key>
       <dict>
         <key>State</key>
-        <integer>20</integer>
+        <integer>25</integer>
         <key>RecoverGap</key>
-        <real>1.5</real>
+        <real>1</real>
       </dict>
       <key>Power</key>
       <dict>
         <key>State</key>
-        <integer>200</integer>
+        <integer>150</integer>
         <key>RecoverGap</key>
         <real>0</real>
       </dict>
@@ -74,14 +74,14 @@
         <key>State</key>
         <integer>5</integer>
         <key>RecoverGap</key>
-        <real>2</real>
+        <real>1.5</real>
       </dict>
       <key>Power</key>
       <dict>
         <key>State</key>
-        <integer>300</integer>
+        <integer>250</integer>
         <key>RecoverGap</key>
-        <real>1</real>
+        <real>0.4</real>
       </dict>
       <key>defaultWeapon</key>
       <string>Shotgun</string>
