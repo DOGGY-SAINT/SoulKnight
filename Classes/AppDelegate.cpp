@@ -101,6 +101,10 @@ bool AppDelegate::applicationDidFinishLaunching() {
 
 	director->runWithScene(scene);
 	CocosDenshion::SimpleAudioEngine::sharedEngine()->playBackgroundMusic("music/pigman.mp3");
+	CocosDenshion::SimpleAudioEngine::sharedEngine()->preloadBackgroundMusic("music/Shotgun.mp3");
+	CocosDenshion::SimpleAudioEngine::sharedEngine()->preloadBackgroundMusic("music/ingleShotgun.mp3");
+	CocosDenshion::SimpleAudioEngine::sharedEngine()->preloadBackgroundMusic("music/Hatchet.mp3");
+	CocosDenshion::SimpleAudioEngine::sharedEngine()->preloadBackgroundMusic("music/Lightsaber.mp3");
 	return true;
 }
 

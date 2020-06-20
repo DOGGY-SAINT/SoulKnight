@@ -42,15 +42,7 @@ bool SingleShotgun::initWithName(std::string weaponName)
 
 void SingleShotgun::initWithValueMap(ValueMap valueMap)
 {
-	_on = false;
-	this->retain();
-	auto map = MainScene::SharedScene()->getMapLayer();
-	map->addActorToVec(this);									//添加到release列表
-	auto file = FileUtils::getInstance();
-	auto defaultMap = file->getValueMapFromFile(PATH_DATA + "WeaponDefaultData.plist");
-	initData(VALUE_AT(defaultMap, "CommonData", ValueMap));
-	initCollision(VALUE_AT(defaultMap, "CollisionData", ValueMap));
-
+	SET_DATA(valueMap, PowerCost, Int);
 	SET_DATA(valueMap, Name, String);
 	SET_DATA(valueMap, GapTime, Float);
 	initBulletData(valueMap);
@@ -70,6 +62,14 @@ void SingleShotgun::update(float dt) {
 
 
 void SingleShotgun::attack(float dt) {
+	//获取hero信息
+	auto Parent = static_cast<Hero*> (getParent());
+	//判断能量
+	State* power = Parent->getPower();
+	if (power->getState() < _powerCost)
+		return;
+	power->setStateTo(power->getState() - _powerCost);
+
 	auto file = FileUtils::getInstance();
 	auto weaponMap = file->getValueMapFromFile(PATH_DATA + "WeaponData.plist");
 	auto thisMap = weaponMap[getName()].asValueMap();

@@ -35,6 +35,7 @@ bool Shotgun::initWithName(std::string weaponName)
 
 void Shotgun::initWithValueMap(ValueMap valueMap)
 {
+	SET_DATA(valueMap, PowerCost, Int);
 	SET_DATA(valueMap, Name, String);
 	SET_DATA(valueMap, GapTime, Float);
 	initBulletData(valueMap);
@@ -54,6 +55,14 @@ void Shotgun::update(float dt) {
 
 
 void Shotgun::attack(float dt) {
+	//获取hero信息
+	auto Parent = static_cast<Hero*> (getParent());
+	//判断能量
+	State* power = Parent->getPower();
+	if (power->getState() < _powerCost)
+		return;
+	power->setStateTo(power->getState() - _powerCost);
+
 	auto file = FileUtils::getInstance();
 	auto weaponMap = file->getValueMapFromFile(PATH_DATA + "WeaponData.plist");
 	auto thisMap = weaponMap[getName()].asValueMap();

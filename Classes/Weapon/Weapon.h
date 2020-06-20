@@ -16,6 +16,7 @@ class Weapon :
 	CC_SYNTHESIZE(ValueMap, _bulletData, BulletData);
 	CC_SYNTHESIZE(Texture2D*, _bulletTexture, BulletTexture);
 	CC_SYNTHESIZE(bool, _on, IsOn);
+	CC_SYNTHESIZE(int, _powerCost, PowerCost);
 protected:
 	Vec2 _direction;
 public:

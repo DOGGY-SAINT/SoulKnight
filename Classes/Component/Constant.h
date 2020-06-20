@@ -30,7 +30,6 @@ mapName[dataName].as##typeName##()
 #define PATH_MAP              std::string("map/")
 #define PATH_PICTURE_PROP     std::string("picture/Prop/")
 
-
 #define SAFE_MAP_NAME         std::string("SafeMap")
 #define DEFAULT_HERO_NAME     std::string("Knight")
 #define DEFAULT_WEAPON_NAME   std::string("Lightsaber")

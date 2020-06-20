@@ -4,6 +4,8 @@
 #include"Scene/MainScene.h"
 #include"Scene/MapLayer.h"
 #include"MeleeWeapon.h"
+#include"SimpleAudioEngine.h"
+#include"iostream"
 
 MeleeWeapon::MeleeWeapon()
 {
@@ -34,8 +36,6 @@ bool MeleeWeapon::initWithName(std::string weaponName)
 	//武器模型
 	auto weaponSize = getContentSize();
 
-	setAnchorPoint(Vec2(0.1, 0.5));
-
 	auto file = FileUtils::getInstance();
 	auto weaponMap = file->getValueMapFromFile(PATH_DATA + "WeaponData.plist");
 	auto thisMap = weaponMap[weaponName].asValueMap();
@@ -46,6 +46,9 @@ bool MeleeWeapon::initWithName(std::string weaponName)
 
 void MeleeWeapon::initWithValueMap(ValueMap valueMap)
 {
+	setAnchorPoint(Vec2(0.1, 0.5));
+
+	SET_DATA(valueMap, PowerCost, Int);
 	SET_DATA(valueMap, Name, String);
 	SET_DATA(valueMap, GapTime, Float);
 	this->setScale(VALUE_AT(valueMap, "Scale", Float));
@@ -67,22 +70,29 @@ void MeleeWeapon::update(float dt) {
 
 
 void MeleeWeapon::attack(float dt) {
-	auto Parent = static_cast<Actor*> (getParent());
+	//获取hero信息
+	auto Parent = static_cast<Hero*> (getParent());
+	//判断能量
+	State* power = Parent->getPower();
+	if (power->getState() < _powerCost)
+		return;
+	power->setStateTo(power->getState() - _powerCost);
+	auto t = getGapTime();
 	setFlag(Parent->getFlag());
-	//auto body = getPhysicsBody();
-	//auto a = body->getCategoryBitmask();
-	//auto b = body->getCollisionBitmask();
-	//auto c = body->getContactTestBitmask();
-
 
 	MainScene* runningScene = dynamic_cast<MainScene*>(Director::getInstance()->getRunningScene());
 	Hero* myHero = runningScene->getHero();
 	setFlag(myHero->getFlag());
 	Vec2 angle60(1, 1.732);
 	CCRotateBy* rt0 = CCRotateBy::create(0, -CC_RADIANS_TO_DEGREES(angle60.getAngle()));
-	CCRotateBy* rt1 = CCRotateBy::create(_gapTime, CC_RADIANS_TO_DEGREES(2 * angle60.getAngle()));
-	CCRotateBy* rt2 = CCRotateBy::create(_gapTime*0.4, -CC_RADIANS_TO_DEGREES(2 * angle60.getAngle()));
+	CCRotateBy* rt1 = CCRotateBy::create(_gapTime*0.6, CC_RADIANS_TO_DEGREES(2 * angle60.getAngle()));
+	CCRotateBy* rt2 = CCRotateBy::create(_gapTime*0.3, -CC_RADIANS_TO_DEGREES(2 * angle60.getAngle()));
 	runAction(CCSequence::create(rt0,rt1,rt2,NULL));
 	updateRotation();
-	scheduleOnce(schedule_selector(MeleeWeapon::updateNohurt),_gapTime*1.4);
+	scheduleOnce(schedule_selector(MeleeWeapon::updateNohurt),_gapTime*0.9);
+	//音效
+	auto audio = CocosDenshion::SimpleAudioEngine::getInstance();
+	String s = "music/" + getName() + ".mp3";
+	if (audio->isBackgroundMusicPlaying() == 1)
+		CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect(s.getCString());
 }

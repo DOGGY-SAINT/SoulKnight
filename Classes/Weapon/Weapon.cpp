@@ -44,6 +44,7 @@ bool Weapon::initWithName(std::string weaponName,ValueMap valueMap)
 
 void Weapon::initWithValueMap(ValueMap valueMap)
 {
+	SET_DATA(valueMap, PowerCost, Int);
 	SET_DATA(valueMap, Name, String);
 	SET_DATA(valueMap, GapTime, Float);
 	initBulletData(valueMap);
@@ -93,6 +94,7 @@ void  Weapon::weaponOff()
 
 
 void Weapon::attack(float dt) {
+	/*
 	MainScene* runningScene = dynamic_cast<MainScene*>(Director::getInstance()->getRunningScene());
 	MapLayer* runningLayer = dynamic_cast<MapLayer*>(runningScene->getMapLayer());
 	Hero* myHero = runningScene->getHero();
@@ -117,7 +119,7 @@ void Weapon::attack(float dt) {
 	runningLayer->addChild(bullet, 6);
 	
 	bullet->setPosition(weaponPosition.x + cos * weaponSize.width / 2, weaponPosition.y + sin * weaponSize.height / 2);
-	bullet->getPhysicsBody()->setVelocity(Vec2(100 * cos, 100 * sin));
+	bullet->getPhysicsBody()->setVelocity(Vec2(100 * cos, 100 * sin));*/
 }
 
 void Weapon::bitMaskOn()

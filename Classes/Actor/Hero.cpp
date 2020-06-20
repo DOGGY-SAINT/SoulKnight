@@ -39,7 +39,7 @@ bool Hero::initWithName(std::string Name)
 	initData(VALUE_AT(valueMap, "CommonData", ValueMap));
 	initCollision(VALUE_AT(valueMap, "CollisionData", ValueMap));
 	//initWeapon(VALUE_AT(heroMap,"defaultWeapon",String));
-	initWeapon("Hatchet");
+	initWeapon("Lightsaber");
 	initScheduler();
 	return true;
 }
