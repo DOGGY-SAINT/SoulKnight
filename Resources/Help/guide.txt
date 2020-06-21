@@ -1,0 +1,15 @@
+wrong:找不到vcruntime140d.dll
+resolution:	1.确认c:\Windows中System32和SysWOW64文件夹中是否有vcruntime140d.dll文件
+		2.若无，将Resources\Help文件夹中的System32和SysWOW64两个文件夹中各自的vcruntime140d.dll
+		分别拷贝到c:\Windows中的同名文件夹中(32位不需要拷贝到SysWOW64的操作)
+wrong:找不到ucrtbased.dll
+resolution:	1.确认c:\Windows中System32和SysWOW64文件夹中是否有ucrtbased.dll文件
+		2.若无，将Resources\Help文件夹中的System32和SysWOW64两个文件夹中各自的ucrtbased.dll
+		分别拷贝到c:\Windows中的同名文件夹中(32位不需要拷贝到SysWOW64的操作)
+wrong:缺少其他dll文件
+resolution:	1.确认自己是32位还是64位电脑
+		2.打开Resources\Help
+		3..若32，执行vc_redist.x86.exe，若64，执行vc_redist.x64.exe
+wrong:游戏无音效
+resolution:	1.确认存放目录中是否有中文，如目录c:\fine\不好看 是不允许的
+		2.将游戏移动到无中文目录中在进行游戏
