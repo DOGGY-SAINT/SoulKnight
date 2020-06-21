@@ -1,0 +1,429 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.2" tiledversion="1.3.4" orientation="orthogonal" renderorder="right-down" width="20" height="20" tilewidth="40" tileheight="20" infinite="0" nextlayerid="13" nextobjectid="12">
+ <properties>
+  <property name="Flag" type="int" value="3"/>
+ </properties>
+ <tileset firstgid="1" name="Wall" tilewidth="40" tileheight="20" tilecount="15" columns="5">
+  <image source="../picture/walls/walls.png" width="200" height="60"/>
+ </tileset>
+ <tileset firstgid="16" name="Door" tilewidth="40" tileheight="40" tilecount="1" columns="0">
+  <grid orientation="orthogonal" width="1" height="1"/>
+  <tile id="0">
+   <image width="40" height="40" source="../picture/doors/DoorOpen.png"/>
+  </tile>
+ </tileset>
+ <tileset firstgid="17" name="Floor" tilewidth="40" tileheight="40" tilecount="1" columns="0">
+  <grid orientation="orthogonal" width="1" height="1"/>
+  <tile id="0">
+   <image width="40" height="40" source="../picture/floors/Floor.png"/>
+  </tile>
+ </tileset>
+ <tileset firstgid="18" name="MapPortal" tilewidth="120" tileheight="150" tilecount="1" columns="0">
+  <grid orientation="orthogonal" width="1" height="1"/>
+  <tile id="0">
+   <image width="120" height="150" source="../picture/mapportal/MapPortal1.png"/>
+  </tile>
+ </tileset>
+ <tileset firstgid="19" name="Box" tilewidth="100" tileheight="59" tilecount="2" columns="0">
+  <grid orientation="orthogonal" width="1" height="1"/>
+  <tile id="0">
+   <image width="60" height="59" source="../picture/Prop/CloseBox.png"/>
+  </tile>
+  <tile id="1">
+   <image width="100" height="57" source="../picture/Prop/OpenBox.png"/>
+  </tile>
+ </tileset>
+ <tileset firstgid="21" name="Monster" tilewidth="70" tileheight="70" tilecount="1" columns="0">
+  <grid orientation="orthogonal" width="1" height="1"/>
+  <tile id="0">
+   <image width="70" height="70" source="../picture/monster/YellowMonster.png"/>
+  </tile>
+ </tileset>
+ <tileset firstgid="22" name="EXGreen" tilewidth="40" tileheight="40" tilecount="1" columns="0">
+  <grid orientation="orthogonal" width="1" height="1"/>
+  <tile id="0">
+   <image width="40" height="40" source="../picture/floors/GreenFloor.png"/>
+  </tile>
+ </tileset>
+ <tileset firstgid="23" name="EXRed" tilewidth="40" tileheight="40" tilecount="1" columns="0">
+  <grid orientation="orthogonal" width="1" height="1"/>
+  <tile id="0">
+   <image width="40" height="40" source="../picture/floors/RedFloor.png"/>
+  </tile>
+ </tileset>
+ <layer id="5" name="FloorLayer" width="20" height="20">
+  <properties>
+   <property name="CanBeHurt" type="bool" value="false"/>
+   <property name="Collision" type="bool" value="false"/>
+   <property name="Damage" type="int" value="0"/>
+   <property name="Flag" type="int" value="0"/>
+   <property name="HP" type="int" value="1"/>
+   <property name="LocalZOrder" type="int" value="0"/>
+   <property name="Name" value="Floor"/>
+  </properties>
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,17,17,17,17,17,17,17,17,17,17,17,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,17,17,17,17,17,17,17,17,17,17,17,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,17,17,17,17,17,17,17,17,17,17,17,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,17,17,17,17,17,17,17,17,17,17,17,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,17,17,17,17,17,17,17,17,17,17,17,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,17,17,17,17,17,17,17,17,17,17,17,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,17,17,17,17,17,17,17,17,17,17,17,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <layer id="10" name="EXGreenFloorLayer" width="20" height="20">
+  <properties>
+   <property name="CanBeHurt" type="bool" value="true"/>
+   <property name="CategoryBitmask" type="int" value="8"/>
+   <property name="Collision" type="bool" value="true"/>
+   <property name="CollisionBitmask" type="int" value="35"/>
+   <property name="ContactTestBitmask" type="int" value="163"/>
+   <property name="Damage" type="int" value="0"/>
+   <property name="Dynamic" type="bool" value="false"/>
+   <property name="Flag" type="int" value="2"/>
+   <property name="HP" type="int" value="20"/>
+   <property name="LocalZOrder" type="int" value="1"/>
+   <property name="Name" value="EXFloor"/>
+   <property name="RotationEnable" type="bool" value="false"/>
+  </properties>
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,22,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,22,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,22,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,22,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,22,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,22,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,22,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <layer id="11" name="EXRedFloorLayer" width="20" height="20">
+  <properties>
+   <property name="CanBeHurt" type="bool" value="true"/>
+   <property name="CategoryBitmask" type="int" value="8"/>
+   <property name="Collision" type="bool" value="true"/>
+   <property name="CollisionBitmask" type="int" value="35"/>
+   <property name="ContactTestBitmask" type="int" value="163"/>
+   <property name="Damage" type="int" value="0"/>
+   <property name="Dynamic" type="bool" value="false"/>
+   <property name="Flag" type="int" value="1"/>
+   <property name="HP" type="int" value="5"/>
+   <property name="LocalZOrder" type="int" value="1"/>
+   <property name="Name" value="EXFloor"/>
+   <property name="RotationEnable" type="bool" value="false"/>
+  </properties>
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,23,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,23,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,23,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,23,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,23,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,23,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,23,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <layer id="1" name="SideWallLayer" width="20" height="20">
+  <properties>
+   <property name="CanBeHurt" type="bool" value="false"/>
+   <property name="Collision" type="bool" value="false"/>
+   <property name="Damage" type="int" value="0"/>
+   <property name="Flag" type="int" value="0"/>
+   <property name="HP" type="int" value="1"/>
+   <property name="LocalZOrder" type="int" value="1"/>
+   <property name="Name" value="SideWall"/>
+  </properties>
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,11,11,11,11,11,11,11,11,11,11,11,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+11,11,11,11,11,11,11,11,11,11,11,11,11,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <layer id="2" name="DownWallLayer" width="20" height="20">
+  <properties>
+   <property name="CanBeHurt" type="bool" value="false"/>
+   <property name="CategoryBitmask" type="int" value="4"/>
+   <property name="Collision" type="bool" value="true"/>
+   <property name="CollisionBitmask" type="int" value="35"/>
+   <property name="ContactTestBitmask" type="int" value="1"/>
+   <property name="Damage" type="int" value="0"/>
+   <property name="Dynamic" type="bool" value="false"/>
+   <property name="Flag" type="int" value="0"/>
+   <property name="HP" type="int" value="1"/>
+   <property name="LocalZOrder" type="int" value="2"/>
+   <property name="Name" value="DownWall"/>
+   <property name="RotationEnable" type="bool" value="false"/>
+  </properties>
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+6,6,6,6,6,6,6,6,6,6,6,6,6,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+6,0,0,0,0,0,0,0,0,0,0,0,6,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+6,0,0,0,0,0,0,0,0,0,0,0,6,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+6,0,0,0,0,0,0,0,0,0,0,0,6,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+6,0,0,0,0,0,0,0,0,0,0,0,6,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+6,0,0,0,0,0,0,0,0,0,0,0,6,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+6,0,0,0,0,0,0,0,0,0,0,0,6,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+6,0,0,0,0,0,0,0,0,0,0,0,6,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+6,6,6,6,6,6,6,6,6,6,6,6,6,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <layer id="3" name="UpWallLayer" width="20" height="20">
+  <properties>
+   <property name="CanBeHurt" type="bool" value="false"/>
+   <property name="CategoryBitmask" type="int" value="4"/>
+   <property name="Collision" type="bool" value="true"/>
+   <property name="CollisionBitmask" type="int" value="35"/>
+   <property name="ContactTestBitmask" type="int" value="1"/>
+   <property name="Damage" type="int" value="0"/>
+   <property name="Dynamic" type="bool" value="false"/>
+   <property name="Flag" type="int" value="0"/>
+   <property name="HP" type="int" value="1"/>
+   <property name="LocalZOrder" type="int" value="6"/>
+   <property name="Name" value="UpWall"/>
+   <property name="RotationEnable" type="bool" value="false"/>
+  </properties>
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+1,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+1,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+1,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+1,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+1,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+1,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+1,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <objectgroup id="9" name="MapPortalLayer">
+  <properties>
+   <property name="CanBeHurt" type="bool" value="false"/>
+   <property name="CategoryBitmask" type="int" value="64"/>
+   <property name="Collision" type="bool" value="true"/>
+   <property name="CollisionBitmask" type="int" value="0"/>
+   <property name="ContactTestBitmask" type="int" value="2"/>
+   <property name="Damage" type="int" value="0"/>
+   <property name="Dynamic" type="bool" value="false"/>
+   <property name="Flag" type="int" value="0"/>
+   <property name="HP" type="int" value="1"/>
+   <property name="LocalZOrder" type="int" value="3"/>
+   <property name="Name" value="MapPortal"/>
+   <property name="NextMap" value="GameMap2"/>
+   <property name="RotationEnable" type="bool" value="false"/>
+   <property name="TexturePath" value="picture/mapportal/MapPortal1.png"/>
+  </properties>
+  <object id="3" gid="18" x="360" y="340" width="120" height="150">
+   <properties>
+    <property name="CanBeHurt" type="bool" value="false"/>
+    <property name="CategoryBitmask" type="int" value="64"/>
+    <property name="Collision" type="bool" value="true"/>
+    <property name="CollisionBitmask" type="int" value="0"/>
+    <property name="ContactTestBitmask" type="int" value="2"/>
+    <property name="Damage" type="int" value="0"/>
+    <property name="Dynamic" type="bool" value="false"/>
+    <property name="Flag" type="int" value="3"/>
+    <property name="HP" type="int" value="1"/>
+    <property name="LocalZOrder" type="int" value="3"/>
+    <property name="Name" value="MapPortal"/>
+    <property name="NextMap" value="GameMap2"/>
+    <property name="RotationEnable" type="bool" value="false"/>
+    <property name="TexturePath" value="picture/mapportal/MapPortal1.png"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup id="6" name="MonsterLayer">
+  <object id="7" gid="21" x="360" y="160" width="70" height="70">
+   <properties>
+    <property name="CanBeHurt" type="bool" value="true"/>
+    <property name="CategoryBitmask" type="int" value="32"/>
+    <property name="Collision" type="bool" value="true"/>
+    <property name="CollisionBitmask" type="int" value="63"/>
+    <property name="ContactTestBitmask" type="int" value="137"/>
+    <property name="Damage" type="int" value="0"/>
+    <property name="Dynamic" type="bool" value="true"/>
+    <property name="Flag" type="int" value="1"/>
+    <property name="HP" type="int" value="5"/>
+    <property name="LocalZOrder" type="int" value="5"/>
+    <property name="Name" value="Monster"/>
+    <property name="RotationEnable" type="bool" value="false"/>
+    <property name="TexturePath" value="picture/monster/YellowMonster.png"/>
+    <property name="V" type="int" value="100"/>
+    <property name="VelocityLim" type="float" value="150"/>
+    <property name="WeaponName" value="Pistol"/>
+   </properties>
+  </object>
+  <object id="8" gid="21" x="251" y="158" width="70" height="70">
+   <properties>
+    <property name="CanBeHurt" type="bool" value="true"/>
+    <property name="CategoryBitmask" type="int" value="32"/>
+    <property name="Collision" type="bool" value="true"/>
+    <property name="CollisionBitmask" type="int" value="63"/>
+    <property name="ContactTestBitmask" type="int" value="137"/>
+    <property name="Damage" type="int" value="0"/>
+    <property name="Dynamic" type="bool" value="true"/>
+    <property name="Flag" type="int" value="1"/>
+    <property name="HP" type="int" value="5"/>
+    <property name="LocalZOrder" type="int" value="5"/>
+    <property name="Name" value="Monster"/>
+    <property name="RotationEnable" type="bool" value="false"/>
+    <property name="TexturePath" value="picture/monster/YellowMonster.png"/>
+    <property name="V" type="int" value="100"/>
+    <property name="VelocityLim" type="float" value="150"/>
+    <property name="WeaponName" value="Hatchet"/>
+   </properties>
+  </object>
+  <object id="11" gid="21" x="258.758" y="286.652" width="70" height="70">
+   <properties>
+    <property name="CanBeHurt" type="bool" value="true"/>
+    <property name="CategoryBitmask" type="int" value="32"/>
+    <property name="Collision" type="bool" value="true"/>
+    <property name="CollisionBitmask" type="int" value="63"/>
+    <property name="ContactTestBitmask" type="int" value="137"/>
+    <property name="Damage" type="int" value="0"/>
+    <property name="Dynamic" type="bool" value="true"/>
+    <property name="Flag" type="int" value="1"/>
+    <property name="HP" type="int" value="5"/>
+    <property name="LocalZOrder" type="int" value="5"/>
+    <property name="Name" value="Monster"/>
+    <property name="RotationEnable" type="bool" value="false"/>
+    <property name="TexturePath" value="picture/monster/YellowMonster.png"/>
+    <property name="V" type="int" value="100"/>
+    <property name="VelocityLim" type="float" value="150"/>
+    <property name="WeaponName" value="Lightsaber"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup id="8" name="BoxLayer">
+  <properties>
+   <property name="CanBeHurt" type="bool" value="false"/>
+   <property name="CategoryBitmask" type="int" value="64"/>
+   <property name="Collision" type="bool" value="true"/>
+   <property name="CollisionBitmask" type="int" value="0"/>
+   <property name="ContactTestBitmask" type="int" value="2"/>
+   <property name="Damage" type="int" value="0"/>
+   <property name="Dynamic" type="bool" value="false"/>
+   <property name="Flag" type="int" value="0"/>
+   <property name="HP" type="int" value="1"/>
+   <property name="LocalZOrder" type="int" value="3"/>
+   <property name="Name" value="Box"/>
+   <property name="RotationEnable" type="bool" value="false"/>
+   <property name="TexturePath" value="picture/Prop/CloseBox.png"/>
+  </properties>
+  <object id="5" gid="19" x="280" y="320" width="60" height="59">
+   <properties>
+    <property name="CanBeHurt" type="bool" value="false"/>
+    <property name="CategoryBitmask" type="int" value="64"/>
+    <property name="Collision" type="bool" value="true"/>
+    <property name="CollisionBitmask" type="int" value="0"/>
+    <property name="ContactTestBitmask" type="int" value="2"/>
+    <property name="Damage" type="int" value="0"/>
+    <property name="Dynamic" type="bool" value="false"/>
+    <property name="Flag" type="int" value="3"/>
+    <property name="HP" type="int" value="1"/>
+    <property name="LocalZOrder" type="int" value="3"/>
+    <property name="Name" value="Box"/>
+    <property name="RotationEnable" type="bool" value="false"/>
+    <property name="TexturePath" value="picture/Prop/CloseBox.png"/>
+   </properties>
+  </object>
+  <object id="10" gid="19" x="293.133" y="160.212" width="60" height="59">
+   <properties>
+    <property name="CanBeHurt" type="bool" value="false"/>
+    <property name="CategoryBitmask" type="int" value="64"/>
+    <property name="Collision" type="bool" value="true"/>
+    <property name="CollisionBitmask" type="int" value="0"/>
+    <property name="ContactTestBitmask" type="int" value="2"/>
+    <property name="Damage" type="int" value="0"/>
+    <property name="Dynamic" type="bool" value="false"/>
+    <property name="Flag" type="int" value="3"/>
+    <property name="HP" type="int" value="1"/>
+    <property name="LocalZOrder" type="int" value="3"/>
+    <property name="Name" value="Box"/>
+    <property name="RotationEnable" type="bool" value="false"/>
+    <property name="TexturePath" value="picture/Prop/CloseBox.png"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup id="7" name="BornLayer">
+  <object id="2" name="BornPlace" x="80" y="300">
+   <point/>
+  </object>
+  <object id="9" name="BornPlace" x="80" y="300">
+   <point/>
+  </object>
+ </objectgroup>
+</map>
